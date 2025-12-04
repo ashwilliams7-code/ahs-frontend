@@ -119,7 +119,10 @@ export default function Landing() {
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/30 md:group-hover:scale-110 transition-transform duration-300">
               <span className="text-white font-bold text-lg">AI</span>
             </div>
-            <span className="font-bold text-xl md:group-hover:text-indigo-400 transition-colors">AutoAI Hub</span>
+            <div>
+              <span className="font-bold text-xl md:group-hover:text-indigo-400 transition-colors block">AutoAI Hub</span>
+              <span className="text-[10px] text-slate-400 hidden sm:block">A Williams Group Company</span>
+            </div>
           </div>
           
           <div className="hidden md:flex items-center gap-8">
