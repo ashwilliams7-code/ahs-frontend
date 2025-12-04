@@ -119,20 +119,21 @@ export default function Landing() {
             <a href="#features" className="text-slate-300 hover:text-white transition-colors">Features</a>
             <a href="#apps" className="text-slate-300 hover:text-white transition-colors">Apps</a>
             <a href="#testimonials" className="text-slate-300 hover:text-white transition-colors">Testimonials</a>
+            <a href="#about" className="text-slate-300 hover:text-white transition-colors">About</a>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <button
               onClick={() => setShowLogin(true)}
-              className="px-5 py-2 text-slate-300 hover:text-white transition-colors font-medium"
+              className="px-3 sm:px-5 py-2 text-slate-300 hover:text-white transition-colors font-medium text-sm sm:text-base"
             >
               Sign In
             </button>
             <button
               onClick={() => setShowSignup(true)}
-              className="px-5 py-2.5 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl font-semibold hover:shadow-lg hover:shadow-indigo-500/30 transition-all"
+              className="px-3 sm:px-5 py-2 sm:py-2.5 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl font-semibold hover:shadow-lg hover:shadow-indigo-500/30 transition-all text-sm sm:text-base"
             >
-              Get Started Free
+              Get Started
             </button>
           </div>
         </div>
@@ -146,7 +147,7 @@ export default function Landing() {
             <span className="text-sm text-slate-300">Now with GPT-4 powered automation</span>
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight">
             Automate Your{' '}
             <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
               Work & Career
@@ -154,7 +155,7 @@ export default function Landing() {
             <br />with AI
           </h1>
           
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-10">
+          <p className="text-base sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 px-2">
             From NDIS provider automation to AI-powered job applications. 
             Let our intelligent agents handle the repetitive work while you focus on what matters.
           </p>
@@ -179,13 +180,13 @@ export default function Landing() {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 max-w-4xl mx-auto">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <p className="text-4xl font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+                <p className="text-2xl sm:text-4xl font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
                   {stat.value}
                 </p>
-                <p className="text-slate-500 mt-1">{stat.label}</p>
+                <p className="text-slate-500 mt-1 text-xs sm:text-base">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -289,31 +290,31 @@ export default function Landing() {
                     </div>
                   </div>
                   {/* Mock Stats Cards */}
-                  <div className="grid grid-cols-4 gap-4 mb-6">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 mb-6">
                     {[
                       { label: 'Total Revenue', value: '$124,500', color: 'from-indigo-500 to-purple-500', change: '+12%' },
                       { label: 'Active Workers', value: '48', color: 'from-emerald-500 to-cyan-500', change: '+3' },
                       { label: 'Pending Invoices', value: '12', color: 'from-amber-500 to-orange-500', change: '-2' },
                       { label: 'Compliance Score', value: '98%', color: 'from-pink-500 to-rose-500', change: '+1%' },
                     ].map((stat, i) => (
-                      <div key={i} className="bg-white/5 rounded-xl p-4 border border-white/5">
-                        <p className="text-xs text-slate-500 mb-1">{stat.label}</p>
-                        <p className={`text-2xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>{stat.value}</p>
-                        <p className="text-xs text-emerald-400 mt-1">{stat.change}</p>
+                      <div key={i} className="bg-white/5 rounded-xl p-2 sm:p-4 border border-white/5">
+                        <p className="text-[10px] sm:text-xs text-slate-500 mb-1">{stat.label}</p>
+                        <p className={`text-lg sm:text-2xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>{stat.value}</p>
+                        <p className="text-[10px] sm:text-xs text-emerald-400 mt-1">{stat.change}</p>
                       </div>
                     ))}
                   </div>
                   {/* Mock Chart Area */}
-                  <div className="grid grid-cols-3 gap-4">
-                    <div className="col-span-2 bg-white/5 rounded-xl p-4 border border-white/5 h-48">
-                      <div className="h-4 w-24 bg-white/10 rounded mb-4"></div>
-                      <div className="flex items-end gap-2 h-32">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div className="sm:col-span-2 bg-white/5 rounded-xl p-3 sm:p-4 border border-white/5 h-32 sm:h-48">
+                      <div className="h-3 sm:h-4 w-20 sm:w-24 bg-white/10 rounded mb-3 sm:mb-4"></div>
+                      <div className="flex items-end gap-1 sm:gap-2 h-20 sm:h-32">
                         {[40, 65, 45, 80, 55, 90, 70, 85, 60, 95, 75, 88].map((h, i) => (
                           <div key={i} className="flex-1 bg-gradient-to-t from-indigo-500 to-purple-500 rounded-t opacity-70" style={{ height: `${h}%` }}></div>
                         ))}
                       </div>
                     </div>
-                    <div className="bg-white/5 rounded-xl p-4 border border-white/5">
+                    <div className="bg-white/5 rounded-xl p-3 sm:p-4 border border-white/5 hidden sm:block">
                       <div className="h-4 w-20 bg-white/10 rounded mb-4"></div>
                       <div className="space-y-3">
                         {['Invoice #1234', 'Invoice #1235', 'Invoice #1236'].map((inv, i) => (
@@ -340,51 +341,52 @@ export default function Landing() {
                 {/* Mock ApplyMate UI */}
                 <div className="relative bg-slate-900/95 p-6">
                   {/* Mock Header */}
-                  <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
-                    <div className="flex items-center gap-4">
-                      <div className="w-8 h-8 rounded-lg bg-emerald-500/20"></div>
-                      <div className="h-4 w-28 bg-white/10 rounded"></div>
+                  <div className="flex items-center justify-between mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-white/10">
+                    <div className="flex items-center gap-2 sm:gap-4">
+                      <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-emerald-500/20"></div>
+                      <div className="h-3 sm:h-4 w-16 sm:w-28 bg-white/10 rounded"></div>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <span className="text-xs text-emerald-400 flex items-center gap-1">
-                        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                        Auto-Apply Active
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <span className="text-[10px] sm:text-xs text-emerald-400 flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span className="hidden sm:inline">Auto-Apply Active</span>
+                        <span className="sm:hidden">Active</span>
                       </span>
-                      <div className="h-8 w-20 rounded-lg bg-red-500/30 flex items-center justify-center text-xs text-red-400">Stop</div>
+                      <div className="h-6 w-12 sm:h-8 sm:w-20 rounded-lg bg-red-500/30 flex items-center justify-center text-[10px] sm:text-xs text-red-400">Stop</div>
                     </div>
                   </div>
                   {/* Mock Stats */}
-                  <div className="grid grid-cols-4 gap-4 mb-6">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 mb-6">
                     {[
                       { label: 'Jobs Applied', value: '47', color: 'from-emerald-500 to-cyan-500' },
                       { label: 'Interviews', value: '8', color: 'from-blue-500 to-indigo-500' },
                       { label: 'Response Rate', value: '32%', color: 'from-amber-500 to-orange-500' },
                       { label: 'Today\'s Target', value: '50', color: 'from-pink-500 to-rose-500' },
                     ].map((stat, i) => (
-                      <div key={i} className="bg-white/5 rounded-xl p-4 border border-white/5">
-                        <p className="text-xs text-slate-500 mb-1">{stat.label}</p>
-                        <p className={`text-2xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>{stat.value}</p>
+                      <div key={i} className="bg-white/5 rounded-xl p-2 sm:p-4 border border-white/5">
+                        <p className="text-[10px] sm:text-xs text-slate-500 mb-1">{stat.label}</p>
+                        <p className={`text-lg sm:text-2xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>{stat.value}</p>
                       </div>
                     ))}
                   </div>
                   {/* Mock Job Cards */}
-                  <div className="space-y-3">
+                  <div className="space-y-2 sm:space-y-3">
                     {[
                       { title: 'Senior React Developer', company: 'TechCorp', status: 'Applied', time: '2m ago' },
                       { title: 'Full Stack Engineer', company: 'StartupXYZ', status: 'Applied', time: '5m ago' },
                       { title: 'Frontend Developer', company: 'DigitalAgency', status: 'Applying...', time: 'Now' },
                     ].map((job, i) => (
-                      <div key={i} className="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/5">
-                        <div className="flex items-center gap-4">
-                          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center text-lg">🏢</div>
+                      <div key={i} className="flex items-center justify-between p-2 sm:p-4 bg-white/5 rounded-xl border border-white/5">
+                        <div className="flex items-center gap-2 sm:gap-4">
+                          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center text-sm sm:text-lg">🏢</div>
                           <div>
-                            <p className="font-medium text-white">{job.title}</p>
-                            <p className="text-xs text-slate-500">{job.company}</p>
+                            <p className="font-medium text-white text-sm sm:text-base truncate max-w-[120px] sm:max-w-none">{job.title}</p>
+                            <p className="text-[10px] sm:text-xs text-slate-500">{job.company}</p>
                           </div>
                         </div>
-                        <div className="text-right">
-                          <p className={`text-sm ${job.status === 'Applying...' ? 'text-amber-400' : 'text-emerald-400'}`}>{job.status}</p>
-                          <p className="text-xs text-slate-500">{job.time}</p>
+                        <div className="text-right ml-2">
+                          <p className={`text-xs sm:text-sm ${job.status === 'Applying...' ? 'text-amber-400' : 'text-emerald-400'}`}>{job.status}</p>
+                          <p className="text-[10px] sm:text-xs text-slate-500">{job.time}</p>
                         </div>
                       </div>
                     ))}
@@ -500,6 +502,97 @@ export default function Landing() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About Us Section */}
+      <section id="about" className="relative z-10 px-6 py-24 bg-gradient-to-b from-slate-900/50 to-transparent">
+        <div className="max-w-7xl mx-auto">
+          {/* Williams Group Banner */}
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-500/10 border border-indigo-500/20 rounded-full mb-6">
+              <span className="text-sm text-indigo-400 font-medium">A Williams Group Company</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">About Us</h2>
+            <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+              Innovation meets execution — building the future of AI automation
+            </p>
+          </div>
+
+          {/* Three Column Layout */}
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            {/* Williams Group */}
+            <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-slate-700 hover:border-indigo-500/30 transition-all">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center mb-6 text-2xl shadow-lg shadow-indigo-500/20">
+                🏢
+              </div>
+              <h3 className="text-xl font-bold text-white mb-4">Williams Group</h3>
+              <p className="text-slate-400 text-sm leading-relaxed mb-4">
+                Williams Group is a multi-venture Australian enterprise focused on building high-performance companies across technology, automation, media, consulting, and digital commerce.
+              </p>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                We specialise in creating systems-driven businesses that scale fast — from AI automation and innovation labs to content production, education brands, and commercial partnerships.
+              </p>
+              <div className="mt-6 pt-6 border-t border-slate-700">
+                <p className="text-indigo-400 text-sm font-medium italic">
+                  "Be smarter, be faster, and deliver real-world results."
+                </p>
+              </div>
+            </div>
+
+            {/* Our Company */}
+            <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-slate-700 hover:border-emerald-500/30 transition-all">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center mb-6 text-2xl shadow-lg shadow-emerald-500/20">
+                🚀
+              </div>
+              <h3 className="text-xl font-bold text-white mb-4">Our Mission</h3>
+              <p className="text-slate-400 text-sm leading-relaxed mb-4">
+                We're part of Williams Group's innovation and growth division, dedicated to building practical, high-impact solutions for modern businesses.
+              </p>
+              <p className="text-slate-400 text-sm leading-relaxed mb-4">
+                Our focus is simple: turn complexity into clarity, and problems into automated systems that save time and generate growth.
+              </p>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                Whether it's AI-driven processes, strategic consulting, sales enablement, digital products, or full-service automation — we execute with precision, speed, and a no-nonsense approach.
+              </p>
+              <div className="mt-6 pt-6 border-t border-slate-700">
+                <p className="text-emerald-400 text-sm font-medium italic">
+                  "Results first, excuses never."
+                </p>
+              </div>
+            </div>
+
+            {/* Founder */}
+            <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-slate-700 hover:border-amber-500/30 transition-all">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center mb-6 text-2xl shadow-lg shadow-amber-500/20">
+                👤
+              </div>
+              <h3 className="text-xl font-bold text-white mb-4">The Founder</h3>
+              <p className="text-lg font-semibold text-white mb-3">Ash Williams</p>
+              <p className="text-slate-400 text-sm leading-relaxed mb-4">
+                Ash Williams is the founder and driving force behind Williams Group — a builder, strategist, and operator who specialises in turning ideas into functioning businesses.
+              </p>
+              <p className="text-slate-400 text-sm leading-relaxed mb-4">
+                With a background in consulting, project management, aviation, AI systems, and business development, Ash blends real-world experience with a sharp, technical edge.
+              </p>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                Known for tackling big problems with simple, elegant solutions — and for pushing every project toward growth, automation, and long-term scalability.
+              </p>
+              <div className="mt-6 pt-6 border-t border-slate-700">
+                <p className="text-amber-400 text-sm font-medium italic">
+                  "Build fast, iterate smarter, stay three steps ahead."
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Banner */}
+          <div className="text-center">
+            <div className="inline-flex items-center gap-4 px-6 py-3 bg-white/5 border border-white/10 rounded-full backdrop-blur-sm">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span className="text-slate-300 text-sm">Proudly Australian • Built for Scale • Powered by AI</span>
+            </div>
           </div>
         </div>
       </section>
