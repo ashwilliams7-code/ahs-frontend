@@ -97,23 +97,28 @@ export default function Landing() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-white overflow-x-hidden">
-      {/* Animated Background */}
+      {/* Animated Background - Simplified for mobile */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 -left-40 w-80 h-80 bg-purple-500/30 rounded-full blur-[128px] blob animate-float-slow"></div>
-        <div className="absolute top-1/3 -right-40 w-96 h-96 bg-emerald-500/20 rounded-full blur-[128px] blob animate-float-reverse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute bottom-0 left-1/3 w-80 h-80 bg-blue-500/20 rounded-full blur-[128px] blob animate-float-slow" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-pink-500/10 rounded-full blur-[100px] blob animate-float-reverse" style={{ animationDelay: '3s' }}></div>
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px]"></div>
+        {/* Desktop: Full animated blobs */}
+        <div className="hidden md:block">
+          <div className="absolute top-0 -left-40 w-80 h-80 bg-purple-500/30 rounded-full blur-[128px] blob animate-float-slow"></div>
+          <div className="absolute top-1/3 -right-40 w-96 h-96 bg-emerald-500/20 rounded-full blur-[128px] blob animate-float-reverse" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute bottom-0 left-1/3 w-80 h-80 bg-blue-500/20 rounded-full blur-[128px] blob animate-float-slow" style={{ animationDelay: '2s' }}></div>
+        </div>
+        {/* Mobile: Static gradient - much lighter */}
+        <div className="md:hidden absolute inset-0 bg-gradient-to-br from-purple-500/10 via-slate-950 to-emerald-500/10"></div>
+        {/* Grid pattern - hidden on mobile */}
+        <div className="hidden md:block absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px]"></div>
       </div>
 
       {/* Navigation */}
       <nav className="relative z-50 px-6 py-6">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3 group cursor-pointer">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/30 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 animate-glow-pulse">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/30 md:group-hover:scale-110 transition-transform duration-300">
               <span className="text-white font-bold text-lg">AI</span>
             </div>
-            <span className="font-bold text-xl group-hover:text-indigo-400 transition-colors">AutoAI Hub</span>
+            <span className="font-bold text-xl md:group-hover:text-indigo-400 transition-colors">AutoAI Hub</span>
           </div>
           
           <div className="hidden md:flex items-center gap-8">
@@ -143,28 +148,28 @@ export default function Landing() {
       {/* Hero Section */}
       <section className="relative z-10 px-6 pt-20 pb-32">
         <div className="max-w-7xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full mb-8 backdrop-blur-sm animate-slide-up animate-delay-0 animate-border-glow">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full mb-8">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
             <span className="text-sm text-slate-300">Now with GPT-4 powered automation</span>
           </div>
           
-          <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight animate-slide-up animate-delay-100">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight">
             Automate Your{' '}
-            <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient-text bg-[length:200%_auto]">
+            <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
               Work & Career
             </span>
             <br />with AI
           </h1>
           
-          <p className="text-base sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 px-2 animate-slide-up animate-delay-200">
+          <p className="text-base sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 px-2">
             From NDIS provider automation to AI-powered job applications. 
             Let our intelligent agents handle the repetitive work while you focus on what matters.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-slide-up animate-delay-300">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
             <button
               onClick={() => setShowSignup(true)}
-              className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl font-semibold text-lg hover:shadow-xl hover:shadow-indigo-500/30 transition-all flex items-center justify-center gap-2 btn-magnetic animate-glow-pulse"
+              className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl font-semibold text-lg hover:shadow-xl hover:shadow-indigo-500/30 transition-all flex items-center justify-center gap-2"
             >
               Start Free Trial
               <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -207,10 +212,10 @@ export default function Landing() {
           {/* Main Apps */}
           <div className="grid md:grid-cols-2 gap-8 mb-12">
             {/* NDISHub Card */}
-            <div className="group relative rounded-3xl p-1 transition-all duration-500 hover-lift card-shine">
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-indigo-500 to-purple-600 opacity-50 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
-              <div className="relative bg-slate-900/90 backdrop-blur-xl rounded-3xl p-8 border border-white/10 group-hover:border-indigo-500/50 transition-all h-full">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center mb-6 text-2xl shadow-xl shadow-indigo-500/30 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 animate-float-slow">
+            <div className="group relative rounded-3xl p-1 transition-all duration-300 md:hover:-translate-y-2">
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-indigo-500 to-purple-600 opacity-50 md:group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
+              <div className="relative bg-slate-900/95 md:bg-slate-900/90 rounded-3xl p-6 sm:p-8 border border-white/10 md:group-hover:border-indigo-500/50 transition-all h-full">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center mb-6 text-xl sm:text-2xl shadow-xl shadow-indigo-500/30 md:group-hover:scale-110 transition-transform duration-300">
                   N
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-2">NDISHub</h3>
@@ -236,10 +241,10 @@ export default function Landing() {
             </div>
 
             {/* ApplyMate Card */}
-            <div className="group relative rounded-3xl p-1 transition-all duration-500 hover-lift card-shine">
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-emerald-500 to-cyan-500 opacity-50 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
-              <div className="relative bg-slate-900/90 backdrop-blur-xl rounded-3xl p-8 border border-white/10 group-hover:border-emerald-500/50 transition-all h-full">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center mb-6 text-2xl shadow-xl shadow-emerald-500/30 group-hover:scale-110 group-hover:-rotate-3 transition-all duration-300 animate-float-reverse">
+            <div className="group relative rounded-3xl p-1 transition-all duration-300 md:hover:-translate-y-2">
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-emerald-500 to-cyan-500 opacity-50 md:group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
+              <div className="relative bg-slate-900/95 md:bg-slate-900/90 rounded-3xl p-6 sm:p-8 border border-white/10 md:group-hover:border-emerald-500/50 transition-all h-full">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center mb-6 text-xl sm:text-2xl shadow-xl shadow-emerald-500/30 md:group-hover:scale-110 transition-transform duration-300">
                   ⚡
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-2">ApplyMate</h3>
@@ -311,7 +316,7 @@ export default function Landing() {
                       <div className="h-3 sm:h-4 w-20 sm:w-24 bg-white/10 rounded mb-3 sm:mb-4"></div>
                       <div className="flex items-end gap-1 sm:gap-2 h-20 sm:h-32">
                         {[40, 65, 45, 80, 55, 90, 70, 85, 60, 95, 75, 88].map((h, i) => (
-                          <div key={i} className="flex-1 bg-gradient-to-t from-indigo-500 to-purple-500 rounded-t opacity-70 animate-bar-grow" style={{ height: `${h}%`, animationDelay: `${i * 100}ms` }}></div>
+                          <div key={i} className="flex-1 bg-gradient-to-t from-indigo-500 to-purple-500 rounded-t opacity-70" style={{ height: `${h}%` }}></div>
                         ))}
                       </div>
                     </div>
@@ -420,12 +425,11 @@ export default function Landing() {
               ].map((app, i) => (
                 <div 
                   key={i} 
-                  className="relative group rounded-2xl p-1 cursor-not-allowed opacity-60 hover:opacity-80 transition-all duration-300 hover:scale-105"
-                  style={{ animationDelay: `${i * 100}ms` }}
+                  className="relative group rounded-2xl p-1 cursor-not-allowed opacity-60 md:hover:opacity-80 transition-opacity"
                 >
-                  <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${app.color} opacity-20 blur-sm group-hover:opacity-30 transition-opacity`}></div>
-                  <div className="relative bg-slate-900/90 backdrop-blur-xl rounded-2xl p-5 border border-white/10 h-full group-hover:border-white/20 transition-all">
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${app.color} flex items-center justify-center mb-4 text-xl opacity-50 group-hover:opacity-70 group-hover:scale-110 transition-all duration-300`}>
+                  <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${app.color} opacity-20`}></div>
+                  <div className="relative bg-slate-900/95 rounded-2xl p-4 sm:p-5 border border-white/10 h-full">
+                    <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${app.color} flex items-center justify-center mb-3 sm:mb-4 text-lg sm:text-xl opacity-50`}>
                       {app.icon}
                     </div>
                     <h4 className="font-bold text-white mb-1">{app.name}</h4>
@@ -454,18 +458,17 @@ export default function Landing() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {features.map((feature, index) => (
               <div 
                 key={index}
-                className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700 hover:border-slate-500 transition-all hover-lift card-shine group"
-                style={{ animationDelay: `${index * 100}ms` }}
+                className="bg-slate-800/50 rounded-2xl p-4 sm:p-6 border border-slate-700 md:hover:border-slate-500 transition-all md:hover:-translate-y-1 group"
               >
-                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 text-xl group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
+                <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-3 sm:mb-4 text-lg sm:text-xl md:group-hover:scale-110 transition-transform duration-300`}>
                   {feature.icon}
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-2">{feature.title}</h3>
-                <p className="text-slate-400 text-sm">{feature.description}</p>
+                <h3 className="text-base sm:text-lg font-semibold text-white mb-1 sm:mb-2">{feature.title}</h3>
+                <p className="text-slate-400 text-xs sm:text-sm">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -480,28 +483,27 @@ export default function Landing() {
             <p className="text-slate-400 text-lg">See what our users have to say</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-4 sm:gap-6">
             {testimonials.map((testimonial, index) => (
               <div 
                 key={index}
-                className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700 hover:border-amber-500/30 transition-all hover-lift card-shine group"
-                style={{ animationDelay: `${index * 150}ms` }}
+                className="bg-slate-800/50 rounded-2xl p-5 sm:p-6 border border-slate-700 md:hover:border-amber-500/30 transition-all md:hover:-translate-y-1"
               >
-                <div className="flex items-center gap-1 mb-4">
+                <div className="flex items-center gap-1 mb-3 sm:mb-4">
                   {[...Array(5)].map((_, i) => (
-                    <svg key={i} className="w-5 h-5 text-amber-400 group-hover:scale-110 transition-transform" style={{ transitionDelay: `${i * 50}ms` }} fill="currentColor" viewBox="0 0 20 20">
+                    <svg key={i} className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                     </svg>
                   ))}
                 </div>
-                <p className="text-slate-300 mb-4 italic">"{testimonial.quote}"</p>
+                <p className="text-slate-300 mb-4 italic text-sm sm:text-base">"{testimonial.quote}"</p>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-semibold group-hover:scale-110 transition-transform">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-semibold text-sm sm:text-base">
                     {testimonial.avatar}
                   </div>
                   <div>
-                    <p className="text-white font-medium">{testimonial.author}</p>
-                    <p className="text-slate-500 text-sm">{testimonial.role}</p>
+                    <p className="text-white font-medium text-sm sm:text-base">{testimonial.author}</p>
+                    <p className="text-slate-500 text-xs sm:text-sm">{testimonial.role}</p>
                   </div>
                 </div>
               </div>
@@ -525,10 +527,10 @@ export default function Landing() {
           </div>
 
           {/* Three Column Layout */}
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <div className="grid md:grid-cols-3 gap-4 sm:gap-8 mb-16">
             {/* Williams Group */}
-            <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-slate-700 hover:border-indigo-500/30 transition-all hover-lift card-shine group">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center mb-6 text-2xl shadow-lg shadow-indigo-500/20 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+            <div className="bg-slate-800/50 rounded-2xl p-5 sm:p-8 border border-slate-700 md:hover:border-indigo-500/30 transition-all md:hover:-translate-y-1 group">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center mb-4 sm:mb-6 text-xl sm:text-2xl shadow-lg shadow-indigo-500/20 md:group-hover:scale-110 transition-transform duration-300">
                 🏢
               </div>
               <h3 className="text-xl font-bold text-white mb-4">Williams Group</h3>
@@ -546,8 +548,8 @@ export default function Landing() {
             </div>
 
             {/* Our Company */}
-            <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-slate-700 hover:border-emerald-500/30 transition-all hover-lift card-shine group">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center mb-6 text-2xl shadow-lg shadow-emerald-500/20 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300">
+            <div className="bg-slate-800/50 rounded-2xl p-5 sm:p-8 border border-slate-700 md:hover:border-emerald-500/30 transition-all md:hover:-translate-y-1 group">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center mb-4 sm:mb-6 text-xl sm:text-2xl shadow-lg shadow-emerald-500/20 md:group-hover:scale-110 transition-transform duration-300">
                 🚀
               </div>
               <h3 className="text-xl font-bold text-white mb-4">Our Mission</h3>
@@ -568,8 +570,8 @@ export default function Landing() {
             </div>
 
             {/* Founder */}
-            <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-slate-700 hover:border-amber-500/30 transition-all hover-lift card-shine group">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center mb-6 text-2xl shadow-lg shadow-amber-500/20 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+            <div className="bg-slate-800/50 rounded-2xl p-5 sm:p-8 border border-slate-700 md:hover:border-amber-500/30 transition-all md:hover:-translate-y-1 group">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center mb-4 sm:mb-6 text-xl sm:text-2xl shadow-lg shadow-amber-500/20 md:group-hover:scale-110 transition-transform duration-300">
                 👤
               </div>
               <h3 className="text-xl font-bold text-white mb-4">The Founder</h3>
@@ -602,23 +604,24 @@ export default function Landing() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative z-10 px-6 py-24">
+      <section className="relative z-10 px-6 py-16 sm:py-24">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 rounded-3xl p-8 sm:p-12 border border-white/10 backdrop-blur-sm relative overflow-hidden group hover:border-indigo-500/30 transition-all duration-500">
-            {/* Animated gradient background */}
-            <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/5 via-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div className="absolute -top-24 -right-24 w-48 h-48 bg-indigo-500/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
-            <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+          <div className="bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 rounded-3xl p-8 sm:p-12 border border-white/10 relative overflow-hidden md:hover:border-indigo-500/30 transition-all duration-300">
+            {/* Desktop only: Animated gradient background */}
+            <div className="hidden md:block">
+              <div className="absolute -top-24 -right-24 w-48 h-48 bg-indigo-500/10 rounded-full blur-3xl"></div>
+              <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl"></div>
+            </div>
             
             <div className="relative z-10">
               <h2 className="text-3xl sm:text-4xl font-bold mb-4">Ready to Automate?</h2>
-              <p className="text-slate-400 text-lg mb-8">
+              <p className="text-slate-400 text-base sm:text-lg mb-8">
                 Join thousands of professionals saving hours every week with AI automation.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <button
                   onClick={() => setShowSignup(true)}
-                  className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl font-semibold text-lg hover:shadow-xl hover:shadow-indigo-500/30 transition-all btn-magnetic animate-glow-pulse"
+                  className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl font-semibold text-lg hover:shadow-xl hover:shadow-indigo-500/30 transition-all"
                 >
                   Start Free — No Credit Card
                 </button>
