@@ -1,15 +1,25 @@
-export default function TopNav({ title, status, statusColor }) {
+export default function TopNav({ title, status, statusColor, onMenuClick }) {
   return (
     <header className="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-10">
-      <div className="flex items-center justify-between px-8 py-4">
-        <div className="flex items-center gap-4">
-          <h2 className="text-xl font-semibold text-gray-900">{title}</h2>
-          <span className={`px-2.5 py-1 text-xs font-medium rounded-full ${statusColor}`}>
+      <div className="flex items-center justify-between px-4 lg:px-8 py-4">
+        <div className="flex items-center gap-3 lg:gap-4">
+          {/* Mobile menu button */}
+          <button
+            onClick={onMenuClick}
+            className="lg:hidden p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+          
+          <h2 className="text-lg lg:text-xl font-semibold text-gray-900">{title}</h2>
+          <span className={`px-2 lg:px-2.5 py-1 text-xs font-medium rounded-full ${statusColor} hidden sm:inline-flex`}>
             {status}
           </span>
         </div>
-        <div className="flex items-center gap-4">
-          <button className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+        <div className="flex items-center gap-2 lg:gap-4">
+          <button className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors hidden sm:block">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>

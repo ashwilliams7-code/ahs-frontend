@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import Sidebar from './Sidebar'
 import TopNav from './TopNav'
@@ -25,13 +26,13 @@ const pageConfig = {
   },
   '/sales': {
     title: 'Sales Agent',
-    status: 'Locked',
-    statusColor: 'bg-gray-200 text-gray-600',
+    status: 'Active',
+    statusColor: 'bg-accent-100 text-accent-700',
   },
   '/marketing': {
     title: 'Marketing Agent',
-    status: 'Locked',
-    statusColor: 'bg-gray-200 text-gray-600',
+    status: 'Active',
+    statusColor: 'bg-accent-100 text-accent-700',
   },
   '/settings': {
     title: 'Settings',
@@ -43,12 +44,32 @@ const pageConfig = {
 export default function Layout() {
   const location = useLocation()
   const config = pageConfig[location.pathname] || pageConfig['/dashboard']
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+
+  // Close sidebar when route changes (mobile navigation)
+  useEffect(() => {
+    setSidebarOpen(false)
+  }, [location.pathname])
 
   return (
     <div className="flex min-h-screen">
-      <Sidebar />
-      <main className="flex-1 ml-64">
-        <TopNav title={config.title} status={config.status} statusColor={config.statusColor} />
+      {/* Mobile overlay */}
+      {sidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-20 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+      
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      
+      <main className="flex-1 lg:ml-64">
+        <TopNav 
+          title={config.title} 
+          status={config.status} 
+          statusColor={config.statusColor}
+          onMenuClick={() => setSidebarOpen(true)}
+        />
         <Outlet />
       </main>
     </div>
