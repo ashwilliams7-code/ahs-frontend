@@ -148,12 +148,12 @@ export default function Landing() {
       {/* Hero Section */}
       <section className="relative z-10 px-6 pt-20 pb-32">
         <div className="max-w-7xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full mb-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full mb-8 animate-[fadeIn_0.6s_ease-out]">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
             <span className="text-sm text-slate-300">Now with GPT-4 powered automation</span>
           </div>
           
-          <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight animate-[fadeIn_0.8s_ease-out]">
             Automate Your{' '}
             <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
               Work & Career
@@ -161,23 +161,23 @@ export default function Landing() {
             <br />with AI
           </h1>
           
-          <p className="text-base sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 px-2">
+          <p className="text-base sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 px-2 animate-[fadeIn_1s_ease-out]">
             From NDIS provider automation to AI-powered job applications. 
             Let our intelligent agents handle the repetitive work while you focus on what matters.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-[fadeIn_1.2s_ease-out]">
             <button
               onClick={() => setShowSignup(true)}
-              className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl font-semibold text-lg hover:shadow-xl hover:shadow-indigo-500/30 transition-all flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl font-semibold text-lg hover:opacity-90 active:scale-[0.98] transition-all duration-150 flex items-center justify-center gap-2"
             >
               Start Free Trial
               <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
               </svg>
             </button>
-            <button className="w-full sm:w-auto px-8 py-4 bg-white/5 border border-white/10 rounded-xl font-semibold text-lg hover:bg-white/10 hover:border-white/20 transition-all flex items-center justify-center gap-2 group">
-              <svg className="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button className="w-full sm:w-auto px-8 py-4 bg-white/5 border border-white/10 rounded-xl font-semibold text-lg hover:bg-white/10 active:scale-[0.98] transition-all duration-150 flex items-center justify-center gap-2">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
@@ -212,10 +212,10 @@ export default function Landing() {
           {/* Main Apps */}
           <div className="grid md:grid-cols-2 gap-8 mb-12">
             {/* NDISHub Card */}
-            <div className="group relative rounded-3xl p-1 transition-all duration-300 md:hover:-translate-y-2">
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-indigo-500 to-purple-600 opacity-50 md:group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
-              <div className="relative bg-slate-900/95 md:bg-slate-900/90 rounded-3xl p-6 sm:p-8 border border-white/10 md:group-hover:border-indigo-500/50 transition-all h-full">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center mb-6 text-xl sm:text-2xl shadow-xl shadow-indigo-500/30 md:group-hover:scale-110 transition-transform duration-300">
+            <div className="group relative rounded-3xl p-1 transition-transform duration-200 md:hover:-translate-y-2 active:scale-[0.98]">
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-indigo-500 to-purple-600 opacity-50 group-active:opacity-70 md:group-hover:opacity-100 transition-opacity duration-200"></div>
+              <div className="relative bg-slate-900/95 rounded-3xl p-6 sm:p-8 border border-white/10 group-active:border-indigo-500/50 md:group-hover:border-indigo-500/50 transition-colors h-full">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center mb-6 text-xl sm:text-2xl shadow-lg shadow-indigo-500/20">
                   N
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-2">NDISHub</h3>
@@ -233,7 +233,7 @@ export default function Landing() {
                 </div>
                 <button
                   onClick={() => setShowSignup(true)}
-                  className="w-full py-3 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl font-semibold hover:shadow-lg hover:shadow-indigo-500/30 transition-all"
+                  className="w-full py-3 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl font-semibold hover:opacity-90 active:scale-[0.97] transition-all duration-150"
                 >
                   Try NDISHub
                 </button>
@@ -241,10 +241,10 @@ export default function Landing() {
             </div>
 
             {/* ApplyMate Card */}
-            <div className="group relative rounded-3xl p-1 transition-all duration-300 md:hover:-translate-y-2">
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-emerald-500 to-cyan-500 opacity-50 md:group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
-              <div className="relative bg-slate-900/95 md:bg-slate-900/90 rounded-3xl p-6 sm:p-8 border border-white/10 md:group-hover:border-emerald-500/50 transition-all h-full">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center mb-6 text-xl sm:text-2xl shadow-xl shadow-emerald-500/30 md:group-hover:scale-110 transition-transform duration-300">
+            <div className="group relative rounded-3xl p-1 transition-transform duration-200 md:hover:-translate-y-2 active:scale-[0.98]">
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-emerald-500 to-cyan-500 opacity-50 group-active:opacity-70 md:group-hover:opacity-100 transition-opacity duration-200"></div>
+              <div className="relative bg-slate-900/95 rounded-3xl p-6 sm:p-8 border border-white/10 group-active:border-emerald-500/50 md:group-hover:border-emerald-500/50 transition-colors h-full">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center mb-6 text-xl sm:text-2xl shadow-lg shadow-emerald-500/20">
                   ⚡
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-2">ApplyMate</h3>
@@ -262,16 +262,43 @@ export default function Landing() {
                 </div>
                 <button
                   onClick={() => setShowSignup(true)}
-                  className="w-full py-3 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-xl font-semibold hover:shadow-lg hover:shadow-emerald-500/30 transition-all"
+                  className="w-full py-3 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-xl font-semibold hover:opacity-90 active:scale-[0.97] transition-all duration-150"
                 >
                   Try ApplyMate
                 </button>
               </div>
             </div>
+
+            {/* Coming Soon Apps - Compact Grid */}
+            <div className="grid grid-cols-4 md:grid-cols-8 gap-2 sm:gap-3 mt-6">
+              {[
+                { icon: '📝', name: 'ResumeAI', color: 'from-violet-500 to-purple-500' },
+                { icon: '🎯', name: 'InterviewAI', color: 'from-blue-500 to-cyan-500' },
+                { icon: '✉️', name: 'EmailAI', color: 'from-rose-500 to-pink-500' },
+                { icon: '📅', name: 'MeetingAI', color: 'from-amber-500 to-orange-500' },
+                { icon: '📱', name: 'SocialAI', color: 'from-pink-500 to-rose-500' },
+                { icon: '✍️', name: 'ContentAI', color: 'from-teal-500 to-emerald-500' },
+                { icon: '💼', name: 'SalesAI', color: 'from-indigo-500 to-blue-500' },
+                { icon: '💰', name: 'FinanceAI', color: 'from-green-500 to-emerald-500' },
+              ].map((app, i) => (
+                <div 
+                  key={i} 
+                  className="relative rounded-xl p-2 sm:p-3 cursor-not-allowed opacity-50 bg-slate-800/50 border border-slate-700/50 text-center"
+                  title={`${app.name} - Coming Soon`}
+                >
+                  <div className={`w-8 h-8 sm:w-10 sm:h-10 mx-auto rounded-lg bg-gradient-to-br ${app.color} flex items-center justify-center mb-1 sm:mb-2 text-sm sm:text-lg opacity-60`}>
+                    {app.icon}
+                  </div>
+                  <p className="text-[10px] sm:text-xs text-slate-500 font-medium truncate">{app.name}</p>
+                  <span className="text-[8px] sm:text-[10px] text-amber-500/60">Soon</span>
+                </div>
+              ))}
+            </div>
+            <p className="text-center text-xs sm:text-sm text-slate-500 mt-4">+ 8 more AI apps coming Q2 2025</p>
           </div>
 
           {/* App Screenshots/Previews */}
-          <div className="mt-20 mb-20">
+          <div className="mt-16 mb-20">
             <h3 className="text-2xl font-bold text-center mb-12">See Our Apps in Action</h3>
             
             {/* NDISHub Preview */}
@@ -402,49 +429,6 @@ export default function Landing() {
             </div>
           </div>
 
-          {/* Coming Soon Apps */}
-          <div className="mt-16">
-            <div className="text-center mb-10">
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/10 border border-amber-500/20 rounded-full text-amber-400 text-sm mb-4">
-                <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
-                Coming Soon
-              </span>
-              <h3 className="text-2xl font-bold">More AI Apps in Development</h3>
-            </div>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {[
-                { icon: '📝', name: 'ResumeAI', desc: 'AI Resume Writer', color: 'from-violet-500 to-purple-500' },
-                { icon: '🎯', name: 'InterviewAI', desc: 'Interview Prep Coach', color: 'from-blue-500 to-cyan-500' },
-                { icon: '✉️', name: 'EmailAI', desc: 'Smart Email Assistant', color: 'from-rose-500 to-pink-500' },
-                { icon: '📅', name: 'MeetingAI', desc: 'Meeting Notes & Summaries', color: 'from-amber-500 to-orange-500' },
-                { icon: '📱', name: 'SocialAI', desc: 'Social Media Manager', color: 'from-pink-500 to-rose-500' },
-                { icon: '✍️', name: 'ContentAI', desc: 'Content Generator', color: 'from-teal-500 to-emerald-500' },
-                { icon: '💼', name: 'SalesAI', desc: 'Sales Automation', color: 'from-indigo-500 to-blue-500' },
-                { icon: '💰', name: 'FinanceAI', desc: 'Financial Assistant', color: 'from-green-500 to-emerald-500' },
-              ].map((app, i) => (
-                <div 
-                  key={i} 
-                  className="relative group rounded-2xl p-1 cursor-not-allowed opacity-60 md:hover:opacity-80 transition-opacity"
-                >
-                  <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${app.color} opacity-20`}></div>
-                  <div className="relative bg-slate-900/95 rounded-2xl p-4 sm:p-5 border border-white/10 h-full">
-                    <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${app.color} flex items-center justify-center mb-3 sm:mb-4 text-lg sm:text-xl opacity-50`}>
-                      {app.icon}
-                    </div>
-                    <h4 className="font-bold text-white mb-1">{app.name}</h4>
-                    <p className="text-slate-500 text-sm mb-3">{app.desc}</p>
-                    <span className="inline-flex items-center gap-1.5 text-xs text-amber-400/70">
-                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-                      </svg>
-                      Coming Q2 2025
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
@@ -462,9 +446,10 @@ export default function Landing() {
             {features.map((feature, index) => (
               <div 
                 key={index}
-                className="bg-slate-800/50 rounded-2xl p-4 sm:p-6 border border-slate-700 md:hover:border-slate-500 transition-all md:hover:-translate-y-1 group"
+                className="bg-slate-800/50 rounded-2xl p-4 sm:p-6 border border-slate-700 hover:border-slate-600 active:border-slate-500 active:scale-[0.98] transition-all duration-150 md:hover:-translate-y-1"
+                style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-3 sm:mb-4 text-lg sm:text-xl md:group-hover:scale-110 transition-transform duration-300`}>
+                <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-3 sm:mb-4 text-lg sm:text-xl`}>
                   {feature.icon}
                 </div>
                 <h3 className="text-base sm:text-lg font-semibold text-white mb-1 sm:mb-2">{feature.title}</h3>
@@ -487,7 +472,7 @@ export default function Landing() {
             {testimonials.map((testimonial, index) => (
               <div 
                 key={index}
-                className="bg-slate-800/50 rounded-2xl p-5 sm:p-6 border border-slate-700 md:hover:border-amber-500/30 transition-all md:hover:-translate-y-1"
+                className="bg-slate-800/50 rounded-2xl p-5 sm:p-6 border border-slate-700 hover:border-slate-600 active:border-amber-500/30 active:scale-[0.98] transition-all duration-150 md:hover:-translate-y-1"
               >
                 <div className="flex items-center gap-1 mb-3 sm:mb-4">
                   {[...Array(5)].map((_, i) => (
@@ -529,7 +514,7 @@ export default function Landing() {
           {/* Three Column Layout */}
           <div className="grid md:grid-cols-3 gap-4 sm:gap-8 mb-16">
             {/* Williams Group */}
-            <div className="bg-slate-800/50 rounded-2xl p-5 sm:p-8 border border-slate-700 md:hover:border-indigo-500/30 transition-all md:hover:-translate-y-1 group">
+            <div className="bg-slate-800/50 rounded-2xl p-5 sm:p-8 border border-slate-700 hover:border-slate-600 active:border-indigo-500/30 active:scale-[0.98] transition-all duration-150 md:hover:-translate-y-1 group">
               <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center mb-4 sm:mb-6 text-xl sm:text-2xl shadow-lg shadow-indigo-500/20 md:group-hover:scale-110 transition-transform duration-300">
                 🏢
               </div>
@@ -548,7 +533,7 @@ export default function Landing() {
             </div>
 
             {/* Our Company */}
-            <div className="bg-slate-800/50 rounded-2xl p-5 sm:p-8 border border-slate-700 md:hover:border-emerald-500/30 transition-all md:hover:-translate-y-1 group">
+            <div className="bg-slate-800/50 rounded-2xl p-5 sm:p-8 border border-slate-700 hover:border-slate-600 active:border-emerald-500/30 active:scale-[0.98] transition-all duration-150 md:hover:-translate-y-1 group">
               <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center mb-4 sm:mb-6 text-xl sm:text-2xl shadow-lg shadow-emerald-500/20 md:group-hover:scale-110 transition-transform duration-300">
                 🚀
               </div>
@@ -570,7 +555,7 @@ export default function Landing() {
             </div>
 
             {/* Founder */}
-            <div className="bg-slate-800/50 rounded-2xl p-5 sm:p-8 border border-slate-700 md:hover:border-amber-500/30 transition-all md:hover:-translate-y-1 group">
+            <div className="bg-slate-800/50 rounded-2xl p-5 sm:p-8 border border-slate-700 hover:border-slate-600 active:border-amber-500/30 active:scale-[0.98] transition-all duration-150 md:hover:-translate-y-1 group">
               <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center mb-4 sm:mb-6 text-xl sm:text-2xl shadow-lg shadow-amber-500/20 md:group-hover:scale-110 transition-transform duration-300">
                 👤
               </div>
@@ -621,7 +606,7 @@ export default function Landing() {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <button
                   onClick={() => setShowSignup(true)}
-                  className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl font-semibold text-lg hover:shadow-xl hover:shadow-indigo-500/30 transition-all"
+                  className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl font-semibold text-lg hover:opacity-90 active:scale-[0.97] transition-all duration-150"
                 >
                   Start Free — No Credit Card
                 </button>
