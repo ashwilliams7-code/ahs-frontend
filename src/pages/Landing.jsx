@@ -295,35 +295,30 @@ export default function Landing() {
             </div>
             <p className="text-center text-xs text-slate-500 mt-3 md:hidden">+ 8 more AI apps coming Q2 2025</p>
 
-            {/* Desktop: Full cards grid */}
-            <div className="hidden md:grid md:grid-cols-4 gap-4 mt-8">
+            {/* Desktop: Single row of 8 */}
+            <div className="hidden md:grid md:grid-cols-8 gap-3 mt-8">
               {[
                 { icon: '📝', name: 'ResumeAI', desc: 'AI Resume Writer', color: 'from-violet-500 to-purple-500' },
-                { icon: '🎯', name: 'InterviewAI', desc: 'Interview Prep Coach', color: 'from-blue-500 to-cyan-500' },
-                { icon: '✉️', name: 'EmailAI', desc: 'Smart Email Assistant', color: 'from-rose-500 to-pink-500' },
-                { icon: '📅', name: 'MeetingAI', desc: 'Meeting Notes & Summaries', color: 'from-amber-500 to-orange-500' },
-                { icon: '📱', name: 'SocialAI', desc: 'Social Media Manager', color: 'from-pink-500 to-rose-500' },
-                { icon: '✍️', name: 'ContentAI', desc: 'Content Generator', color: 'from-teal-500 to-emerald-500' },
-                { icon: '💼', name: 'SalesAI', desc: 'Sales Automation', color: 'from-indigo-500 to-blue-500' },
-                { icon: '💰', name: 'FinanceAI', desc: 'Financial Assistant', color: 'from-green-500 to-emerald-500' },
+                { icon: '🎯', name: 'InterviewAI', desc: 'Interview Coach', color: 'from-blue-500 to-cyan-500' },
+                { icon: '✉️', name: 'EmailAI', desc: 'Email Assistant', color: 'from-rose-500 to-pink-500' },
+                { icon: '📅', name: 'MeetingAI', desc: 'Meeting Notes', color: 'from-amber-500 to-orange-500' },
+                { icon: '📱', name: 'SocialAI', desc: 'Social Media', color: 'from-pink-500 to-rose-500' },
+                { icon: '✍️', name: 'ContentAI', desc: 'Content Gen', color: 'from-teal-500 to-emerald-500' },
+                { icon: '💼', name: 'SalesAI', desc: 'Sales Auto', color: 'from-indigo-500 to-blue-500' },
+                { icon: '💰', name: 'FinanceAI', desc: 'Finance Help', color: 'from-green-500 to-emerald-500' },
               ].map((app, i) => (
                 <div 
                   key={i} 
-                  className="relative group rounded-2xl p-1 cursor-not-allowed opacity-60 hover:opacity-80 transition-all duration-200 hover:scale-[1.02]"
+                  className="relative group rounded-xl cursor-not-allowed opacity-60 hover:opacity-90 transition-all duration-200 hover:scale-105"
                 >
-                  <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${app.color} opacity-20 group-hover:opacity-30 transition-opacity`}></div>
-                  <div className="relative bg-slate-900/90 rounded-2xl p-5 border border-white/10 group-hover:border-white/20 transition-colors h-full">
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${app.color} flex items-center justify-center mb-4 text-xl opacity-60 group-hover:opacity-80 transition-opacity`}>
+                  <div className={`absolute inset-0 rounded-xl bg-gradient-to-br ${app.color} opacity-20 group-hover:opacity-40 transition-opacity`}></div>
+                  <div className="relative bg-slate-900/90 rounded-xl p-3 border border-white/10 group-hover:border-white/25 transition-colors h-full text-center">
+                    <div className={`w-10 h-10 mx-auto rounded-lg bg-gradient-to-br ${app.color} flex items-center justify-center mb-2 text-lg opacity-60 group-hover:opacity-90 transition-opacity`}>
                       {app.icon}
                     </div>
-                    <h4 className="font-bold text-white mb-1">{app.name}</h4>
-                    <p className="text-slate-500 text-sm mb-3">{app.desc}</p>
-                    <span className="inline-flex items-center gap-1.5 text-xs text-amber-400/70">
-                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-                      </svg>
-                      Coming Q2 2025
-                    </span>
+                    <h4 className="font-semibold text-white text-sm mb-0.5">{app.name}</h4>
+                    <p className="text-slate-500 text-xs mb-1.5">{app.desc}</p>
+                    <span className="text-[10px] text-amber-400/70 font-medium">Q2 2025</span>
                   </div>
                 </div>
               ))}
