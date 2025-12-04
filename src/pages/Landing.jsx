@@ -269,8 +269,9 @@ export default function Landing() {
               </div>
             </div>
 
-            {/* Coming Soon Apps - Compact Grid */}
-            <div className="grid grid-cols-4 md:grid-cols-8 gap-2 sm:gap-3 mt-6">
+            {/* Coming Soon Apps */}
+            {/* Mobile: Compact 4-column grid */}
+            <div className="grid grid-cols-4 gap-2 mt-6 md:hidden">
               {[
                 { icon: '📝', name: 'ResumeAI', color: 'from-violet-500 to-purple-500' },
                 { icon: '🎯', name: 'InterviewAI', color: 'from-blue-500 to-cyan-500' },
@@ -283,18 +284,50 @@ export default function Landing() {
               ].map((app, i) => (
                 <div 
                   key={i} 
-                  className="relative rounded-xl p-2 sm:p-3 cursor-not-allowed opacity-50 bg-slate-800/50 border border-slate-700/50 text-center"
-                  title={`${app.name} - Coming Soon`}
+                  className="relative rounded-xl p-2 cursor-not-allowed opacity-50 bg-slate-800/50 border border-slate-700/50 text-center"
                 >
-                  <div className={`w-8 h-8 sm:w-10 sm:h-10 mx-auto rounded-lg bg-gradient-to-br ${app.color} flex items-center justify-center mb-1 sm:mb-2 text-sm sm:text-lg opacity-60`}>
+                  <div className={`w-8 h-8 mx-auto rounded-lg bg-gradient-to-br ${app.color} flex items-center justify-center mb-1 text-sm opacity-60`}>
                     {app.icon}
                   </div>
-                  <p className="text-[10px] sm:text-xs text-slate-500 font-medium truncate">{app.name}</p>
-                  <span className="text-[8px] sm:text-[10px] text-amber-500/60">Soon</span>
+                  <p className="text-[10px] text-slate-500 font-medium truncate">{app.name}</p>
                 </div>
               ))}
             </div>
-            <p className="text-center text-xs sm:text-sm text-slate-500 mt-4">+ 8 more AI apps coming Q2 2025</p>
+            <p className="text-center text-xs text-slate-500 mt-3 md:hidden">+ 8 more AI apps coming Q2 2025</p>
+
+            {/* Desktop: Full cards grid */}
+            <div className="hidden md:grid md:grid-cols-4 gap-4 mt-8">
+              {[
+                { icon: '📝', name: 'ResumeAI', desc: 'AI Resume Writer', color: 'from-violet-500 to-purple-500' },
+                { icon: '🎯', name: 'InterviewAI', desc: 'Interview Prep Coach', color: 'from-blue-500 to-cyan-500' },
+                { icon: '✉️', name: 'EmailAI', desc: 'Smart Email Assistant', color: 'from-rose-500 to-pink-500' },
+                { icon: '📅', name: 'MeetingAI', desc: 'Meeting Notes & Summaries', color: 'from-amber-500 to-orange-500' },
+                { icon: '📱', name: 'SocialAI', desc: 'Social Media Manager', color: 'from-pink-500 to-rose-500' },
+                { icon: '✍️', name: 'ContentAI', desc: 'Content Generator', color: 'from-teal-500 to-emerald-500' },
+                { icon: '💼', name: 'SalesAI', desc: 'Sales Automation', color: 'from-indigo-500 to-blue-500' },
+                { icon: '💰', name: 'FinanceAI', desc: 'Financial Assistant', color: 'from-green-500 to-emerald-500' },
+              ].map((app, i) => (
+                <div 
+                  key={i} 
+                  className="relative group rounded-2xl p-1 cursor-not-allowed opacity-60 hover:opacity-80 transition-all duration-200 hover:scale-[1.02]"
+                >
+                  <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${app.color} opacity-20 group-hover:opacity-30 transition-opacity`}></div>
+                  <div className="relative bg-slate-900/90 rounded-2xl p-5 border border-white/10 group-hover:border-white/20 transition-colors h-full">
+                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${app.color} flex items-center justify-center mb-4 text-xl opacity-60 group-hover:opacity-80 transition-opacity`}>
+                      {app.icon}
+                    </div>
+                    <h4 className="font-bold text-white mb-1">{app.name}</h4>
+                    <p className="text-slate-500 text-sm mb-3">{app.desc}</p>
+                    <span className="inline-flex items-center gap-1.5 text-xs text-amber-400/70">
+                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                      </svg>
+                      Coming Q2 2025
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* App Screenshots/Previews */}
