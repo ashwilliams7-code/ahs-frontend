@@ -158,16 +158,15 @@ export default function Landing() {
           </div>
           
           <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight animate-[fadeIn_0.8s_ease-out]">
-            Automate Your{' '}
+            AI Automation for{' '}
             <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Work & Career
+              Australian
             </span>
-            <br />with AI
+            <br />Professionals
           </h1>
           
           <p className="text-base sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 px-2 animate-[fadeIn_1s_ease-out]">
-            From NDIS provider automation to AI-powered job applications. 
-            Let our intelligent agents handle the repetitive work while you focus on what matters.
+            Purpose-built for the Australian market. Streamline your NDIS compliance, invoicing, and rostering — or let AI apply to hundreds of jobs on SEEK, Indeed, LinkedIn, and Jora while you sleep.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-[fadeIn_1.2s_ease-out]">
