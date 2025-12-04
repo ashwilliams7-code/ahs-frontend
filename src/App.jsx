@@ -3,6 +3,9 @@ import { useAuth } from './context/AuthContext'
 import Layout from './components/Layout'
 import ApplyMateLayout from './components/ApplyMateLayout'
 import Landing from './pages/Landing'
+import Privacy from './pages/Privacy'
+import Terms from './pages/Terms'
+import Contact from './pages/Contact'
 import AppSelector from './pages/AppSelector'
 // NDISHub Pages
 import Dashboard from './pages/Dashboard'
@@ -133,6 +136,11 @@ function App() {
         <Route path="resume" element={<Resume />} />
         <Route path="settings" element={<ApplyMateSettings />} />
       </Route>
+
+      {/* Public Pages */}
+      <Route path="/privacy" element={<Privacy />} />
+      <Route path="/terms" element={<Terms />} />
+      <Route path="/contact" element={<Contact />} />
 
       {/* Catch all */}
       <Route path="*" element={<Navigate to="/apps" replace />} />

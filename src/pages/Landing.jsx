@@ -653,9 +653,9 @@ export default function Landing() {
               <span className="font-semibold">AutoAI Hub</span>
             </div>
             <div className="flex items-center gap-6 text-sm text-slate-400">
-              <a href="#" className="hover:text-white transition-colors">Privacy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms</a>
-              <a href="#" className="hover:text-white transition-colors">Contact</a>
+              <Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link>
+              <Link to="/terms" className="hover:text-white transition-colors">Terms</Link>
+              <Link to="/contact" className="hover:text-white transition-colors">Contact</Link>
             </div>
             <p className="text-sm text-slate-500">© 2024 AutoAI Hub. All rights reserved.</p>
           </div>
