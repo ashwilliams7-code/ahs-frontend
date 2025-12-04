@@ -36,8 +36,7 @@ const apps = [
     ],
     features: ['Auto-Apply', 'AI Cover Letters', 'Resume Tailoring', 'Interview Prep'],
     route: '/applymate',
-    available: false,
-    comingSoon: true,
+    available: true,
   },
 ]
 
