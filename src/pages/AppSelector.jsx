@@ -110,7 +110,7 @@ export default function AppSelector() {
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
               Choose Your{' '}
               <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                AI Assistant
+                AI App
               </span>
             </h2>
             <p className="text-slate-400 text-lg max-w-2xl mx-auto">
