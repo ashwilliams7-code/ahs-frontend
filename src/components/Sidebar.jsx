@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext'
 
 const navItems = [
   {
-    path: '/dashboard',
+    path: '/ndishub/dashboard',
     label: 'Dashboard',
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -12,7 +12,7 @@ const navItems = [
     ),
   },
   {
-    path: '/invoicing',
+    path: '/ndishub/invoicing',
     label: 'Invoicing Agent',
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -22,7 +22,7 @@ const navItems = [
     active: true,
   },
   {
-    path: '/rostering',
+    path: '/ndishub/rostering',
     label: 'Rostering Agent',
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -31,7 +31,7 @@ const navItems = [
     ),
   },
   {
-    path: '/compliance',
+    path: '/ndishub/compliance',
     label: 'Compliance Agent',
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -40,7 +40,7 @@ const navItems = [
     ),
   },
   {
-    path: '/sales',
+    path: '/ndishub/sales',
     label: 'Sales Agent',
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -49,7 +49,7 @@ const navItems = [
     ),
   },
   {
-    path: '/marketing',
+    path: '/ndishub/marketing',
     label: 'Marketing Agent',
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -144,7 +144,7 @@ export default function Sidebar({ isOpen, onClose }) {
 
         <div className="pt-4 mt-4 border-t border-gray-100">
           <NavLink
-            to="/settings"
+            to="/ndishub/settings"
             className={({ isActive }) =>
               `sidebar-item flex items-center gap-3 px-4 py-3 rounded-xl border-l-2 transition-all ${
                 isActive

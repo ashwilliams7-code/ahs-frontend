@@ -4,37 +4,37 @@ import Sidebar from './Sidebar'
 import TopNav from './TopNav'
 
 const pageConfig = {
-  '/dashboard': {
+  '/ndishub/dashboard': {
     title: 'Dashboard',
     status: 'Overview',
     statusColor: 'bg-gray-100 text-gray-700',
   },
-  '/invoicing': {
+  '/ndishub/invoicing': {
     title: 'Invoicing Agent',
     status: 'Active',
     statusColor: 'bg-accent-100 text-accent-700',
   },
-  '/rostering': {
+  '/ndishub/rostering': {
     title: 'Rostering Agent',
     status: 'Active',
     statusColor: 'bg-orange-100 text-orange-700',
   },
-  '/compliance': {
+  '/ndishub/compliance': {
     title: 'Compliance Agent',
     status: 'Active',
     statusColor: 'bg-green-100 text-green-700',
   },
-  '/sales': {
+  '/ndishub/sales': {
     title: 'Sales Agent',
     status: 'Active',
     statusColor: 'bg-accent-100 text-accent-700',
   },
-  '/marketing': {
+  '/ndishub/marketing': {
     title: 'Marketing Agent',
     status: 'Active',
     statusColor: 'bg-accent-100 text-accent-700',
   },
-  '/settings': {
+  '/ndishub/settings': {
     title: 'Settings',
     status: 'Configuration',
     statusColor: 'bg-gray-100 text-gray-700',
@@ -43,7 +43,7 @@ const pageConfig = {
 
 export default function Layout() {
   const location = useLocation()
-  const config = pageConfig[location.pathname] || pageConfig['/dashboard']
+  const config = pageConfig[location.pathname] || pageConfig['/ndishub/dashboard']
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   // Close sidebar when route changes (mobile navigation)

@@ -2,8 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import { useAuth } from './context/AuthContext'
 import Layout from './components/Layout'
 import ApplyMateLayout from './components/ApplyMateLayout'
-import Login from './pages/Login'
-import Signup from './pages/Signup'
+import Landing from './pages/Landing'
 import AppSelector from './pages/AppSelector'
 // NDISHub Pages
 import Dashboard from './pages/Dashboard'
@@ -27,14 +26,14 @@ function ProtectedRoute({ children }) {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-900">
+      <div className="min-h-screen flex items-center justify-center bg-slate-950">
         <div className="spinner w-12 h-12"></div>
       </div>
     )
   }
 
   if (!user) {
-    return <Navigate to="/login" replace />
+    return <Navigate to="/" replace />
   }
 
   return children
@@ -45,7 +44,7 @@ function PublicRoute({ children }) {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-900">
+      <div className="min-h-screen flex items-center justify-center bg-slate-950">
         <div className="spinner w-12 h-12"></div>
       </div>
     )
@@ -61,20 +60,20 @@ function PublicRoute({ children }) {
 function App() {
   return (
     <Routes>
-      {/* Public routes */}
+      {/* Landing page - Public */}
       <Route
-        path="/login"
+        path="/"
         element={
           <PublicRoute>
-            <Login />
+            <Landing />
           </PublicRoute>
         }
       />
       <Route
-        path="/signup"
+        path="/login"
         element={
           <PublicRoute>
-            <Signup />
+            <Landing />
           </PublicRoute>
         }
       />
@@ -91,14 +90,14 @@ function App() {
 
       {/* NDISHub App - Protected routes with Layout */}
       <Route
-        path="/"
+        path="/ndishub"
         element={
           <ProtectedRoute>
             <Layout />
           </ProtectedRoute>
         }
       >
-        <Route index element={<Navigate to="/apps" replace />} />
+        <Route index element={<Navigate to="/ndishub/dashboard" replace />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="invoicing" element={<Invoicing />} />
         <Route path="rostering" element={<Rostering />} />
@@ -107,6 +106,15 @@ function App() {
         <Route path="marketing" element={<Marketing />} />
         <Route path="settings" element={<Settings />} />
       </Route>
+
+      {/* Legacy routes - redirect to new paths */}
+      <Route path="/dashboard" element={<Navigate to="/ndishub/dashboard" replace />} />
+      <Route path="/invoicing" element={<Navigate to="/ndishub/invoicing" replace />} />
+      <Route path="/rostering" element={<Navigate to="/ndishub/rostering" replace />} />
+      <Route path="/compliance" element={<Navigate to="/ndishub/compliance" replace />} />
+      <Route path="/sales" element={<Navigate to="/ndishub/sales" replace />} />
+      <Route path="/marketing" element={<Navigate to="/ndishub/marketing" replace />} />
+      <Route path="/settings" element={<Navigate to="/ndishub/settings" replace />} />
 
       {/* ApplyMate App - Protected routes with ApplyMateLayout */}
       <Route

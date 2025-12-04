@@ -17,7 +17,7 @@ const apps = [
       { label: 'Time Saved', value: '10hr/wk' },
     ],
     features: ['Invoice Generation', 'Smart Rostering', 'Compliance Tracking', 'Sales Automation'],
-    route: '/dashboard',
+    route: '/ndishub/dashboard',
     available: true,
   },
   {
