@@ -268,9 +268,10 @@ export default function Landing() {
                 </button>
               </div>
             </div>
+          </div>
 
-            {/* Coming Soon Apps - Same style as main apps */}
-            <div className="grid md:grid-cols-2 gap-8 mt-8">
+          {/* Coming Soon Apps - Same style as main apps */}
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
               {[
                 { icon: '📝', name: 'ResumeAI', tagline: 'AI Resume Writer', desc: 'Create ATS-optimized resumes with AI that highlights your strengths and matches job requirements perfectly.', features: ['ATS Optimization', 'Templates', 'PDF Export', 'AI Tips'], color: 'from-violet-500 to-purple-500', textColor: 'text-violet-400' },
                 { icon: '🎯', name: 'InterviewAI', tagline: 'Interview Prep Coach', desc: 'Practice with AI-powered mock interviews and get real-time feedback to ace your next job interview.', features: ['Mock Interviews', 'Feedback', 'Industry Tips', 'Scoring'], color: 'from-blue-500 to-cyan-500', textColor: 'text-cyan-400' },
@@ -301,12 +302,11 @@ export default function Landing() {
                       ))}
                     </div>
                     <div className={`w-full py-3 bg-gradient-to-r ${app.color} opacity-50 rounded-xl font-semibold text-center text-white/80`}>
-                      Coming Q2 2025
+                      Coming 2026
                     </div>
                   </div>
                 </div>
               ))}
-            </div>
           </div>
 
           {/* App Screenshots/Previews */}
