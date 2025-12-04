@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useAuth } from '../../context/AuthContext'
 import { Link } from 'react-router-dom'
 
-const API_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001'
+const API_URL = import.meta.env.VITE_BACKEND_URL || 'https://ahs-backend.onrender.com'
 
 export default function AutoApply() {
   const { session } = useAuth()

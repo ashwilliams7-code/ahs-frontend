@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from '../../context/AuthContext'
 
-const API_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001'
+const API_URL = import.meta.env.VITE_BACKEND_URL || 'https://ahs-backend.onrender.com'
 
 const statusOptions = ['All', 'submitted', 'viewed', 'interview', 'rejected', 'offer']
 const statusLabels = {
