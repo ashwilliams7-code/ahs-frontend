@@ -40,7 +40,7 @@ export default function Signup() {
         last_name: formData.lastName,
         company_name: formData.companyName,
       })
-      navigate('/dashboard')
+      navigate('/apps')
     } catch (err) {
       setError(err.message || 'Failed to create account')
     } finally {

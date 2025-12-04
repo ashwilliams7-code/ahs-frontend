@@ -3,6 +3,7 @@ import { useAuth } from './context/AuthContext'
 import Layout from './components/Layout'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import AppSelector from './pages/AppSelector'
 import Dashboard from './pages/Dashboard'
 import Invoicing from './pages/Invoicing'
 import Rostering from './pages/Rostering'
@@ -16,7 +17,7 @@ function ProtectedRoute({ children }) {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-slate-900">
         <div className="spinner w-12 h-12"></div>
       </div>
     )
@@ -34,14 +35,14 @@ function PublicRoute({ children }) {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-slate-900">
         <div className="spinner w-12 h-12"></div>
       </div>
     )
   }
 
   if (user) {
-    return <Navigate to="/dashboard" replace />
+    return <Navigate to="/apps" replace />
   }
 
   return children
@@ -68,7 +69,17 @@ function App() {
         }
       />
 
-      {/* Protected routes */}
+      {/* App Selector - First page after login */}
+      <Route
+        path="/apps"
+        element={
+          <ProtectedRoute>
+            <AppSelector />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* AHS App - Protected routes with Layout */}
       <Route
         path="/"
         element={
@@ -77,7 +88,7 @@ function App() {
           </ProtectedRoute>
         }
       >
-        <Route index element={<Navigate to="/dashboard" replace />} />
+        <Route index element={<Navigate to="/apps" replace />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="invoicing" element={<Invoicing />} />
         <Route path="rostering" element={<Rostering />} />
@@ -88,7 +99,7 @@ function App() {
       </Route>
 
       {/* Catch all */}
-      <Route path="*" element={<Navigate to="/dashboard" replace />} />
+      <Route path="*" element={<Navigate to="/apps" replace />} />
     </Routes>
   )
 }
