@@ -295,30 +295,43 @@ export default function Landing() {
             </div>
             <p className="text-center text-xs text-slate-500 mt-3 md:hidden">+ 8 more AI apps coming Q2 2025</p>
 
-            {/* Desktop: Single row of 8 */}
-            <div className="hidden md:grid md:grid-cols-8 gap-3 mt-8">
+            {/* Desktop: Full cards like the main apps */}
+            <div className="hidden md:grid md:grid-cols-4 gap-6 mt-8">
               {[
-                { icon: '📝', name: 'ResumeAI', desc: 'AI Resume Writer', color: 'from-violet-500 to-purple-500' },
-                { icon: '🎯', name: 'InterviewAI', desc: 'Interview Coach', color: 'from-blue-500 to-cyan-500' },
-                { icon: '✉️', name: 'EmailAI', desc: 'Email Assistant', color: 'from-rose-500 to-pink-500' },
-                { icon: '📅', name: 'MeetingAI', desc: 'Meeting Notes', color: 'from-amber-500 to-orange-500' },
-                { icon: '📱', name: 'SocialAI', desc: 'Social Media', color: 'from-pink-500 to-rose-500' },
-                { icon: '✍️', name: 'ContentAI', desc: 'Content Gen', color: 'from-teal-500 to-emerald-500' },
-                { icon: '💼', name: 'SalesAI', desc: 'Sales Auto', color: 'from-indigo-500 to-blue-500' },
-                { icon: '💰', name: 'FinanceAI', desc: 'Finance Help', color: 'from-green-500 to-emerald-500' },
+                { icon: '📝', name: 'ResumeAI', tagline: 'AI Resume Writer', desc: 'Create ATS-optimized resumes with AI that highlights your strengths and matches job requirements.', features: ['ATS Optimization', 'Templates', 'PDF Export'], color: 'from-violet-500 to-purple-500', textColor: 'text-violet-400' },
+                { icon: '🎯', name: 'InterviewAI', tagline: 'Interview Prep Coach', desc: 'Practice with AI-powered mock interviews and get real-time feedback on your responses.', features: ['Mock Interviews', 'Feedback', 'Tips'], color: 'from-blue-500 to-cyan-500', textColor: 'text-cyan-400' },
+                { icon: '✉️', name: 'EmailAI', tagline: 'Smart Email Assistant', desc: 'Write professional emails in seconds. AI crafts the perfect tone for any situation.', features: ['Auto-Write', 'Tone Control', 'Templates'], color: 'from-rose-500 to-pink-500', textColor: 'text-pink-400' },
+                { icon: '📅', name: 'MeetingAI', tagline: 'Meeting Notes & Summaries', desc: 'Automatic meeting transcription, summaries, and action items extraction.', features: ['Transcription', 'Summaries', 'Actions'], color: 'from-amber-500 to-orange-500', textColor: 'text-amber-400' },
+                { icon: '📱', name: 'SocialAI', tagline: 'Social Media Manager', desc: 'Schedule posts, generate content, and grow your audience across all platforms.', features: ['Scheduling', 'Content Gen', 'Analytics'], color: 'from-pink-500 to-rose-500', textColor: 'text-rose-400' },
+                { icon: '✍️', name: 'ContentAI', tagline: 'Content Generator', desc: 'Create blog posts, articles, and marketing copy that converts.', features: ['Blog Posts', 'Ad Copy', 'SEO'], color: 'from-teal-500 to-emerald-500', textColor: 'text-emerald-400' },
+                { icon: '💼', name: 'SalesAI', tagline: 'Sales Automation', desc: 'Automate outreach, follow-ups, and lead qualification with AI precision.', features: ['Outreach', 'Follow-ups', 'CRM'], color: 'from-indigo-500 to-blue-500', textColor: 'text-blue-400' },
+                { icon: '💰', name: 'FinanceAI', tagline: 'Financial Assistant', desc: 'Track expenses, forecast budgets, and get AI-powered financial insights.', features: ['Tracking', 'Forecasts', 'Reports'], color: 'from-green-500 to-emerald-500', textColor: 'text-green-400' },
               ].map((app, i) => (
                 <div 
                   key={i} 
-                  className="relative group rounded-xl cursor-not-allowed opacity-60 hover:opacity-90 transition-all duration-200 hover:scale-105"
+                  className="group relative rounded-2xl p-1 transition-all duration-200 cursor-not-allowed opacity-70 hover:opacity-90"
                 >
-                  <div className={`absolute inset-0 rounded-xl bg-gradient-to-br ${app.color} opacity-20 group-hover:opacity-40 transition-opacity`}></div>
-                  <div className="relative bg-slate-900/90 rounded-xl p-3 border border-white/10 group-hover:border-white/25 transition-colors h-full text-center">
-                    <div className={`w-10 h-10 mx-auto rounded-lg bg-gradient-to-br ${app.color} flex items-center justify-center mb-2 text-lg opacity-60 group-hover:opacity-90 transition-opacity`}>
-                      {app.icon}
+                  <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${app.color} opacity-30 group-hover:opacity-50 transition-opacity duration-200`}></div>
+                  <div className="relative bg-slate-900/95 rounded-2xl p-5 border border-white/10 group-hover:border-white/20 transition-colors h-full">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${app.color} flex items-center justify-center text-xl shadow-lg opacity-70`}>
+                        {app.icon}
+                      </div>
+                      <span className="px-2 py-1 bg-amber-500/20 text-amber-400 text-xs font-medium rounded-full">Coming Soon</span>
                     </div>
-                    <h4 className="font-semibold text-white text-sm mb-0.5">{app.name}</h4>
-                    <p className="text-slate-500 text-xs mb-1.5">{app.desc}</p>
-                    <span className="text-[10px] text-amber-400/70 font-medium">Q2 2025</span>
+                    <h3 className="text-lg font-bold text-white mb-1">{app.name}</h3>
+                    <p className={`${app.textColor} font-medium text-sm mb-3`}>{app.tagline}</p>
+                    <p className="text-slate-400 text-sm mb-4 line-clamp-2">{app.desc}</p>
+                    <div className="flex flex-wrap gap-1.5 mb-4">
+                      {app.features.map((feature) => (
+                        <span key={feature} className={`px-2 py-0.5 bg-white/5 ${app.textColor}/70 rounded-full text-xs border border-white/10`}>
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="py-2.5 bg-slate-800/50 rounded-lg text-center text-slate-500 text-sm font-medium">
+                      Available Q2 2025
+                    </div>
                   </div>
                 </div>
               ))}
