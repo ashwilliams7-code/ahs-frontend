@@ -1,45 +1,105 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useAuth } from '../../context/AuthContext'
 
-const applications = [
-  { id: 1, company: 'Google', role: 'Senior Software Engineer', status: 'Interview', appliedDate: 'Dec 2, 2024', platform: 'LinkedIn', salary: '$180,000', logo: 'G' },
-  { id: 2, company: 'Meta', role: 'Full Stack Developer', status: 'Viewed', appliedDate: 'Dec 1, 2024', platform: 'SEEK', salary: '$150,000', logo: 'M' },
-  { id: 3, company: 'Amazon', role: 'Backend Engineer', status: 'Applied', appliedDate: 'Dec 1, 2024', platform: 'LinkedIn', salary: '$170,000', logo: 'A' },
-  { id: 4, company: 'Microsoft', role: 'Software Engineer II', status: 'Offer', appliedDate: 'Nov 28, 2024', platform: 'LinkedIn', salary: '$165,000', logo: 'M' },
-  { id: 5, company: 'Apple', role: 'iOS Developer', status: 'Rejected', appliedDate: 'Nov 25, 2024', platform: 'SEEK', salary: '$140,000', logo: 'A' },
-  { id: 6, company: 'Netflix', role: 'Senior Engineer', status: 'Applied', appliedDate: 'Nov 24, 2024', platform: 'LinkedIn', salary: '$200,000', logo: 'N' },
-  { id: 7, company: 'Spotify', role: 'Backend Developer', status: 'Viewed', appliedDate: 'Nov 23, 2024', platform: 'SEEK', salary: '$130,000', logo: 'S' },
-  { id: 8, company: 'Atlassian', role: 'Full Stack Engineer', status: 'Interview', appliedDate: 'Nov 22, 2024', platform: 'LinkedIn', salary: '$155,000', logo: 'A' },
-]
+const API_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001'
 
-const statusOptions = ['All', 'Applied', 'Viewed', 'Interview', 'Offer', 'Rejected']
+const statusOptions = ['All', 'submitted', 'viewed', 'interview', 'rejected', 'offer']
+const statusLabels = {
+  'submitted': 'Applied',
+  'viewed': 'Viewed',
+  'interview': 'Interview',
+  'rejected': 'Rejected',
+  'offer': 'Offer'
+}
 
 export default function Applications() {
+  const { session } = useAuth()
+  const [applications, setApplications] = useState([])
+  const [stats, setStats] = useState({ total: 0, thisWeek: 0, today: 0, byStatus: {} })
+  const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState('All')
   const [searchTerm, setSearchTerm] = useState('')
 
+  useEffect(() => {
+    loadData()
+  }, [])
+
+  const loadData = async () => {
+    try {
+      const [appsRes, statsRes] = await Promise.all([
+        fetch(`${API_URL}/api/applymate/applications`, {
+          headers: { 'Authorization': `Bearer ${session?.access_token}` }
+        }),
+        fetch(`${API_URL}/api/applymate/stats`, {
+          headers: { 'Authorization': `Bearer ${session?.access_token}` }
+        })
+      ])
+      
+      if (appsRes.ok) {
+        const appsData = await appsRes.json()
+        setApplications(appsData)
+      }
+      
+      if (statsRes.ok) {
+        const statsData = await statsRes.json()
+        setStats(statsData)
+      }
+    } catch (error) {
+      console.error('Failed to load data:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const updateStatus = async (id, newStatus) => {
+    try {
+      const res = await fetch(`${API_URL}/api/applymate/applications/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session?.access_token}`
+        },
+        body: JSON.stringify({ status: newStatus })
+      })
+      
+      if (res.ok) {
+        setApplications(prev => prev.map(app => 
+          app.id === id ? { ...app, status: newStatus } : app
+        ))
+      }
+    } catch (error) {
+      console.error('Failed to update status:', error)
+    }
+  }
+
   const filteredApplications = applications.filter(app => {
     const matchesFilter = filter === 'All' || app.status === filter
-    const matchesSearch = app.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          app.role.toLowerCase().includes(searchTerm.toLowerCase())
+    const matchesSearch = (app.company?.toLowerCase() || '').includes(searchTerm.toLowerCase()) ||
+                          (app.job_title?.toLowerCase() || '').includes(searchTerm.toLowerCase())
     return matchesFilter && matchesSearch
   })
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'Applied': return 'bg-blue-500/20 text-blue-400 border-blue-500/30'
-      case 'Viewed': return 'bg-purple-500/20 text-purple-400 border-purple-500/30'
-      case 'Interview': return 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
-      case 'Rejected': return 'bg-red-500/20 text-red-400 border-red-500/30'
-      case 'Offer': return 'bg-amber-500/20 text-amber-400 border-amber-500/30'
+      case 'submitted': return 'bg-blue-500/20 text-blue-400 border-blue-500/30'
+      case 'viewed': return 'bg-purple-500/20 text-purple-400 border-purple-500/30'
+      case 'interview': return 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
+      case 'rejected': return 'bg-red-500/20 text-red-400 border-red-500/30'
+      case 'offer': return 'bg-amber-500/20 text-amber-400 border-amber-500/30'
       default: return 'bg-slate-500/20 text-slate-400 border-slate-500/30'
     }
   }
 
-  const stats = {
-    total: applications.length,
-    interviews: applications.filter(a => a.status === 'Interview').length,
-    offers: applications.filter(a => a.status === 'Offer').length,
-    responseRate: Math.round((applications.filter(a => ['Viewed', 'Interview', 'Offer'].includes(a.status)).length / applications.length) * 100)
+  const responseRate = stats.total > 0 
+    ? Math.round(((stats.byStatus.viewed || 0) + (stats.byStatus.interview || 0) + (stats.byStatus.offer || 0)) / stats.total * 100)
+    : 0
+
+  if (loading) {
+    return (
+      <div className="p-8 bg-slate-900 min-h-screen flex items-center justify-center">
+        <div className="text-slate-400">Loading applications...</div>
+      </div>
+    )
   }
 
   return (
@@ -57,15 +117,15 @@ export default function Applications() {
           <p className="text-sm text-slate-400">Total Applications</p>
         </div>
         <div className="bg-slate-800 rounded-2xl p-5 border border-slate-700">
-          <p className="text-3xl font-bold text-emerald-400 mb-1">{stats.interviews}</p>
+          <p className="text-3xl font-bold text-emerald-400 mb-1">{stats.byStatus.interview || 0}</p>
           <p className="text-sm text-slate-400">Interviews</p>
         </div>
         <div className="bg-slate-800 rounded-2xl p-5 border border-slate-700">
-          <p className="text-3xl font-bold text-amber-400 mb-1">{stats.offers}</p>
+          <p className="text-3xl font-bold text-amber-400 mb-1">{stats.byStatus.offer || 0}</p>
           <p className="text-sm text-slate-400">Offers</p>
         </div>
         <div className="bg-slate-800 rounded-2xl p-5 border border-slate-700">
-          <p className="text-3xl font-bold text-purple-400 mb-1">{stats.responseRate}%</p>
+          <p className="text-3xl font-bold text-purple-400 mb-1">{responseRate}%</p>
           <p className="text-sm text-slate-400">Response Rate</p>
         </div>
       </div>
@@ -99,7 +159,7 @@ export default function Applications() {
                     : 'bg-slate-700 text-slate-400 border border-slate-600 hover:border-slate-500'
                 }`}
               >
-                {status}
+                {status === 'All' ? 'All' : statusLabels[status] || status}
               </button>
             ))}
           </div>
@@ -116,9 +176,7 @@ export default function Applications() {
                 <th className="text-left py-4 px-6 text-sm font-medium text-slate-400">Company</th>
                 <th className="text-left py-4 px-6 text-sm font-medium text-slate-400">Role</th>
                 <th className="text-left py-4 px-6 text-sm font-medium text-slate-400">Status</th>
-                <th className="text-left py-4 px-6 text-sm font-medium text-slate-400">Salary</th>
                 <th className="text-left py-4 px-6 text-sm font-medium text-slate-400">Applied</th>
-                <th className="text-left py-4 px-6 text-sm font-medium text-slate-400">Platform</th>
                 <th className="text-right py-4 px-6 text-sm font-medium text-slate-400">Actions</th>
               </tr>
             </thead>
@@ -128,26 +186,41 @@ export default function Applications() {
                   <td className="py-4 px-6">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-xl bg-slate-700 flex items-center justify-center text-white font-bold">
-                        {app.logo}
+                        {(app.company || 'U')[0].toUpperCase()}
                       </div>
-                      <span className="text-white font-medium">{app.company}</span>
+                      <span className="text-white font-medium">{app.company || 'Unknown'}</span>
                     </div>
                   </td>
-                  <td className="py-4 px-6 text-slate-300">{app.role}</td>
+                  <td className="py-4 px-6 text-slate-300">{app.job_title || 'Unknown'}</td>
                   <td className="py-4 px-6">
-                    <span className={`px-3 py-1 text-xs font-medium rounded-full border ${getStatusColor(app.status)}`}>
-                      {app.status}
-                    </span>
+                    <select
+                      value={app.status}
+                      onChange={(e) => updateStatus(app.id, e.target.value)}
+                      className={`px-3 py-1 text-xs font-medium rounded-full border bg-transparent cursor-pointer ${getStatusColor(app.status)}`}
+                    >
+                      <option value="submitted">Applied</option>
+                      <option value="viewed">Viewed</option>
+                      <option value="interview">Interview</option>
+                      <option value="offer">Offer</option>
+                      <option value="rejected">Rejected</option>
+                    </select>
                   </td>
-                  <td className="py-4 px-6 text-emerald-400 font-medium">{app.salary}</td>
-                  <td className="py-4 px-6 text-slate-400">{app.appliedDate}</td>
-                  <td className="py-4 px-6 text-slate-400">{app.platform}</td>
+                  <td className="py-4 px-6 text-slate-400">
+                    {app.applied_at ? new Date(app.applied_at).toLocaleDateString() : 'Unknown'}
+                  </td>
                   <td className="py-4 px-6 text-right">
-                    <button className="p-2 text-slate-400 hover:text-white hover:bg-slate-600 rounded-lg transition-colors">
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
-                      </svg>
-                    </button>
+                    {app.job_url && (
+                      <a 
+                        href={app.job_url} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="p-2 text-slate-400 hover:text-emerald-400 hover:bg-slate-600 rounded-lg transition-colors inline-block"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        </svg>
+                      </a>
+                    )}
                   </td>
                 </tr>
               ))}
@@ -161,19 +234,38 @@ export default function Applications() {
             <div key={app.id} className="p-4">
               <div className="flex items-start gap-3 mb-3">
                 <div className="w-12 h-12 rounded-xl bg-slate-700 flex items-center justify-center text-white font-bold text-lg">
-                  {app.logo}
+                  {(app.company || 'U')[0].toUpperCase()}
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-white font-semibold">{app.company}</h3>
-                  <p className="text-slate-400 text-sm">{app.role}</p>
+                  <h3 className="text-white font-semibold">{app.company || 'Unknown'}</h3>
+                  <p className="text-slate-400 text-sm">{app.job_title || 'Unknown'}</p>
                 </div>
-                <span className={`px-3 py-1 text-xs font-medium rounded-full border ${getStatusColor(app.status)}`}>
-                  {app.status}
-                </span>
+                <select
+                  value={app.status}
+                  onChange={(e) => updateStatus(app.id, e.target.value)}
+                  className={`px-3 py-1 text-xs font-medium rounded-full border bg-transparent ${getStatusColor(app.status)}`}
+                >
+                  <option value="submitted">Applied</option>
+                  <option value="viewed">Viewed</option>
+                  <option value="interview">Interview</option>
+                  <option value="offer">Offer</option>
+                  <option value="rejected">Rejected</option>
+                </select>
               </div>
               <div className="flex items-center justify-between text-sm">
-                <span className="text-emerald-400 font-medium">{app.salary}</span>
-                <span className="text-slate-500">{app.appliedDate} • {app.platform}</span>
+                <span className="text-slate-500">
+                  {app.applied_at ? new Date(app.applied_at).toLocaleDateString() : 'Unknown'}
+                </span>
+                {app.job_url && (
+                  <a 
+                    href={app.job_url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-emerald-400 hover:underline"
+                  >
+                    View Job →
+                  </a>
+                )}
               </div>
             </div>
           ))}
@@ -187,11 +279,15 @@ export default function Applications() {
               </svg>
             </div>
             <h3 className="text-white font-semibold mb-2">No applications found</h3>
-            <p className="text-slate-400 text-sm">Try adjusting your search or filter</p>
+            <p className="text-slate-400 text-sm">
+              {applications.length === 0 
+                ? 'Start auto-apply to track your applications here'
+                : 'Try adjusting your search or filter'
+              }
+            </p>
           </div>
         )}
       </div>
     </div>
   )
 }
-

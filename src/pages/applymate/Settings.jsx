@@ -1,41 +1,26 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useAuth } from '../../context/AuthContext'
+
+const API_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001'
 
 export default function ApplyMateSettings() {
+  const { session } = useAuth()
+  const [loading, setLoading] = useState(true)
   const [settings, setSettings] = useState({
-    // User Profile
-    fullName: '',
-    location: 'Sydney, Australia',
-    backgroundBio: '',
-    
-    // Job Search Settings
-    jobTitles: ['project manager', 'program manager'],
-    maxJobs: 100,
-    expectedSalary: 100000,
-    
-    // Speed Settings
-    scanSpeed: 50,
-    applySpeed: 50,
-    cooldownDelay: 5,
-    stealthMode: false,
-    
-    // Blocklists
-    blockedCompanies: [],
-    blockedTitles: [],
-    
-    // Platform Credentials
-    seekEmail: '',
-    seekPassword: '',
-    linkedinEmail: '',
-    linkedinPassword: '',
-    
-    // AI Settings
-    openaiKey: '',
-    useGPT4: false,
-    autoGenerateCoverLetter: true,
-    
-    // Notifications
-    notificationsEnabled: true,
-    dailySummary: true,
+    full_name: '',
+    location: 'Brisbane, Australia',
+    background_bio: '',
+    seek_email: '',
+    expected_salary: 100000,
+    job_titles: ['project manager', 'program manager'],
+    blocked_companies: [],
+    blocked_titles: ['sales', 'customer service'],
+    scan_speed: 50,
+    apply_speed: 50,
+    cooldown_delay: 5,
+    stealth_mode: false,
+    max_jobs: 100,
+    openai_api_key: ''
   })
 
   const [newJobTitle, setNewJobTitle] = useState('')
@@ -43,11 +28,34 @@ export default function ApplyMateSettings() {
   const [newBlockedTitle, setNewBlockedTitle] = useState('')
   const [saveStatus, setSaveStatus] = useState('')
 
+  // Load settings on mount
+  useEffect(() => {
+    loadSettings()
+  }, [])
+
+  const loadSettings = async () => {
+    try {
+      const res = await fetch(`${API_URL}/api/applymate/settings`, {
+        headers: {
+          'Authorization': `Bearer ${session?.access_token}`
+        }
+      })
+      if (res.ok) {
+        const data = await res.json()
+        setSettings(data)
+      }
+    } catch (error) {
+      console.error('Failed to load settings:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   const addJobTitle = () => {
-    if (newJobTitle.trim() && !settings.jobTitles.includes(newJobTitle.trim().toLowerCase())) {
+    if (newJobTitle.trim() && !settings.job_titles.includes(newJobTitle.trim().toLowerCase())) {
       setSettings(prev => ({
         ...prev,
-        jobTitles: [...prev.jobTitles, newJobTitle.trim().toLowerCase()]
+        job_titles: [...prev.job_titles, newJobTitle.trim().toLowerCase()]
       }))
       setNewJobTitle('')
     }
@@ -56,7 +64,7 @@ export default function ApplyMateSettings() {
   const removeJobTitle = (index) => {
     setSettings(prev => ({
       ...prev,
-      jobTitles: prev.jobTitles.filter((_, i) => i !== index)
+      job_titles: prev.job_titles.filter((_, i) => i !== index)
     }))
   }
 
@@ -64,7 +72,7 @@ export default function ApplyMateSettings() {
     if (newBlockedCompany.trim()) {
       setSettings(prev => ({
         ...prev,
-        blockedCompanies: [...prev.blockedCompanies, newBlockedCompany.trim().toLowerCase()]
+        blocked_companies: [...prev.blocked_companies, newBlockedCompany.trim().toLowerCase()]
       }))
       setNewBlockedCompany('')
     }
@@ -73,7 +81,7 @@ export default function ApplyMateSettings() {
   const removeBlockedCompany = (index) => {
     setSettings(prev => ({
       ...prev,
-      blockedCompanies: prev.blockedCompanies.filter((_, i) => i !== index)
+      blocked_companies: prev.blocked_companies.filter((_, i) => i !== index)
     }))
   }
 
@@ -81,7 +89,7 @@ export default function ApplyMateSettings() {
     if (newBlockedTitle.trim()) {
       setSettings(prev => ({
         ...prev,
-        blockedTitles: [...prev.blockedTitles, newBlockedTitle.trim().toLowerCase()]
+        blocked_titles: [...prev.blocked_titles, newBlockedTitle.trim().toLowerCase()]
       }))
       setNewBlockedTitle('')
     }
@@ -90,16 +98,41 @@ export default function ApplyMateSettings() {
   const removeBlockedTitle = (index) => {
     setSettings(prev => ({
       ...prev,
-      blockedTitles: prev.blockedTitles.filter((_, i) => i !== index)
+      blocked_titles: prev.blocked_titles.filter((_, i) => i !== index)
     }))
   }
 
   const handleSave = async () => {
     setSaveStatus('saving')
-    // In production, this would save to backend/database
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    setSaveStatus('saved')
-    setTimeout(() => setSaveStatus(''), 2000)
+    try {
+      const res = await fetch(`${API_URL}/api/applymate/settings`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session?.access_token}`
+        },
+        body: JSON.stringify(settings)
+      })
+      
+      if (res.ok) {
+        setSaveStatus('saved')
+        setTimeout(() => setSaveStatus(''), 2000)
+      } else {
+        throw new Error('Failed to save')
+      }
+    } catch (error) {
+      console.error('Save error:', error)
+      setSaveStatus('error')
+      setTimeout(() => setSaveStatus(''), 3000)
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="p-8 bg-slate-900 min-h-screen flex items-center justify-center">
+        <div className="text-slate-400">Loading settings...</div>
+      </div>
+    )
   }
 
   return (
@@ -121,8 +154,8 @@ export default function ApplyMateSettings() {
               <label className="block text-sm font-medium text-slate-400 mb-2">Full Name *</label>
               <input
                 type="text"
-                value={settings.fullName}
-                onChange={(e) => setSettings({ ...settings, fullName: e.target.value })}
+                value={settings.full_name}
+                onChange={(e) => setSettings({ ...settings, full_name: e.target.value })}
                 className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                 placeholder="John Doe"
               />
@@ -140,8 +173,8 @@ export default function ApplyMateSettings() {
             <div className="md:col-span-2">
               <label className="block text-sm font-medium text-slate-400 mb-2">Background Bio</label>
               <textarea
-                value={settings.backgroundBio}
-                onChange={(e) => setSettings({ ...settings, backgroundBio: e.target.value })}
+                value={settings.background_bio}
+                onChange={(e) => setSettings({ ...settings, background_bio: e.target.value })}
                 rows={4}
                 className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent resize-none"
                 placeholder="Experienced professional with 10+ years in project management, specializing in agile methodologies and digital transformation..."
@@ -174,7 +207,7 @@ export default function ApplyMateSettings() {
           </div>
 
           <div className="flex flex-wrap gap-2">
-            {settings.jobTitles.map((title, index) => (
+            {settings.job_titles.map((title, index) => (
               <span
                 key={index}
                 className="px-4 py-2 bg-emerald-500/10 text-emerald-400 rounded-xl border border-emerald-500/20 flex items-center gap-2"
@@ -201,8 +234,8 @@ export default function ApplyMateSettings() {
               <label className="block text-sm font-medium text-slate-400 mb-2">Max Applications per Session</label>
               <input
                 type="number"
-                value={settings.maxJobs}
-                onChange={(e) => setSettings({ ...settings, maxJobs: parseInt(e.target.value) || 0 })}
+                value={settings.max_jobs}
+                onChange={(e) => setSettings({ ...settings, max_jobs: parseInt(e.target.value) || 0 })}
                 className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                 min="1"
                 max="500"
@@ -212,8 +245,8 @@ export default function ApplyMateSettings() {
               <label className="block text-sm font-medium text-slate-400 mb-2">Expected Salary (AUD)</label>
               <input
                 type="number"
-                value={settings.expectedSalary}
-                onChange={(e) => setSettings({ ...settings, expectedSalary: parseInt(e.target.value) || 0 })}
+                value={settings.expected_salary}
+                onChange={(e) => setSettings({ ...settings, expected_salary: parseInt(e.target.value) || 0 })}
                 className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                 placeholder="100000"
               />
@@ -231,12 +264,12 @@ export default function ApplyMateSettings() {
             <div>
               <div className="flex justify-between mb-2">
                 <label className="text-sm font-medium text-slate-400">Scan Speed</label>
-                <span className="text-emerald-400 font-medium">{settings.scanSpeed}%</span>
+                <span className="text-emerald-400 font-medium">{settings.scan_speed}%</span>
               </div>
               <input
                 type="range"
-                value={settings.scanSpeed}
-                onChange={(e) => setSettings({ ...settings, scanSpeed: parseInt(e.target.value) })}
+                value={settings.scan_speed}
+                onChange={(e) => setSettings({ ...settings, scan_speed: parseInt(e.target.value) })}
                 className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
                 min="1"
                 max="100"
@@ -250,12 +283,12 @@ export default function ApplyMateSettings() {
             <div>
               <div className="flex justify-between mb-2">
                 <label className="text-sm font-medium text-slate-400">Apply Speed</label>
-                <span className="text-emerald-400 font-medium">{settings.applySpeed}%</span>
+                <span className="text-emerald-400 font-medium">{settings.apply_speed}%</span>
               </div>
               <input
                 type="range"
-                value={settings.applySpeed}
-                onChange={(e) => setSettings({ ...settings, applySpeed: parseInt(e.target.value) })}
+                value={settings.apply_speed}
+                onChange={(e) => setSettings({ ...settings, apply_speed: parseInt(e.target.value) })}
                 className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
                 min="1"
                 max="100"
@@ -265,12 +298,12 @@ export default function ApplyMateSettings() {
             <div>
               <div className="flex justify-between mb-2">
                 <label className="text-sm font-medium text-slate-400">Cooldown Between Jobs (seconds)</label>
-                <span className="text-emerald-400 font-medium">{settings.cooldownDelay}s</span>
+                <span className="text-emerald-400 font-medium">{settings.cooldown_delay}s</span>
               </div>
               <input
                 type="range"
-                value={settings.cooldownDelay}
-                onChange={(e) => setSettings({ ...settings, cooldownDelay: parseInt(e.target.value) })}
+                value={settings.cooldown_delay}
+                onChange={(e) => setSettings({ ...settings, cooldown_delay: parseInt(e.target.value) })}
                 className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500"
                 min="0"
                 max="30"
@@ -280,8 +313,8 @@ export default function ApplyMateSettings() {
             <label className="flex items-center gap-3 cursor-pointer p-4 bg-slate-700/50 rounded-xl">
               <input
                 type="checkbox"
-                checked={settings.stealthMode}
-                onChange={(e) => setSettings({ ...settings, stealthMode: e.target.checked })}
+                checked={settings.stealth_mode}
+                onChange={(e) => setSettings({ ...settings, stealth_mode: e.target.checked })}
                 className="w-5 h-5 rounded border-slate-600 text-emerald-500 focus:ring-emerald-500 focus:ring-offset-slate-800"
               />
               <div>
@@ -318,7 +351,7 @@ export default function ApplyMateSettings() {
                 </button>
               </div>
               <div className="flex flex-wrap gap-2">
-                {settings.blockedCompanies.map((company, index) => (
+                {settings.blocked_companies.map((company, index) => (
                   <span
                     key={index}
                     className="px-3 py-1 bg-red-500/10 text-red-400 rounded-lg border border-red-500/20 flex items-center gap-2 text-sm"
@@ -350,7 +383,7 @@ export default function ApplyMateSettings() {
                 </button>
               </div>
               <div className="flex flex-wrap gap-2">
-                {settings.blockedTitles.map((title, index) => (
+                {settings.blocked_titles.map((title, index) => (
                   <span
                     key={index}
                     className="px-3 py-1 bg-red-500/10 text-red-400 rounded-lg border border-red-500/20 flex items-center gap-2 text-sm"
@@ -381,32 +414,21 @@ export default function ApplyMateSettings() {
                   <p className="text-xs text-slate-400">Australia's #1 job site</p>
                 </div>
               </div>
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-slate-400 mb-2">Email</label>
-                  <input
-                    type="email"
-                    value={settings.seekEmail}
-                    onChange={(e) => setSettings({ ...settings, seekEmail: e.target.value })}
-                    className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white focus:ring-2 focus:ring-emerald-500"
-                    placeholder="your@email.com"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-400 mb-2">Password</label>
-                  <input
-                    type="password"
-                    value={settings.seekPassword}
-                    onChange={(e) => setSettings({ ...settings, seekPassword: e.target.value })}
-                    className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white focus:ring-2 focus:ring-emerald-500"
-                    placeholder="••••••••"
-                  />
-                </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-400 mb-2">SEEK Account Email</label>
+                <input
+                  type="email"
+                  value={settings.seek_email}
+                  onChange={(e) => setSettings({ ...settings, seek_email: e.target.value })}
+                  className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white focus:ring-2 focus:ring-emerald-500"
+                  placeholder="your@email.com"
+                />
+                <p className="text-xs text-slate-500 mt-2">Note: You'll need to be logged into SEEK in your browser session</p>
               </div>
             </div>
 
-            {/* LinkedIn */}
-            <div className="p-4 bg-slate-700/50 rounded-xl border border-slate-600">
+            {/* LinkedIn - Coming Soon */}
+            <div className="p-4 bg-slate-700/50 rounded-xl border border-slate-600 opacity-60">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold text-sm">
                   in
@@ -417,25 +439,19 @@ export default function ApplyMateSettings() {
                 </div>
                 <span className="ml-auto px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-medium rounded-full">Coming Soon</span>
               </div>
-              <div className="grid md:grid-cols-2 gap-4 opacity-50">
-                <div>
-                  <label className="block text-sm font-medium text-slate-400 mb-2">Email</label>
-                  <input
-                    type="email"
-                    disabled
-                    className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white cursor-not-allowed"
-                    placeholder="Coming soon..."
-                  />
+            </div>
+
+            {/* Indeed - Coming Soon */}
+            <div className="p-4 bg-slate-700/50 rounded-xl border border-slate-600 opacity-60">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-xl bg-purple-600 flex items-center justify-center text-white font-bold text-sm">
+                  IN
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-400 mb-2">Password</label>
-                  <input
-                    type="password"
-                    disabled
-                    className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white cursor-not-allowed"
-                    placeholder="Coming soon..."
-                  />
+                  <h4 className="text-white font-semibold">Indeed</h4>
+                  <p className="text-xs text-slate-400">Global job search</p>
                 </div>
+                <span className="ml-auto px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-medium rounded-full">Coming Soon</span>
               </div>
             </div>
           </div>
@@ -451,8 +467,8 @@ export default function ApplyMateSettings() {
               <label className="block text-sm font-medium text-slate-400 mb-2">OpenAI API Key *</label>
               <input
                 type="password"
-                value={settings.openaiKey}
-                onChange={(e) => setSettings({ ...settings, openaiKey: e.target.value })}
+                value={settings.openai_api_key}
+                onChange={(e) => setSettings({ ...settings, openai_api_key: e.target.value })}
                 className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                 placeholder="sk-..."
               />
@@ -464,67 +480,28 @@ export default function ApplyMateSettings() {
               </p>
             </div>
 
-            <div className="space-y-4">
-              <label className="flex items-center gap-3 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={settings.autoGenerateCoverLetter}
-                  onChange={(e) => setSettings({ ...settings, autoGenerateCoverLetter: e.target.checked })}
-                  className="w-5 h-5 rounded border-slate-600 text-emerald-500 focus:ring-emerald-500 focus:ring-offset-slate-800"
-                />
-                <div>
-                  <span className="text-white">Auto-generate cover letters</span>
-                  <p className="text-xs text-slate-500">Create tailored cover letters for each application</p>
+            {/* API Key Status */}
+            {settings.openai_api_key && (
+              <div className={`p-4 rounded-xl ${settings.openai_api_key.startsWith('sk-') ? 'bg-emerald-500/10 border border-emerald-500/20' : 'bg-red-500/10 border border-red-500/20'}`}>
+                <div className="flex items-center gap-2">
+                  {settings.openai_api_key.startsWith('sk-') ? (
+                    <>
+                      <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                      <span className="text-emerald-400">API key format looks valid</span>
+                    </>
+                  ) : (
+                    <>
+                      <svg className="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                      </svg>
+                      <span className="text-red-400">API key should start with "sk-"</span>
+                    </>
+                  )}
                 </div>
-              </label>
-
-              <label className="flex items-center gap-3 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={settings.useGPT4}
-                  onChange={(e) => setSettings({ ...settings, useGPT4: e.target.checked })}
-                  className="w-5 h-5 rounded border-slate-600 text-emerald-500 focus:ring-emerald-500 focus:ring-offset-slate-800"
-                />
-                <div>
-                  <span className="text-white">Use GPT-4 (Premium)</span>
-                  <p className="text-xs text-slate-500">Higher quality but slower and more expensive (~$0.03/letter)</p>
-                </div>
-              </label>
-            </div>
-          </div>
-        </div>
-
-        {/* Notifications */}
-        <div className="bg-slate-800 rounded-2xl p-6 border border-slate-700">
-          <h3 className="text-lg font-semibold text-white mb-2">Notifications</h3>
-          <p className="text-sm text-slate-400 mb-6">Manage your notification preferences</p>
-
-          <div className="space-y-4">
-            <label className="flex items-center gap-3 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={settings.notificationsEnabled}
-                onChange={(e) => setSettings({ ...settings, notificationsEnabled: e.target.checked })}
-                className="w-5 h-5 rounded border-slate-600 text-emerald-500 focus:ring-emerald-500 focus:ring-offset-slate-800"
-              />
-              <div>
-                <span className="text-white">Enable notifications</span>
-                <p className="text-xs text-slate-500">Get notified about application status changes</p>
               </div>
-            </label>
-
-            <label className="flex items-center gap-3 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={settings.dailySummary}
-                onChange={(e) => setSettings({ ...settings, dailySummary: e.target.checked })}
-                className="w-5 h-5 rounded border-slate-600 text-emerald-500 focus:ring-emerald-500 focus:ring-offset-slate-800"
-              />
-              <div>
-                <span className="text-white">Daily summary email</span>
-                <p className="text-xs text-slate-500">Receive a daily report of applications and responses</p>
-              </div>
-            </label>
+            )}
           </div>
         </div>
 
@@ -537,6 +514,14 @@ export default function ApplyMateSettings() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                 </svg>
                 Settings saved successfully!
+              </span>
+            )}
+            {saveStatus === 'error' && (
+              <span className="text-red-400 flex items-center gap-2">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+                Failed to save settings
               </span>
             )}
           </div>
