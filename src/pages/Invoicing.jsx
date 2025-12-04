@@ -168,7 +168,7 @@ export default function Invoicing() {
           <div className="relative">
             <div className="flex items-start justify-between">
               <div>
-                <h1 className="text-3xl font-bold mb-2">AHS Invoicing Agent</h1>
+                <h1 className="text-3xl font-bold mb-2">NDISHub Invoicing Agent</h1>
                 <p className="text-primary-200 text-lg max-w-xl">Upload your timesheet and automatically generate a compliant NDIS invoice in seconds.</p>
               </div>
               <div className="hidden lg:flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-xl px-4 py-2">

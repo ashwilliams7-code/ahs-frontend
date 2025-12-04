@@ -38,11 +38,11 @@ export default function Login() {
         <div className="relative">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center backdrop-blur-sm">
-              <span className="text-white font-bold text-2xl">A</span>
+              <span className="text-white font-bold text-2xl">N</span>
             </div>
             <div>
-              <h1 className="font-bold text-white text-2xl tracking-tight">AHS</h1>
-              <p className="text-primary-200 text-sm">Automate Human Services</p>
+              <h1 className="font-bold text-white text-2xl tracking-tight">NDISHub</h1>
+              <p className="text-primary-200 text-sm">Smart NDIS Management</p>
             </div>
           </div>
         </div>
@@ -78,11 +78,11 @@ export default function Login() {
           <div className="text-center mb-8">
             <div className="lg:hidden flex items-center justify-center gap-3 mb-6">
               <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-2xl">A</span>
+                <span className="text-white font-bold text-2xl">N</span>
               </div>
             </div>
             <h2 className="text-2xl font-bold text-gray-900">Welcome back</h2>
-            <p className="text-gray-500 mt-2">Sign in to your AHS account</p>
+            <p className="text-gray-500 mt-2">Sign in to your NDISHub account</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">

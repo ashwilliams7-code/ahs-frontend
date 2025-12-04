@@ -107,7 +107,7 @@ export default function Dashboard() {
                 </div>
                 <h1 className="text-4xl font-bold mb-3">Welcome back! 👋</h1>
                 <p className="text-primary-100 text-lg max-w-xl">
-                  Here's your AHS command center. Monitor your agents, track invoices, and manage your team all in one place.
+                  Here's your NDISHub command center. Monitor your agents, track invoices, and manage your team all in one place.
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-3">

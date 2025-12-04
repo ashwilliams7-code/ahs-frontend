@@ -76,7 +76,7 @@ export default function Rostering() {
           <div className="relative">
             <div className="flex items-start justify-between">
               <div>
-                <h1 className="text-3xl font-bold mb-2">AHS Rostering Agent</h1>
+                <h1 className="text-3xl font-bold mb-2">NDISHub Rostering Agent</h1>
                 <p className="text-orange-100 text-lg max-w-xl">AI-powered shift scheduling and workforce optimization. Manage your team's roster effortlessly.</p>
               </div>
               <div className="hidden lg:flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-xl px-4 py-2">

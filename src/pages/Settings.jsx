@@ -114,7 +114,7 @@ export default function Settings() {
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="md:col-span-2">
                   <label className="block text-sm font-medium text-gray-700 mb-1">Company Name</label>
-                  <input type="text" defaultValue="AHS - Automate Human Services" className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all" />
+                  <input type="text" defaultValue="NDISHub - Smart NDIS Management" className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">ABN</label>

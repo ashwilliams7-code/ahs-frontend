@@ -4,10 +4,10 @@ import { useAuth } from '../context/AuthContext'
 const apps = [
   {
     id: 'ahs',
-    name: 'AHS',
-    tagline: 'Automate Human Services',
+    name: 'NDISHub',
+    tagline: 'Smart NDIS Management',
     description: 'NDIS invoicing, rostering, and compliance automation powered by AI. Save hours every week.',
-    icon: 'A',
+    icon: 'N',
     gradient: 'from-indigo-500 via-purple-500 to-indigo-600',
     shadowColor: 'shadow-indigo-500/30',
     hoverShadow: 'hover:shadow-indigo-500/40',

@@ -12,7 +12,7 @@ const DEMO_CAMPAIGNS = [
 const SOCIAL_POSTS = [
   { id: 1, platform: 'LinkedIn', content: 'Exciting news! Our NDIS support services are now available in...', scheduled: 'Today, 2:00 PM', status: 'Scheduled', engagement: null },
   { id: 2, platform: 'Facebook', content: 'Meet our amazing support workers who make a difference...', scheduled: 'Tomorrow, 9:00 AM', status: 'Scheduled', engagement: null },
-  { id: 3, platform: 'Instagram', content: 'Behind the scenes at AHS - see how we support our clients...', scheduled: 'Dec 6, 10:00 AM', status: 'Draft', engagement: null },
+  { id: 3, platform: 'Instagram', content: 'Behind the scenes at NDISHub - see how we support our clients...', scheduled: 'Dec 6, 10:00 AM', status: 'Draft', engagement: null },
 ]
 
 export default function Marketing() {

@@ -284,7 +284,7 @@ export default function Sales() {
                     <div className="w-2 h-10 bg-green-500 rounded animate-bounce delay-150"></div>
                     <div className="w-2 h-8 bg-green-400 rounded animate-bounce delay-200"></div>
                   </div>
-                  <p className="text-sm text-gray-500 italic">"Hi, I'm calling from AHS about your NDIS support services inquiry..."</p>
+                  <p className="text-sm text-gray-500 italic">"Hi, I'm calling from NDISHub about your NDIS support services inquiry..."</p>
                   <button 
                     onClick={endCall}
                     className="w-full py-3 bg-red-500 text-white font-semibold rounded-xl hover:bg-red-600 transition-all"

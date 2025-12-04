@@ -61,11 +61,11 @@ export default function Signup() {
         <div className="relative">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center backdrop-blur-sm">
-              <span className="text-white font-bold text-2xl">A</span>
+              <span className="text-white font-bold text-2xl">N</span>
             </div>
             <div>
-              <h1 className="font-bold text-white text-2xl tracking-tight">AHS</h1>
-              <p className="text-emerald-100 text-sm">Automate Human Services</p>
+              <h1 className="font-bold text-white text-2xl tracking-tight">NDISHub</h1>
+              <p className="text-emerald-100 text-sm">Smart NDIS Management</p>
             </div>
           </div>
         </div>
@@ -119,7 +119,7 @@ export default function Signup() {
           <div className="text-center mb-8">
             <div className="lg:hidden flex items-center justify-center gap-3 mb-6">
               <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-2xl">A</span>
+                <span className="text-white font-bold text-2xl">N</span>
               </div>
             </div>
             <h2 className="text-2xl font-bold text-gray-900">Create your account</h2>

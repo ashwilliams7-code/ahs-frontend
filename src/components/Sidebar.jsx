@@ -92,11 +92,11 @@ export default function Sidebar({ isOpen, onClose }) {
       <div className="p-6 border-b border-gray-100">
         <div className="flex items-center gap-3 mb-3">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center shadow-lg shadow-primary-200">
-            <span className="text-white font-bold text-lg">A</span>
+            <span className="text-white font-bold text-lg">N</span>
           </div>
           <div>
-            <h1 className="font-bold text-gray-900 text-lg tracking-tight">AHS</h1>
-            <p className="text-xs text-gray-500 -mt-0.5">Automate Human Services</p>
+            <h1 className="font-bold text-gray-900 text-lg tracking-tight">NDISHub</h1>
+            <p className="text-xs text-gray-500 -mt-0.5">Smart NDIS Management</p>
           </div>
         </div>
         <Link 

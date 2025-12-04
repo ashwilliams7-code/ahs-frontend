@@ -79,7 +79,7 @@ function App() {
         }
       />
 
-      {/* AHS App - Protected routes with Layout */}
+      {/* NDISHub App - Protected routes with Layout */}
       <Route
         path="/"
         element={
