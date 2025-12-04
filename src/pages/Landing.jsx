@@ -295,42 +295,39 @@ export default function Landing() {
             </div>
             <p className="text-center text-xs text-slate-500 mt-3 md:hidden">+ 8 more AI apps coming Q2 2025</p>
 
-            {/* Desktop: Full cards like the main apps */}
-            <div className="hidden md:grid md:grid-cols-4 gap-6 mt-8">
+            {/* Desktop: Exact same style as main apps - 2 per row */}
+            <div className="hidden md:grid md:grid-cols-2 gap-8 mt-8">
               {[
-                { icon: '📝', name: 'ResumeAI', tagline: 'AI Resume Writer', desc: 'Create ATS-optimized resumes with AI that highlights your strengths and matches job requirements.', features: ['ATS Optimization', 'Templates', 'PDF Export'], color: 'from-violet-500 to-purple-500', textColor: 'text-violet-400' },
-                { icon: '🎯', name: 'InterviewAI', tagline: 'Interview Prep Coach', desc: 'Practice with AI-powered mock interviews and get real-time feedback on your responses.', features: ['Mock Interviews', 'Feedback', 'Tips'], color: 'from-blue-500 to-cyan-500', textColor: 'text-cyan-400' },
-                { icon: '✉️', name: 'EmailAI', tagline: 'Smart Email Assistant', desc: 'Write professional emails in seconds. AI crafts the perfect tone for any situation.', features: ['Auto-Write', 'Tone Control', 'Templates'], color: 'from-rose-500 to-pink-500', textColor: 'text-pink-400' },
-                { icon: '📅', name: 'MeetingAI', tagline: 'Meeting Notes & Summaries', desc: 'Automatic meeting transcription, summaries, and action items extraction.', features: ['Transcription', 'Summaries', 'Actions'], color: 'from-amber-500 to-orange-500', textColor: 'text-amber-400' },
-                { icon: '📱', name: 'SocialAI', tagline: 'Social Media Manager', desc: 'Schedule posts, generate content, and grow your audience across all platforms.', features: ['Scheduling', 'Content Gen', 'Analytics'], color: 'from-pink-500 to-rose-500', textColor: 'text-rose-400' },
-                { icon: '✍️', name: 'ContentAI', tagline: 'Content Generator', desc: 'Create blog posts, articles, and marketing copy that converts.', features: ['Blog Posts', 'Ad Copy', 'SEO'], color: 'from-teal-500 to-emerald-500', textColor: 'text-emerald-400' },
-                { icon: '💼', name: 'SalesAI', tagline: 'Sales Automation', desc: 'Automate outreach, follow-ups, and lead qualification with AI precision.', features: ['Outreach', 'Follow-ups', 'CRM'], color: 'from-indigo-500 to-blue-500', textColor: 'text-blue-400' },
-                { icon: '💰', name: 'FinanceAI', tagline: 'Financial Assistant', desc: 'Track expenses, forecast budgets, and get AI-powered financial insights.', features: ['Tracking', 'Forecasts', 'Reports'], color: 'from-green-500 to-emerald-500', textColor: 'text-green-400' },
+                { icon: '📝', name: 'ResumeAI', tagline: 'AI Resume Writer', desc: 'Create ATS-optimized resumes with AI that highlights your strengths and matches job requirements perfectly.', features: ['ATS Optimization', 'Smart Templates', 'PDF Export', 'AI Suggestions'], color: 'from-violet-500 to-purple-500', textColor: 'text-violet-400', borderColor: 'border-violet-500/50' },
+                { icon: '🎯', name: 'InterviewAI', tagline: 'Interview Prep Coach', desc: 'Practice with AI-powered mock interviews and get real-time feedback to ace your next job interview.', features: ['Mock Interviews', 'Real-time Feedback', 'Industry Tips', 'Score Tracking'], color: 'from-blue-500 to-cyan-500', textColor: 'text-cyan-400', borderColor: 'border-cyan-500/50' },
+                { icon: '✉️', name: 'EmailAI', tagline: 'Smart Email Assistant', desc: 'Write professional emails in seconds. AI crafts the perfect tone and message for any business situation.', features: ['Auto-Write', 'Tone Control', 'Templates', 'Follow-ups'], color: 'from-rose-500 to-pink-500', textColor: 'text-pink-400', borderColor: 'border-pink-500/50' },
+                { icon: '📅', name: 'MeetingAI', tagline: 'Meeting Notes & Summaries', desc: 'Automatic meeting transcription, intelligent summaries, and action items extraction for busy professionals.', features: ['Transcription', 'AI Summaries', 'Action Items', 'Integrations'], color: 'from-amber-500 to-orange-500', textColor: 'text-amber-400', borderColor: 'border-amber-500/50' },
+                { icon: '📱', name: 'SocialAI', tagline: 'Social Media Manager', desc: 'Schedule posts, generate viral content, and grow your audience across all platforms automatically.', features: ['Auto Scheduling', 'Content Gen', 'Analytics', 'Multi-Platform'], color: 'from-pink-500 to-rose-500', textColor: 'text-rose-400', borderColor: 'border-rose-500/50' },
+                { icon: '✍️', name: 'ContentAI', tagline: 'Content Generator', desc: 'Create blog posts, articles, and marketing copy that converts readers into customers effortlessly.', features: ['Blog Posts', 'Ad Copy', 'SEO Optimized', 'Brand Voice'], color: 'from-teal-500 to-emerald-500', textColor: 'text-emerald-400', borderColor: 'border-emerald-500/50' },
+                { icon: '💼', name: 'SalesAI', tagline: 'Sales Automation', desc: 'Automate cold outreach, intelligent follow-ups, and lead qualification with AI-powered precision.', features: ['Cold Outreach', 'Smart Follow-ups', 'Lead Scoring', 'CRM Sync'], color: 'from-indigo-500 to-blue-500', textColor: 'text-blue-400', borderColor: 'border-blue-500/50' },
+                { icon: '💰', name: 'FinanceAI', tagline: 'Financial Assistant', desc: 'Track expenses, forecast budgets, and get AI-powered financial insights for smarter decisions.', features: ['Expense Tracking', 'Budget Forecast', 'Reports', 'Tax Prep'], color: 'from-green-500 to-emerald-500', textColor: 'text-green-400', borderColor: 'border-green-500/50' },
               ].map((app, i) => (
                 <div 
                   key={i} 
-                  className="group relative rounded-2xl p-1 transition-all duration-200 cursor-not-allowed opacity-70 hover:opacity-90"
+                  className="group relative rounded-3xl p-1 transition-transform duration-200 cursor-not-allowed opacity-70 hover:opacity-85"
                 >
-                  <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${app.color} opacity-30 group-hover:opacity-50 transition-opacity duration-200`}></div>
-                  <div className="relative bg-slate-900/95 rounded-2xl p-5 border border-white/10 group-hover:border-white/20 transition-colors h-full">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${app.color} flex items-center justify-center text-xl shadow-lg opacity-70`}>
-                        {app.icon}
-                      </div>
-                      <span className="px-2 py-1 bg-amber-500/20 text-amber-400 text-xs font-medium rounded-full">Coming Soon</span>
+                  <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${app.color} opacity-40 group-hover:opacity-60 transition-opacity duration-200`}></div>
+                  <div className={`relative bg-slate-900/95 rounded-3xl p-6 sm:p-8 border border-white/10 group-hover:${app.borderColor} transition-colors h-full`}>
+                    <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br ${app.color} flex items-center justify-center mb-6 text-xl sm:text-2xl shadow-lg opacity-80`}>
+                      {app.icon}
                     </div>
-                    <h3 className="text-lg font-bold text-white mb-1">{app.name}</h3>
-                    <p className={`${app.textColor} font-medium text-sm mb-3`}>{app.tagline}</p>
-                    <p className="text-slate-400 text-sm mb-4 line-clamp-2">{app.desc}</p>
-                    <div className="flex flex-wrap gap-1.5 mb-4">
+                    <h3 className="text-2xl font-bold text-white mb-2">{app.name}</h3>
+                    <p className={`${app.textColor} font-medium mb-4`}>{app.tagline}</p>
+                    <p className="text-slate-400 mb-6">{app.desc}</p>
+                    <div className="flex flex-wrap gap-2 mb-6">
                       {app.features.map((feature) => (
-                        <span key={feature} className={`px-2 py-0.5 bg-white/5 ${app.textColor}/70 rounded-full text-xs border border-white/10`}>
+                        <span key={feature} className={`px-3 py-1 bg-white/5 ${app.textColor} rounded-full text-sm border border-white/10`}>
                           {feature}
                         </span>
                       ))}
                     </div>
-                    <div className="py-2.5 bg-slate-800/50 rounded-lg text-center text-slate-500 text-sm font-medium">
-                      Available Q2 2025
+                    <div className={`w-full py-3 bg-gradient-to-r ${app.color} opacity-50 rounded-xl font-semibold text-center text-white/80`}>
+                      Coming Q2 2025
                     </div>
                   </div>
                 </div>
