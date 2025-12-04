@@ -820,12 +820,15 @@ export default function Landing() {
             <div className="relative pt-[56.25%] rounded-2xl overflow-hidden shadow-2xl shadow-indigo-500/20 border border-white/10">
               <iframe
                 className="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/rA6Ml2qalUw?autoplay=1&rel=0"
+                src="https://www.youtube.com/embed/rA6Ml2qalUw?autoplay=1&mute=1&rel=0&modestbranding=1"
                 title="AutoAI Hub Demo"
                 frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
               ></iframe>
+              <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/60 text-xs bg-black/50 px-3 py-1 rounded-full">
+                🔊 Click video to unmute
+              </p>
             </div>
             <p className="text-center text-slate-400 mt-4 text-sm">See how AutoAI Hub can transform your workflow</p>
           </div>
