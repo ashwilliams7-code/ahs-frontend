@@ -172,10 +172,11 @@ export default function Landing() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-[fadeIn_1.2s_ease-out]">
             <button
               onClick={() => setShowSignup(true)}
-              className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl font-semibold text-lg hover:opacity-90 active:scale-[0.98] transition-all duration-150 flex items-center justify-center gap-2"
+              className="group w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl font-semibold text-lg hover:opacity-90 active:scale-[0.98] transition-all duration-150 flex items-center justify-center gap-2 animate-[glow_2s_ease-in-out_infinite] shadow-lg shadow-indigo-500/30"
+              style={{ animation: 'glow 2s ease-in-out infinite' }}
             >
               Start Free Trial
-              <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 transition-transform group-hover:translate-x-1 animate-[bounceX_1s_ease-in-out_infinite]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
               </svg>
             </button>
@@ -221,7 +222,9 @@ export default function Landing() {
             <div className="group relative rounded-3xl p-1 transition-transform duration-200 md:hover:-translate-y-2 active:scale-[0.98]">
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-indigo-500 to-purple-600 opacity-50 group-active:opacity-70 md:group-hover:opacity-100 transition-opacity duration-200"></div>
               <div className="relative bg-slate-900/95 rounded-3xl p-6 sm:p-8 border border-white/10 group-active:border-indigo-500/50 md:group-hover:border-indigo-500/50 transition-colors h-full">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center mb-6 text-xl sm:text-2xl shadow-lg shadow-indigo-500/20">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center mb-6 text-xl sm:text-2xl shadow-lg shadow-indigo-500/30 animate-[float_3s_ease-in-out_infinite] hover:animate-[spin_0.5s_ease-in-out]"
+                  style={{ animation: 'float 3s ease-in-out infinite' }}
+                >
                   N
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-2">NDISHub</h3>
@@ -250,8 +253,10 @@ export default function Landing() {
             <div className="group relative rounded-3xl p-1 transition-transform duration-200 md:hover:-translate-y-2 active:scale-[0.98]">
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-emerald-500 to-cyan-500 opacity-50 group-active:opacity-70 md:group-hover:opacity-100 transition-opacity duration-200"></div>
               <div className="relative bg-slate-900/95 rounded-3xl p-6 sm:p-8 border border-white/10 group-active:border-emerald-500/50 md:group-hover:border-emerald-500/50 transition-colors h-full">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center mb-6 text-xl sm:text-2xl shadow-lg shadow-emerald-500/20">
-                  ⚡
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center mb-6 text-xl sm:text-2xl shadow-lg shadow-emerald-500/30 animate-[float_3s_ease-in-out_infinite]"
+                  style={{ animation: 'float 3s ease-in-out infinite', animationDelay: '0.5s' }}
+                >
+                  <span className="animate-pulse">⚡</span>
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-2">ApplyMate</h3>
                 <p className="text-emerald-400 font-medium mb-4">AI Job Application Assistant</p>
@@ -294,8 +299,11 @@ export default function Landing() {
                 >
                   <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${app.color} opacity-40 group-hover:opacity-60 transition-opacity duration-200`}></div>
                   <div className="relative bg-slate-900/95 rounded-3xl p-6 sm:p-8 border border-white/10 group-hover:border-white/20 transition-colors h-full">
-                    <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br ${app.color} flex items-center justify-center mb-6 text-xl sm:text-2xl shadow-lg opacity-80`}>
-                      {app.icon}
+                    <div 
+                      className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br ${app.color} flex items-center justify-center mb-6 text-xl sm:text-2xl shadow-lg opacity-80 animate-[float_3s_ease-in-out_infinite]`}
+                      style={{ animationDelay: `${i * 0.2}s` }}
+                    >
+                      <span className="animate-pulse">{app.icon}</span>
                     </div>
                     <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">{app.name}</h3>
                     <p className={`${app.textColor} font-medium mb-3 sm:mb-4`}>{app.tagline}</p>
