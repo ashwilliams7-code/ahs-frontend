@@ -198,11 +198,12 @@ export default function Landing() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">Your AI-Powered Suite</h2>
             <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-              Two powerful applications designed to automate your professional life
+              10 powerful applications designed to automate your professional life
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          {/* Main Apps */}
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
             {/* NDISHub Card */}
             <div className="group relative rounded-3xl p-1 transition-all duration-500">
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-indigo-500 to-purple-600 opacity-50 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
@@ -259,6 +260,181 @@ export default function Landing() {
                   Try ApplyMate
                 </button>
               </div>
+            </div>
+          </div>
+
+          {/* App Screenshots/Previews */}
+          <div className="mt-20 mb-20">
+            <h3 className="text-2xl font-bold text-center mb-12">See Our Apps in Action</h3>
+            
+            {/* NDISHub Preview */}
+            <div className="mb-16">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold">N</div>
+                <h4 className="text-xl font-semibold text-white">NDISHub Dashboard</h4>
+              </div>
+              <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-indigo-500/10">
+                <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-600/5"></div>
+                {/* Mock Dashboard UI */}
+                <div className="relative bg-slate-900/95 p-6">
+                  {/* Mock Header */}
+                  <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
+                    <div className="flex items-center gap-4">
+                      <div className="w-8 h-8 rounded-lg bg-indigo-500/20"></div>
+                      <div className="h-4 w-32 bg-white/10 rounded"></div>
+                    </div>
+                    <div className="flex gap-2">
+                      <div className="h-8 w-8 rounded-full bg-white/10"></div>
+                      <div className="h-8 w-24 rounded-lg bg-indigo-500/30"></div>
+                    </div>
+                  </div>
+                  {/* Mock Stats Cards */}
+                  <div className="grid grid-cols-4 gap-4 mb-6">
+                    {[
+                      { label: 'Total Revenue', value: '$124,500', color: 'from-indigo-500 to-purple-500', change: '+12%' },
+                      { label: 'Active Workers', value: '48', color: 'from-emerald-500 to-cyan-500', change: '+3' },
+                      { label: 'Pending Invoices', value: '12', color: 'from-amber-500 to-orange-500', change: '-2' },
+                      { label: 'Compliance Score', value: '98%', color: 'from-pink-500 to-rose-500', change: '+1%' },
+                    ].map((stat, i) => (
+                      <div key={i} className="bg-white/5 rounded-xl p-4 border border-white/5">
+                        <p className="text-xs text-slate-500 mb-1">{stat.label}</p>
+                        <p className={`text-2xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>{stat.value}</p>
+                        <p className="text-xs text-emerald-400 mt-1">{stat.change}</p>
+                      </div>
+                    ))}
+                  </div>
+                  {/* Mock Chart Area */}
+                  <div className="grid grid-cols-3 gap-4">
+                    <div className="col-span-2 bg-white/5 rounded-xl p-4 border border-white/5 h-48">
+                      <div className="h-4 w-24 bg-white/10 rounded mb-4"></div>
+                      <div className="flex items-end gap-2 h-32">
+                        {[40, 65, 45, 80, 55, 90, 70, 85, 60, 95, 75, 88].map((h, i) => (
+                          <div key={i} className="flex-1 bg-gradient-to-t from-indigo-500 to-purple-500 rounded-t opacity-70" style={{ height: `${h}%` }}></div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="bg-white/5 rounded-xl p-4 border border-white/5">
+                      <div className="h-4 w-20 bg-white/10 rounded mb-4"></div>
+                      <div className="space-y-3">
+                        {['Invoice #1234', 'Invoice #1235', 'Invoice #1236'].map((inv, i) => (
+                          <div key={i} className="flex items-center justify-between p-2 bg-white/5 rounded-lg">
+                            <span className="text-xs text-slate-400">{inv}</span>
+                            <span className="text-xs text-emerald-400">Paid</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* ApplyMate Preview */}
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center text-white text-xl">⚡</div>
+                <h4 className="text-xl font-semibold text-white">ApplyMate Auto-Apply</h4>
+              </div>
+              <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-emerald-500/10">
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-cyan-500/5"></div>
+                {/* Mock ApplyMate UI */}
+                <div className="relative bg-slate-900/95 p-6">
+                  {/* Mock Header */}
+                  <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
+                    <div className="flex items-center gap-4">
+                      <div className="w-8 h-8 rounded-lg bg-emerald-500/20"></div>
+                      <div className="h-4 w-28 bg-white/10 rounded"></div>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <span className="text-xs text-emerald-400 flex items-center gap-1">
+                        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        Auto-Apply Active
+                      </span>
+                      <div className="h-8 w-20 rounded-lg bg-red-500/30 flex items-center justify-center text-xs text-red-400">Stop</div>
+                    </div>
+                  </div>
+                  {/* Mock Stats */}
+                  <div className="grid grid-cols-4 gap-4 mb-6">
+                    {[
+                      { label: 'Jobs Applied', value: '47', color: 'from-emerald-500 to-cyan-500' },
+                      { label: 'Interviews', value: '8', color: 'from-blue-500 to-indigo-500' },
+                      { label: 'Response Rate', value: '32%', color: 'from-amber-500 to-orange-500' },
+                      { label: 'Today\'s Target', value: '50', color: 'from-pink-500 to-rose-500' },
+                    ].map((stat, i) => (
+                      <div key={i} className="bg-white/5 rounded-xl p-4 border border-white/5">
+                        <p className="text-xs text-slate-500 mb-1">{stat.label}</p>
+                        <p className={`text-2xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>{stat.value}</p>
+                      </div>
+                    ))}
+                  </div>
+                  {/* Mock Job Cards */}
+                  <div className="space-y-3">
+                    {[
+                      { title: 'Senior React Developer', company: 'TechCorp', status: 'Applied', time: '2m ago' },
+                      { title: 'Full Stack Engineer', company: 'StartupXYZ', status: 'Applied', time: '5m ago' },
+                      { title: 'Frontend Developer', company: 'DigitalAgency', status: 'Applying...', time: 'Now' },
+                    ].map((job, i) => (
+                      <div key={i} className="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/5">
+                        <div className="flex items-center gap-4">
+                          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center text-lg">🏢</div>
+                          <div>
+                            <p className="font-medium text-white">{job.title}</p>
+                            <p className="text-xs text-slate-500">{job.company}</p>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <p className={`text-sm ${job.status === 'Applying...' ? 'text-amber-400' : 'text-emerald-400'}`}>{job.status}</p>
+                          <p className="text-xs text-slate-500">{job.time}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Coming Soon Apps */}
+          <div className="mt-16">
+            <div className="text-center mb-10">
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/10 border border-amber-500/20 rounded-full text-amber-400 text-sm mb-4">
+                <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                Coming Soon
+              </span>
+              <h3 className="text-2xl font-bold">More AI Apps in Development</h3>
+            </div>
+            
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {[
+                { icon: '📝', name: 'ResumeAI', desc: 'AI Resume Writer', color: 'from-violet-500 to-purple-500' },
+                { icon: '🎯', name: 'InterviewAI', desc: 'Interview Prep Coach', color: 'from-blue-500 to-cyan-500' },
+                { icon: '✉️', name: 'EmailAI', desc: 'Smart Email Assistant', color: 'from-rose-500 to-pink-500' },
+                { icon: '📅', name: 'MeetingAI', desc: 'Meeting Notes & Summaries', color: 'from-amber-500 to-orange-500' },
+                { icon: '📱', name: 'SocialAI', desc: 'Social Media Manager', color: 'from-pink-500 to-rose-500' },
+                { icon: '✍️', name: 'ContentAI', desc: 'Content Generator', color: 'from-teal-500 to-emerald-500' },
+                { icon: '💼', name: 'SalesAI', desc: 'Sales Automation', color: 'from-indigo-500 to-blue-500' },
+                { icon: '💰', name: 'FinanceAI', desc: 'Financial Assistant', color: 'from-green-500 to-emerald-500' },
+              ].map((app, i) => (
+                <div 
+                  key={i} 
+                  className="relative group rounded-2xl p-1 cursor-not-allowed opacity-60 hover:opacity-80 transition-opacity"
+                >
+                  <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${app.color} opacity-20 blur-sm`}></div>
+                  <div className="relative bg-slate-900/90 backdrop-blur-xl rounded-2xl p-5 border border-white/10 h-full">
+                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${app.color} flex items-center justify-center mb-4 text-xl opacity-50`}>
+                      {app.icon}
+                    </div>
+                    <h4 className="font-bold text-white mb-1">{app.name}</h4>
+                    <p className="text-slate-500 text-sm mb-3">{app.desc}</p>
+                    <span className="inline-flex items-center gap-1.5 text-xs text-amber-400/70">
+                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                      </svg>
+                      Coming Q2 2025
+                    </span>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
