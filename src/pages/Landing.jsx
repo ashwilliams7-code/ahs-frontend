@@ -115,13 +115,13 @@ export default function Landing() {
       {/* Navigation */}
       <nav className="relative z-50 px-6 py-6">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3 group cursor-pointer">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/30 md:group-hover:scale-110 transition-transform duration-300">
-              <span className="text-white font-bold text-lg">AI</span>
+          <div className="flex items-center gap-2 sm:gap-3 group cursor-pointer">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/30 md:group-hover:scale-110 transition-transform duration-300">
+              <span className="text-white font-bold text-base sm:text-lg">AI</span>
             </div>
             <div>
-              <span className="font-bold text-xl md:group-hover:text-indigo-400 transition-colors block">AutoAI Hub</span>
-              <span className="text-[10px] text-slate-400 hidden sm:block">A Williams Group Company</span>
+              <span className="font-bold text-base sm:text-xl md:group-hover:text-indigo-400 transition-colors block leading-tight">AutoAI Hub</span>
+              <span className="text-[8px] sm:text-[10px] text-slate-400 block leading-tight">A Williams Group Company</span>
             </div>
           </div>
           
@@ -280,14 +280,14 @@ export default function Landing() {
           {/* Coming Soon Apps - Same style as main apps */}
           <div className="grid md:grid-cols-2 gap-8 mb-12">
               {[
-                { icon: '📝', name: 'ResumeAI', tagline: 'AI Resume Writer', desc: 'Create ATS-optimized resumes with AI that highlights your strengths and matches job requirements perfectly.', features: ['ATS Optimization', 'Templates', 'PDF Export', 'AI Tips'], color: 'from-violet-500 to-purple-500', textColor: 'text-violet-400' },
-                { icon: '🎯', name: 'InterviewAI', tagline: 'Interview Prep Coach', desc: 'Practice with AI-powered mock interviews and get real-time feedback to ace your next job interview.', features: ['Mock Interviews', 'Feedback', 'Industry Tips', 'Scoring'], color: 'from-blue-500 to-cyan-500', textColor: 'text-cyan-400' },
-                { icon: '✉️', name: 'EmailAI', tagline: 'Smart Email Assistant', desc: 'Write professional emails in seconds. AI crafts the perfect tone and message for any business situation.', features: ['Auto-Write', 'Tone Control', 'Templates', 'Follow-ups'], color: 'from-rose-500 to-pink-500', textColor: 'text-pink-400' },
-                { icon: '📅', name: 'MeetingAI', tagline: 'Meeting Notes & Summaries', desc: 'Automatic meeting transcription, intelligent summaries, and action items extraction for busy professionals.', features: ['Transcription', 'Summaries', 'Actions', 'Integrations'], color: 'from-amber-500 to-orange-500', textColor: 'text-amber-400' },
-                { icon: '📱', name: 'SocialAI', tagline: 'Social Media Manager', desc: 'Schedule posts, generate viral content, and grow your audience across all platforms automatically.', features: ['Scheduling', 'Content Gen', 'Analytics', 'Multi-Platform'], color: 'from-pink-500 to-rose-500', textColor: 'text-rose-400' },
-                { icon: '✍️', name: 'ContentAI', tagline: 'Content Generator', desc: 'Create blog posts, articles, and marketing copy that converts readers into customers effortlessly.', features: ['Blog Posts', 'Ad Copy', 'SEO', 'Brand Voice'], color: 'from-teal-500 to-emerald-500', textColor: 'text-emerald-400' },
-                { icon: '💼', name: 'SalesAI', tagline: 'Sales Automation', desc: 'Automate cold outreach, intelligent follow-ups, and lead qualification with AI-powered precision.', features: ['Outreach', 'Follow-ups', 'Lead Scoring', 'CRM Sync'], color: 'from-indigo-500 to-blue-500', textColor: 'text-blue-400' },
-                { icon: '💰', name: 'FinanceAI', tagline: 'Financial Assistant', desc: 'Track expenses, forecast budgets, and get AI-powered financial insights for smarter decisions.', features: ['Tracking', 'Forecasts', 'Reports', 'Tax Prep'], color: 'from-green-500 to-emerald-500', textColor: 'text-green-400' },
+                { icon: '📝', name: 'ResumeAI', tagline: 'Fully Automated Resume Builder', desc: 'AI builds your entire resume automatically. Just input your experience once — our AI optimizes, formats, and tailors it for every job application.', features: ['100% Automated', 'ATS Optimized', 'One-Click Export', 'AI Tailoring'], color: 'from-violet-500 to-purple-500', textColor: 'text-violet-400' },
+                { icon: '🎯', name: 'InterviewAI', tagline: 'AI Interview Automation', desc: 'Fully automated interview prep. AI conducts mock interviews, analyzes your responses in real-time, and coaches you to perfection — zero manual effort.', features: ['Auto Mock Interviews', 'AI Feedback', 'Voice Analysis', 'Auto Scoring'], color: 'from-blue-500 to-cyan-500', textColor: 'text-cyan-400' },
+                { icon: '✉️', name: 'EmailAI', tagline: 'Fully Automated Email Assistant', desc: 'Never write an email again. AI reads context, drafts perfect responses, schedules follow-ups, and manages your inbox completely on autopilot.', features: ['Auto-Drafting', 'Smart Replies', 'Auto Follow-ups', 'Inbox Zero'], color: 'from-rose-500 to-pink-500', textColor: 'text-pink-400' },
+                { icon: '📅', name: 'MeetingAI', tagline: 'Fully Automated Meeting Notes', desc: 'AI joins your meetings automatically, transcribes everything, generates summaries, extracts action items, and sends follow-ups — you just show up.', features: ['Auto-Join', 'Live Transcription', 'AI Summaries', 'Auto Actions'], color: 'from-amber-500 to-orange-500', textColor: 'text-amber-400' },
+                { icon: '📱', name: 'SocialAI', tagline: 'Fully Automated Social Media', desc: 'Complete autopilot for social media. AI creates content, designs graphics, schedules posts, engages with followers, and grows your audience 24/7.', features: ['Auto Content', 'Auto Posting', 'Auto Engage', 'Auto Growth'], color: 'from-pink-500 to-rose-500', textColor: 'text-rose-400' },
+                { icon: '✍️', name: 'ContentAI', tagline: 'Fully Automated Content Creation', desc: 'AI writes your blogs, articles, and marketing copy automatically. Set your topics and schedule — wake up to fresh, SEO-optimized content daily.', features: ['Auto Writing', 'Auto SEO', 'Auto Publishing', 'Brand Voice AI'], color: 'from-teal-500 to-emerald-500', textColor: 'text-emerald-400' },
+                { icon: '💼', name: 'SalesAI', tagline: 'Fully Automated Sales Pipeline', desc: 'AI runs your entire sales process. Automated prospecting, personalized outreach, intelligent follow-ups, and deal tracking — sales on complete autopilot.', features: ['Auto Prospecting', 'Auto Outreach', 'Auto Follow-up', 'Auto CRM'], color: 'from-indigo-500 to-blue-500', textColor: 'text-blue-400' },
+                { icon: '💰', name: 'FinanceAI', tagline: 'Fully Automated Finance Manager', desc: 'AI manages your finances automatically. Auto-categorizes expenses, generates reports, forecasts budgets, and prepares tax documents — zero spreadsheets.', features: ['Auto Tracking', 'Auto Reports', 'Auto Forecast', 'Auto Tax Prep'], color: 'from-green-500 to-emerald-500', textColor: 'text-green-400' },
               ].map((app, i) => (
                 <div 
                   key={i} 
