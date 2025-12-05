@@ -126,8 +126,9 @@ export default function Landing() {
           </div>
           
           <div className="hidden md:flex items-center gap-8">
-            <a href="#features" className="text-slate-300 hover:text-white transition-colors">Features</a>
             <a href="#apps" className="text-slate-300 hover:text-white transition-colors">Apps</a>
+            <a href="#industries" className="text-slate-300 hover:text-white transition-colors">Industries</a>
+            <a href="#features" className="text-slate-300 hover:text-white transition-colors">Features</a>
             <a href="#testimonials" className="text-slate-300 hover:text-white transition-colors">Testimonials</a>
             <a href="#about" className="text-slate-300 hover:text-white transition-colors">About</a>
           </div>
@@ -458,8 +459,208 @@ export default function Landing() {
         </div>
       </section>
 
+      {/* Industry Solutions Section */}
+      <section id="industries" className="relative z-10 px-6 py-24">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full mb-6">
+              <span className="text-sm text-emerald-400 font-medium">Industry-Specific Solutions</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">AI Automation for Every Industry</h2>
+            <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+              Discover how AI can transform your specific business — tailored solutions for Australian industries
+            </p>
+          </div>
+
+          {/* Industry Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {[
+              {
+                icon: '🏥',
+                name: 'NDIS & Disability Services',
+                gradient: 'from-indigo-500 to-purple-600',
+                bgGlow: 'bg-indigo-500/20',
+                borderHover: 'hover:border-indigo-500/50',
+                automations: [
+                  { name: 'Automated Invoicing', desc: 'NDIS-compliant billing' },
+                  { name: 'Smart Rostering', desc: 'AI shift scheduling' },
+                  { name: 'Compliance Tracking', desc: 'Auto audit trails' },
+                  { name: 'Participant Management', desc: 'Plan tracking & alerts' },
+                  { name: 'Progress Notes AI', desc: 'Auto-generate reports' },
+                ]
+              },
+              {
+                icon: '👔',
+                name: 'Recruitment & HR',
+                gradient: 'from-emerald-500 to-cyan-500',
+                bgGlow: 'bg-emerald-500/20',
+                borderHover: 'hover:border-emerald-500/50',
+                automations: [
+                  { name: 'Auto Job Posting', desc: 'Multi-platform publish' },
+                  { name: 'Resume Screening', desc: 'AI candidate matching' },
+                  { name: 'Interview Scheduler', desc: 'Smart calendar sync' },
+                  { name: 'Onboarding Automation', desc: 'Document workflows' },
+                  { name: 'Employee Analytics', desc: 'Performance insights' },
+                ]
+              },
+              {
+                icon: '🏠',
+                name: 'Real Estate',
+                gradient: 'from-amber-500 to-orange-500',
+                bgGlow: 'bg-amber-500/20',
+                borderHover: 'hover:border-amber-500/50',
+                automations: [
+                  { name: 'Listing Generator', desc: 'AI property descriptions' },
+                  { name: 'Lead Follow-up', desc: 'Automated nurturing' },
+                  { name: 'Contract Automation', desc: 'Smart doc generation' },
+                  { name: 'Market Analysis', desc: 'AI price predictions' },
+                  { name: 'Virtual Tours', desc: 'Automated scheduling' },
+                ]
+              },
+              {
+                icon: '⚕️',
+                name: 'Healthcare & Allied Health',
+                gradient: 'from-rose-500 to-pink-500',
+                bgGlow: 'bg-rose-500/20',
+                borderHover: 'hover:border-rose-500/50',
+                automations: [
+                  { name: 'Appointment Booking', desc: '24/7 AI scheduling' },
+                  { name: 'Patient Reminders', desc: 'Smart notifications' },
+                  { name: 'Medicare Billing', desc: 'Auto claim processing' },
+                  { name: 'Clinical Notes AI', desc: 'Voice-to-documentation' },
+                  { name: 'Referral Management', desc: 'Automated workflows' },
+                ]
+              },
+              {
+                icon: '🛒',
+                name: 'E-Commerce & Retail',
+                gradient: 'from-violet-500 to-purple-500',
+                bgGlow: 'bg-violet-500/20',
+                borderHover: 'hover:border-violet-500/50',
+                automations: [
+                  { name: 'Inventory AI', desc: 'Smart stock management' },
+                  { name: 'Customer Support Bot', desc: '24/7 chat assistance' },
+                  { name: 'Email Campaigns', desc: 'Personalized automation' },
+                  { name: 'Review Management', desc: 'Auto responses' },
+                  { name: 'Dynamic Pricing', desc: 'AI price optimization' },
+                ]
+              },
+              {
+                icon: '⚖️',
+                name: 'Legal & Accounting',
+                gradient: 'from-blue-500 to-indigo-500',
+                bgGlow: 'bg-blue-500/20',
+                borderHover: 'hover:border-blue-500/50',
+                automations: [
+                  { name: 'Document Automation', desc: 'Contract generation' },
+                  { name: 'Client Intake', desc: 'AI form processing' },
+                  { name: 'Time Tracking', desc: 'Automatic billing' },
+                  { name: 'Compliance Alerts', desc: 'Deadline reminders' },
+                  { name: 'Research Assistant', desc: 'AI-powered search' },
+                ]
+              },
+              {
+                icon: '🔧',
+                name: 'Trades & Construction',
+                gradient: 'from-orange-500 to-red-500',
+                bgGlow: 'bg-orange-500/20',
+                borderHover: 'hover:border-orange-500/50',
+                automations: [
+                  { name: 'Quote Generator', desc: 'AI cost estimation' },
+                  { name: 'Job Scheduling', desc: 'Smart dispatch' },
+                  { name: 'Invoice Automation', desc: 'Progress billing' },
+                  { name: 'Safety Compliance', desc: 'Auto documentation' },
+                  { name: 'Supply Chain AI', desc: 'Material ordering' },
+                ]
+              },
+              {
+                icon: '🍽️',
+                name: 'Hospitality & Food',
+                gradient: 'from-teal-500 to-emerald-500',
+                bgGlow: 'bg-teal-500/20',
+                borderHover: 'hover:border-teal-500/50',
+                automations: [
+                  { name: 'Booking Management', desc: 'AI reservations' },
+                  { name: 'Staff Rostering', desc: 'Smart scheduling' },
+                  { name: 'Menu Optimization', desc: 'AI recommendations' },
+                  { name: 'Review Responses', desc: 'Auto engagement' },
+                  { name: 'Inventory Forecasting', desc: 'Waste reduction' },
+                ]
+              },
+              {
+                icon: '📚',
+                name: 'Education & Training',
+                gradient: 'from-cyan-500 to-blue-500',
+                bgGlow: 'bg-cyan-500/20',
+                borderHover: 'hover:border-cyan-500/50',
+                automations: [
+                  { name: 'Enrollment AI', desc: 'Auto student intake' },
+                  { name: 'Course Scheduling', desc: 'Smart timetables' },
+                  { name: 'Assessment Grading', desc: 'AI marking assist' },
+                  { name: 'Student Analytics', desc: 'Progress tracking' },
+                  { name: 'Content Generation', desc: 'AI course materials' },
+                ]
+              },
+            ].map((industry, idx) => (
+              <div 
+                key={idx}
+                className={`group relative rounded-2xl p-1 transition-all duration-300 md:hover:-translate-y-2 active:scale-[0.98]`}
+              >
+                {/* Gradient border glow */}
+                <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${industry.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm`}></div>
+                <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${industry.gradient} opacity-20`}></div>
+                
+                <div className={`relative bg-slate-900/95 rounded-2xl p-6 border border-white/10 ${industry.borderHover} transition-colors h-full`}>
+                  {/* Industry Header */}
+                  <div className="flex items-center gap-4 mb-5">
+                    <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${industry.gradient} flex items-center justify-center text-2xl shadow-lg`}>
+                      {industry.icon}
+                    </div>
+                    <h3 className="text-lg font-bold text-white">{industry.name}</h3>
+                  </div>
+                  
+                  {/* Automations List */}
+                  <div className="space-y-3">
+                    {industry.automations.map((auto, i) => (
+                      <div 
+                        key={i}
+                        className="flex items-center gap-3 p-2.5 rounded-lg bg-white/5 border border-white/5 group-hover:bg-white/10 transition-colors"
+                      >
+                        <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${industry.gradient} opacity-80 flex items-center justify-center flex-shrink-0`}>
+                          <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                          </svg>
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-sm font-medium text-white truncate">{auto.name}</p>
+                          <p className="text-xs text-slate-500 truncate">{auto.desc}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom CTA */}
+          <div className="text-center">
+            <p className="text-slate-400 mb-6">Don't see your industry? We build custom AI solutions for any business.</p>
+            <button
+              onClick={() => setShowSignup(true)}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl font-semibold hover:opacity-90 active:scale-[0.97] transition-all"
+            >
+              <span>Get a Custom Solution</span>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
-      <section id="features" className="relative z-10 px-6 py-24">
+      <section id="features" className="relative z-10 px-6 py-24 bg-gradient-to-b from-transparent to-slate-900/50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">Why Australian SMBs Choose Us</h2>
