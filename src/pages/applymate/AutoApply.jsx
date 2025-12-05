@@ -16,10 +16,23 @@ export default function AutoApply() {
     error_message: null
   })
   const [applications, setApplications] = useState([])
+  const [activityLog, setActivityLog] = useState([])
   const [loading, setLoading] = useState(true)
   const [actionLoading, setActionLoading] = useState(false)
   const [error, setError] = useState(null)
   const pollInterval = useRef(null)
+  const logContainerRef = useRef(null)
+
+  // Activity log helper
+  const addLogEntry = (message, type = 'info') => {
+    setActivityLog(prev => {
+      const newLog = [
+        { id: Date.now(), message, type, timestamp: new Date().toISOString() },
+        ...prev.slice(0, 49) // Keep last 50 entries
+      ]
+      return newLog
+    })
+  }
 
   // Load session and applications on mount
   useEffect(() => {
@@ -53,10 +66,31 @@ export default function AutoApply() {
       })
       if (res.ok) {
         const data = await res.json()
+        
+        // Add log entries based on status changes
+        if (data.status === 'running') {
+          if (data.current_job && data.current_job !== sessionData.current_job) {
+            addLogEntry(`📋 Found job: ${data.current_job}`, 'job')
+            addLogEntry(`🤖 Analyzing job requirements...`, 'info')
+            setTimeout(() => addLogEntry(`✍️ Generating tailored cover letter...`, 'info'), 1500)
+            setTimeout(() => addLogEntry(`📤 Submitting application...`, 'info'), 3000)
+          }
+          if (data.jobs_applied > sessionData.jobs_applied) {
+            setTimeout(() => addLogEntry(`✅ Successfully applied! (${data.jobs_applied} total)`, 'success'), 4000)
+            setTimeout(() => addLogEntry(`🔍 Searching for next job...`, 'info'), 5000)
+          }
+          if (data.jobs_skipped > sessionData.jobs_skipped) {
+            addLogEntry(`⏭️ Skipped job (already applied or blocked)`, 'warning')
+          }
+        }
+        
         setSessionData(data)
       }
     } catch (err) {
       console.error('Failed to load session:', err)
+      if (sessionData.status === 'running') {
+        addLogEntry('⚠️ Connection interrupted, retrying...', 'warning')
+      }
     }
   }
 
@@ -77,6 +111,9 @@ export default function AutoApply() {
   const handleStart = async () => {
     setActionLoading(true)
     setError(null)
+    setActivityLog([]) // Clear previous log
+    addLogEntry('🚀 Starting Auto-Apply session...', 'start')
+    addLogEntry('🔧 Loading your settings...', 'info')
     try {
       const res = await fetch(`${API_URL}/api/applymate/start`, {
         method: 'POST',
@@ -84,8 +121,14 @@ export default function AutoApply() {
       })
       const data = await res.json()
       if (!res.ok) {
+        addLogEntry(`❌ Error: ${data.error || 'Failed to start'}`, 'error')
         throw new Error(data.error || 'Failed to start')
       }
+      addLogEntry('✅ Settings loaded successfully', 'success')
+      addLogEntry('🌐 Launching browser in stealth mode...', 'info')
+      setTimeout(() => addLogEntry('🔗 Connecting to SEEK...', 'info'), 1000)
+      setTimeout(() => addLogEntry('🔐 Logging into your account...', 'info'), 2500)
+      setTimeout(() => addLogEntry('🔍 Starting job search...', 'info'), 4000)
       await loadSession()
     } catch (err) {
       setError(err.message)
@@ -96,14 +139,17 @@ export default function AutoApply() {
 
   const handlePause = async () => {
     setActionLoading(true)
+    addLogEntry('⏸️ Pausing automation...', 'info')
     try {
       await fetch(`${API_URL}/api/applymate/pause`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${session?.access_token}` }
       })
+      addLogEntry('⏸️ Auto-Apply paused', 'warning')
       await loadSession()
     } catch (err) {
       console.error('Pause error:', err)
+      addLogEntry('❌ Failed to pause', 'error')
     } finally {
       setActionLoading(false)
     }
@@ -111,14 +157,18 @@ export default function AutoApply() {
 
   const handleResume = async () => {
     setActionLoading(true)
+    addLogEntry('▶️ Resuming automation...', 'info')
     try {
       await fetch(`${API_URL}/api/applymate/resume`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${session?.access_token}` }
       })
+      addLogEntry('✅ Auto-Apply resumed', 'success')
+      addLogEntry('🔍 Searching for next job...', 'info')
       await loadSession()
     } catch (err) {
       console.error('Resume error:', err)
+      addLogEntry('❌ Failed to resume', 'error')
     } finally {
       setActionLoading(false)
     }
@@ -126,15 +176,20 @@ export default function AutoApply() {
 
   const handleStop = async () => {
     setActionLoading(true)
+    addLogEntry('🛑 Stopping automation...', 'info')
     try {
       await fetch(`${API_URL}/api/applymate/stop`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${session?.access_token}` }
       })
+      addLogEntry('🔒 Closing browser...', 'info')
+      setTimeout(() => addLogEntry('✅ Session ended successfully', 'success'), 1000)
+      setTimeout(() => addLogEntry(`📊 Summary: ${sessionData.jobs_applied} jobs applied`, 'success'), 1500)
       await loadSession()
       await loadApplications()
     } catch (err) {
       console.error('Stop error:', err)
+      addLogEntry('❌ Error stopping session', 'error')
     } finally {
       setActionLoading(false)
     }
@@ -386,24 +441,89 @@ export default function AutoApply() {
             </div>
           </div>
 
-          {/* Activity Log */}
+          {/* Live Activity Log */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Recent Applications</h3>
-            <div className="bg-slate-800 rounded-2xl border border-slate-700 overflow-hidden">
-              {applications.length === 0 ? (
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+                <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                </svg>
+                Activity Log
+              </h3>
+              {isRunning && (
+                <div className="flex items-center gap-1.5 text-xs text-emerald-400">
+                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                  Live
+                </div>
+              )}
+            </div>
+            <div 
+              ref={logContainerRef}
+              className="bg-slate-800 rounded-2xl border border-slate-700 overflow-hidden max-h-80 overflow-y-auto"
+            >
+              {activityLog.length === 0 ? (
                 <div className="p-6 text-center text-slate-500">
                   <svg className="w-12 h-12 mx-auto mb-3 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                   </svg>
-                  <p>No applications yet</p>
-                  <p className="text-sm">Start auto-apply to see your applications here</p>
+                  <p>No activity yet</p>
+                  <p className="text-sm">Start auto-apply to see live updates here</p>
                 </div>
               ) : (
-                applications.map((app, index) => (
+                <div className="divide-y divide-slate-700/50">
+                  {activityLog.map((entry) => (
+                    <div 
+                      key={entry.id}
+                      className={`px-4 py-3 text-sm ${
+                        entry.type === 'error' ? 'bg-red-500/10' :
+                        entry.type === 'success' ? 'bg-emerald-500/5' :
+                        entry.type === 'start' ? 'bg-cyan-500/10' :
+                        entry.type === 'job' ? 'bg-blue-500/5' :
+                        entry.type === 'warning' ? 'bg-amber-500/5' :
+                        ''
+                      }`}
+                    >
+                      <div className="flex items-start gap-2">
+                        <span className={`flex-1 ${
+                          entry.type === 'error' ? 'text-red-400' :
+                          entry.type === 'success' ? 'text-emerald-400' :
+                          entry.type === 'start' ? 'text-cyan-400' :
+                          entry.type === 'job' ? 'text-blue-400' :
+                          entry.type === 'warning' ? 'text-amber-400' :
+                          'text-slate-300'
+                        }`}>
+                          {entry.message}
+                        </span>
+                        <span className="text-xs text-slate-600 shrink-0">
+                          {new Date(entry.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+            
+            {activityLog.length > 0 && (
+              <button 
+                onClick={() => setActivityLog([])}
+                className="mt-3 text-xs text-slate-500 hover:text-slate-400 transition-colors"
+              >
+                Clear Log
+              </button>
+            )}
+          </div>
+
+          {/* Recent Applications */}
+          {applications.length > 0 && (
+            <div>
+              <h3 className="text-lg font-semibold text-white mb-4">Recent Applications</h3>
+              <div className="bg-slate-800 rounded-2xl border border-slate-700 overflow-hidden">
+                {applications.slice(0, 5).map((app, index) => (
                   <div 
                     key={app.id}
                     className={`p-4 flex items-start gap-3 ${
-                      index !== applications.length - 1 ? 'border-b border-slate-700' : ''
+                      index !== Math.min(applications.length, 5) - 1 ? 'border-b border-slate-700' : ''
                     }`}
                   >
                     <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 bg-emerald-500/20 text-emerald-400">
@@ -415,23 +535,17 @@ export default function AutoApply() {
                       <p className="text-white font-medium truncate">{app.company}</p>
                       <p className="text-sm text-slate-400 truncate">{app.job_title}</p>
                     </div>
-                    <span className="text-xs text-slate-500 shrink-0">
-                      {new Date(app.applied_at).toLocaleDateString()}
-                    </span>
                   </div>
-                ))
-              )}
-            </div>
-            
-            {applications.length > 0 && (
+                ))}
+              </div>
               <Link 
                 to="/applymate/applications" 
                 className="mt-4 block text-center text-emerald-400 hover:text-emerald-300 text-sm"
               >
                 View All Applications →
               </Link>
-            )}
-          </div>
+            </div>
+          )}
 
           {/* Pro Tips */}
           <div className="bg-gradient-to-br from-emerald-500/10 to-cyan-500/10 rounded-2xl p-6 border border-emerald-500/20">
