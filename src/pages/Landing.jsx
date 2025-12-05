@@ -69,29 +69,29 @@ export default function Landing() {
   ]
 
   const stats = [
-    { value: '10,000+', label: 'Applications Sent' },
-    { value: '98%', label: 'ATS Pass Rate' },
-    { value: '3x', label: 'Interview Rate' },
-    { value: '24/7', label: 'AI Automation' },
+    { value: '500+', label: 'SMBs Automated' },
+    { value: '10,000+', label: 'Hours Saved' },
+    { value: '3x', label: 'Efficiency Boost' },
+    { value: '24/7', label: 'AI Working' },
   ]
 
   const testimonials = [
     {
-      quote: "ApplyMate landed me 5 interviews in my first week. Game changer!",
+      quote: "NDISHub cut our admin time by 80%. We went from drowning in paperwork to actually growing our business.",
       author: "Sarah M.",
-      role: "Software Engineer",
+      role: "NDIS Provider, Brisbane",
       avatar: "S",
     },
     {
-      quote: "NDISHub cut our invoicing time from 10 hours to 30 minutes.",
+      quote: "As a small business, we couldn't afford a full HR team. ApplyMate found us 3 quality hires in a month.",
       author: "Michael R.",
-      role: "NDIS Provider",
+      role: "Director, Tech Startup",
       avatar: "M",
     },
     {
-      quote: "The AI cover letters are incredibly personalized. Can't tell they're AI.",
+      quote: "Finally, AI tools built for Australian businesses. The compliance features alone saved us thousands.",
       author: "Jessica L.",
-      role: "Project Manager",
+      role: "Operations Manager, SME",
       avatar: "J",
     },
   ]
@@ -158,15 +158,15 @@ export default function Landing() {
           </div>
           
           <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight animate-[fadeIn_0.8s_ease-out]">
-            AI Automation for{' '}
+            Custom AI Solutions for{' '}
             <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
               Australian
             </span>
-            <br />Professionals
+            <br />Small & Medium Business
           </h1>
           
           <p className="text-base sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 px-2 animate-[fadeIn_1s_ease-out]">
-            Purpose-built for the Australian market. Streamline your NDIS compliance, invoicing, and rostering — or let AI apply to hundreds of jobs on SEEK, Indeed, LinkedIn, and Jora while you sleep.
+            Tailored AI automation built specifically for Australian SMBs. From NDIS providers to growing businesses — automate your operations, hire smarter, and scale faster with intelligent solutions that work.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-[fadeIn_1.2s_ease-out]">
@@ -210,9 +210,9 @@ export default function Landing() {
       <section id="apps" className="relative z-10 px-6 py-24 bg-gradient-to-b from-transparent to-slate-900/50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Your AI-Powered Suite</h2>
+            <h2 className="text-4xl font-bold mb-4">Your AI-Powered Business Suite</h2>
             <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-              10 powerful applications designed to automate your professional life
+              10 powerful applications designed to automate and scale your Australian business
             </p>
           </div>
 
@@ -462,9 +462,9 @@ export default function Landing() {
       <section id="features" className="relative z-10 px-6 py-24">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Why Choose AutoAI Hub?</h2>
+            <h2 className="text-4xl font-bold mb-4">Why Australian SMBs Choose Us</h2>
             <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-              Powerful features designed to supercharge your productivity
+              Powerful AI solutions built for the way Australian businesses actually work
             </p>
           </div>
 
@@ -490,8 +490,8 @@ export default function Landing() {
       <section id="testimonials" className="relative z-10 px-6 py-24 bg-gradient-to-b from-transparent to-slate-900/50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Loved by Professionals</h2>
-            <p className="text-slate-400 text-lg">See what our users have to say</p>
+            <h2 className="text-4xl font-bold mb-4">Loved by Australian Businesses</h2>
+            <p className="text-slate-400 text-lg">See what our SMB clients have to say</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-4 sm:gap-6">
@@ -625,9 +625,9 @@ export default function Landing() {
             </div>
             
             <div className="relative z-10">
-              <h2 className="text-3xl sm:text-4xl font-bold mb-4">Ready to Automate?</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">Ready to Transform Your Business?</h2>
               <p className="text-slate-400 text-base sm:text-lg mb-8">
-                Join thousands of professionals saving hours every week with AI automation.
+                Join hundreds of Australian SMBs saving time and scaling faster with custom AI automation.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <button
