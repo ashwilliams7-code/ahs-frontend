@@ -553,6 +553,80 @@ export default function Landing() {
                 </div>
               </div>
             </div>
+
+            {/* Cost Breakdown */}
+            <div className="mt-6 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 rounded-2xl p-6 border border-emerald-500/20">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="font-bold text-white">Cost Per Call Breakdown</h4>
+                  <p className="text-xs text-slate-400">Approximate running costs (AUD)</p>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                <div className="bg-slate-900/60 rounded-xl p-4 border border-slate-700">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-lg">🧠</span>
+                    <span className="text-xs text-slate-400">GPT-4</span>
+                  </div>
+                  <p className="text-xl font-bold text-emerald-400">$0.02</p>
+                  <p className="text-[10px] text-slate-500">~500 tokens/call</p>
+                </div>
+                <div className="bg-slate-900/60 rounded-xl p-4 border border-slate-700">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-lg">🎙️</span>
+                    <span className="text-xs text-slate-400">ElevenLabs</span>
+                  </div>
+                  <p className="text-xl font-bold text-purple-400">$0.03</p>
+                  <p className="text-[10px] text-slate-500">~1000 chars</p>
+                </div>
+                <div className="bg-slate-900/60 rounded-xl p-4 border border-slate-700">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-lg">📞</span>
+                    <span className="text-xs text-slate-400">Twilio</span>
+                  </div>
+                  <p className="text-xl font-bold text-red-400">$0.04</p>
+                  <p className="text-[10px] text-slate-500">~2 min call AU</p>
+                </div>
+                <div className="bg-slate-900/60 rounded-xl p-4 border border-slate-700">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-lg">👂</span>
+                    <span className="text-xs text-slate-400">Whisper</span>
+                  </div>
+                  <p className="text-xl font-bold text-blue-400">$0.01</p>
+                  <p className="text-[10px] text-slate-500">Transcription</p>
+                </div>
+                <div className="bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 rounded-xl p-4 border border-emerald-500/30">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-lg">💰</span>
+                    <span className="text-xs text-emerald-400 font-medium">TOTAL</span>
+                  </div>
+                  <p className="text-xl font-bold text-white">~$0.10</p>
+                  <p className="text-[10px] text-emerald-400">per call</p>
+                </div>
+              </div>
+
+              <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-4 border-t border-slate-700/50">
+                <div className="flex items-center gap-6">
+                  <div>
+                    <p className="text-xs text-slate-400">100 calls/day</p>
+                    <p className="text-lg font-bold text-white">~$10/day</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-400">Monthly (3000 calls)</p>
+                    <p className="text-lg font-bold text-white">~$300/mo</p>
+                  </div>
+                </div>
+                <div className="bg-emerald-500/10 rounded-lg px-4 py-2 border border-emerald-500/20">
+                  <p className="text-xs text-emerald-400">💡 Compare: Human SDR costs $5,000-8,000/mo</p>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* More Examples Grid */}
