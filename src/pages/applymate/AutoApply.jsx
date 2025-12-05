@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom'
 
 const API_URL = import.meta.env.VITE_BACKEND_URL || 'https://ahs-backend.onrender.com'
 
+// Debug: Log API URL on load
+console.log('🔧 ApplyMate API URL:', API_URL)
+console.log('🔧 Environment VITE_BACKEND_URL:', import.meta.env.VITE_BACKEND_URL)
+
 export default function AutoApply() {
   const { session } = useAuth()
   const [sessionData, setSessionData] = useState({
@@ -145,6 +149,11 @@ export default function AutoApply() {
       setTimeout(() => addLogEntry('🔍 Starting job search...', 'info'), 4000)
       await loadSession()
     } catch (err) {
+      console.error('🔴 Start Auto-Apply Error:', err)
+      console.error('🔴 Error name:', err.name)
+      console.error('🔴 Error message:', err.message)
+      console.error('🔴 Full error:', JSON.stringify(err, Object.getOwnPropertyNames(err)))
+      
       const errorMsg = err.message === 'Failed to fetch' 
         ? 'Cannot connect to server. Please check your internet connection.'
         : err.message
