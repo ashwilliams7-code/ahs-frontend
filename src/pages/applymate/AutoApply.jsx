@@ -62,10 +62,14 @@ export default function AutoApply() {
   const loadSession = async () => {
     try {
       const res = await fetch(`${API_URL}/api/applymate/session`, {
-        headers: { 'Authorization': `Bearer ${session?.access_token}` }
+        headers: { 
+          'Authorization': `Bearer ${session?.access_token}`,
+          'Content-Type': 'application/json'
+        }
       })
       if (res.ok) {
         const data = await res.json()
+        setError(null) // Clear any previous errors
         
         // Add log entries based on status changes
         if (data.status === 'running') {
@@ -90,6 +94,10 @@ export default function AutoApply() {
       console.error('Failed to load session:', err)
       if (sessionData.status === 'running') {
         addLogEntry('⚠️ Connection interrupted, retrying...', 'warning')
+      }
+      // Only show error on initial load, not during polling
+      if (loading) {
+        setError('Failed to connect to server. Please refresh the page.')
       }
     }
   }
@@ -117,13 +125,19 @@ export default function AutoApply() {
     try {
       const res = await fetch(`${API_URL}/api/applymate/start`, {
         method: 'POST',
-        headers: { 'Authorization': `Bearer ${session?.access_token}` }
+        headers: { 
+          'Authorization': `Bearer ${session?.access_token}`,
+          'Content-Type': 'application/json'
+        }
       })
-      const data = await res.json()
+      
       if (!res.ok) {
+        const data = await res.json().catch(() => ({ error: 'Server error' }))
         addLogEntry(`❌ Error: ${data.error || 'Failed to start'}`, 'error')
-        throw new Error(data.error || 'Failed to start')
+        throw new Error(data.error || 'Failed to start automation')
       }
+      
+      const data = await res.json()
       addLogEntry('✅ Settings loaded successfully', 'success')
       addLogEntry('🌐 Launching browser in stealth mode...', 'info')
       setTimeout(() => addLogEntry('🔗 Connecting to SEEK...', 'info'), 1000)
@@ -131,7 +145,11 @@ export default function AutoApply() {
       setTimeout(() => addLogEntry('🔍 Starting job search...', 'info'), 4000)
       await loadSession()
     } catch (err) {
-      setError(err.message)
+      const errorMsg = err.message === 'Failed to fetch' 
+        ? 'Cannot connect to server. Please check your internet connection.'
+        : err.message
+      setError(errorMsg)
+      addLogEntry(`❌ ${errorMsg}`, 'error')
     } finally {
       setActionLoading(false)
     }
