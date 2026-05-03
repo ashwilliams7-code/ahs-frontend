@@ -9,10 +9,12 @@ build/
 
 # Environment
 .env
+.env.*
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+env.config.txt
 
 # Logs
 npm-debug.log*
