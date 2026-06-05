@@ -105,10 +105,23 @@ export default function VentureLinks() {
     }
     meta.setAttribute('content', description)
 
+    const themeColor = '#020806'
+    let themeMeta = document.querySelector('meta[name="theme-color"]')
+    const originalThemeColor = themeMeta?.getAttribute('content')
+    if (!themeMeta) {
+      themeMeta = document.createElement('meta')
+      themeMeta.setAttribute('name', 'theme-color')
+      document.head.appendChild(themeMeta)
+    }
+    themeMeta.setAttribute('content', themeColor)
+
     return () => {
       document.title = originalTitle
       if (originalDescription) {
         meta.setAttribute('content', originalDescription)
+      }
+      if (originalThemeColor) {
+        themeMeta.setAttribute('content', originalThemeColor)
       }
     }
   }, [])
