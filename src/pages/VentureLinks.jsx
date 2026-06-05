@@ -10,7 +10,7 @@ const FEATURED_LINKS = [
     href: 'https://app.autoaihub.io/',
     label: 'Open AHS',
     mark: 'AI',
-    tint: '#73f0c8',
+    tint: '#C9A646',
     metric: 'AI ops',
   },
   {
@@ -21,7 +21,7 @@ const FEATURED_LINKS = [
     href: 'https://aurii.me',
     label: 'View Aurii',
     mark: 'Au',
-    tint: '#f6d58a',
+    tint: '#F4E6BE',
     metric: 'beauty tech',
   },
   {
@@ -32,7 +32,7 @@ const FEATURED_LINKS = [
     href: 'https://kingklaw.au',
     label: 'Visit King Klaw',
     mark: 'KK',
-    tint: '#ff7c5c',
+    tint: '#8FA092',
     metric: 'AU agents',
   },
 ]
@@ -43,7 +43,7 @@ const VENTURE_LINKS = [
     description: 'Marketplace layer for curated OpenClaw skills and deployable agent workflows.',
     href: 'https://clawhub.ai',
     mark: 'CH',
-    tint: '#9de9be',
+    tint: '#0D3B2A',
     type: 'marketplace',
   },
   {
@@ -51,7 +51,7 @@ const VENTURE_LINKS = [
     description: 'Job-search agents, inbox triage, application operations, and multi-bot workflow tooling.',
     href: 'https://github.com/ashwilliams7-code/SeekMateAI',
     mark: 'SM',
-    tint: '#b99cff',
+    tint: '#8FA092',
     type: 'github proof',
   },
   {
@@ -59,7 +59,7 @@ const VENTURE_LINKS = [
     description: 'Prediction-market alpha OS for Polymarket/Kalshi-style research and trading systems.',
     href: 'https://github.com/ashwilliams7-code/homerun',
     mark: 'HR',
-    tint: '#80d8ff',
+    tint: '#C9A646',
     type: 'markets',
   },
   {
@@ -67,7 +67,7 @@ const VENTURE_LINKS = [
     description: 'Express/Supabase API layer for invoices, activity, workers, ApplyMate, and operations data.',
     href: 'https://github.com/ashwilliams7-code/ahs-backend',
     mark: 'API',
-    tint: '#ffc56f',
+    tint: '#F4E6BE',
     type: 'infrastructure',
   },
 ]

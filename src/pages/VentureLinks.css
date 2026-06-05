@@ -1,18 +1,24 @@
 .venture-links-shell {
-  --vl-ink: #f7efe0;
-  --vl-muted: rgba(247, 239, 224, 0.68);
-  --vl-hairline: rgba(247, 239, 224, 0.14);
-  --vl-panel: rgba(13, 15, 20, 0.72);
-  --vl-panel-strong: rgba(23, 25, 31, 0.9);
-  --vl-gold: #f2c978;
-  --vl-black: #060607;
+  --vl-obsidian: #020806;
+  --vl-emerald: #061A12;
+  --vl-rich: #0D3B2A;
+  --vl-gold: #C9A646;
+  --vl-champagne: #F4E6BE;
+  --vl-sage: #8FA092;
+  --vl-ink: var(--vl-champagne);
+  --vl-muted: rgba(244, 230, 190, 0.72);
+  --vl-hairline: rgba(244, 230, 190, 0.14);
+  --vl-panel: rgba(6, 26, 18, 0.76);
+  --vl-panel-strong: rgba(13, 59, 42, 0.9);
+  --vl-black: var(--vl-obsidian);
   position: relative;
   min-height: 100svh;
   overflow: hidden;
   background:
-    radial-gradient(circle at 18% 0%, rgba(242, 201, 120, 0.16), transparent 34rem),
-    radial-gradient(circle at 84% 18%, rgba(115, 240, 200, 0.18), transparent 28rem),
-    linear-gradient(145deg, #090909 0%, #111318 42%, #050506 100%);
+    radial-gradient(circle at 18% 0%, rgba(201, 166, 70, 0.16), transparent 34rem),
+    radial-gradient(circle at 84% 18%, rgba(13, 59, 42, 0.42), transparent 28rem),
+    radial-gradient(circle at 50% 118%, rgba(143, 160, 146, 0.13), transparent 26rem),
+    linear-gradient(145deg, #020806 0%, #061A12 44%, #020604 100%);
   color: var(--vl-ink);
   font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
   letter-spacing: -0.012em;
@@ -24,8 +30,8 @@
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(110deg, transparent 0 23%, rgba(255,255,255,0.035) 23.2% 23.55%, transparent 23.8% 100%),
-    linear-gradient(180deg, rgba(255,255,255,0.055), transparent 22%, rgba(0,0,0,0.38));
+    linear-gradient(110deg, transparent 0 23%, rgba(244,230,190,0.03) 23.2% 23.55%, transparent 23.8% 100%),
+    linear-gradient(180deg, rgba(244,230,190,0.035), transparent 22%, rgba(0,0,0,0.44));
   mix-blend-mode: screen;
   opacity: 0.7;
 }
@@ -50,13 +56,13 @@
 .vl-glow-one {
   left: -11rem;
   top: 6rem;
-  background: #f2c978;
+  background: #C9A646;
 }
 
 .vl-glow-two {
   right: -12rem;
   bottom: -4rem;
-  background: #73f0c8;
+  background: #0D3B2A;
   animation-delay: -5s;
 }
 
@@ -65,8 +71,8 @@
   inset: -40%;
   opacity: 0.13;
   background-image:
-    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.6) 0 1px, transparent 1.5px),
-    radial-gradient(circle at 70% 80%, rgba(255,255,255,0.42) 0 1px, transparent 1.5px);
+    radial-gradient(circle at 20% 30%, rgba(244,230,190,0.42) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 70% 80%, rgba(143,160,146,0.3) 0 1px, transparent 1.5px);
   background-size: 43px 47px, 31px 37px;
   transform: rotate(8deg);
 }
@@ -100,9 +106,9 @@
 .vl-live-dot,
 .vl-share {
   border: 1px solid var(--vl-hairline);
-  background: rgba(255, 255, 255, 0.055);
-  color: rgba(247, 239, 224, 0.86);
-  box-shadow: inset 0 1px rgba(255,255,255,0.08), 0 12px 34px rgba(0,0,0,0.28);
+  background: rgba(6, 26, 18, 0.64);
+  color: rgba(244, 230, 190, 0.9);
+  box-shadow: inset 0 1px rgba(244,230,190,0.08), 0 12px 34px rgba(0,0,0,0.32);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
 }
@@ -123,8 +129,8 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #73f0c8;
-  box-shadow: 0 0 0 6px rgba(115, 240, 200, 0.1), 0 0 18px rgba(115, 240, 200, 0.9);
+  background: #C9A646;
+  box-shadow: 0 0 0 6px rgba(201, 166, 70, 0.1), 0 0 18px rgba(201, 166, 70, 0.74);
 }
 
 .vl-share {
@@ -140,8 +146,8 @@
 
 .vl-share:hover {
   transform: translateY(-1px);
-  border-color: rgba(242, 201, 120, 0.45);
-  background: rgba(242, 201, 120, 0.12);
+  border-color: rgba(201, 166, 70, 0.48);
+  background: rgba(201, 166, 70, 0.12);
 }
 
 .vl-identity-card {
@@ -152,12 +158,12 @@
   gap: 18px;
   align-items: start;
   padding: 22px;
-  border: 1px solid rgba(247, 239, 224, 0.16);
+  border: 1px solid rgba(244, 230, 190, 0.16);
   border-radius: 34px;
   background:
-    linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.035)),
-    rgba(10, 11, 13, 0.78);
-  box-shadow: 0 34px 90px rgba(0,0,0,0.55), inset 0 1px rgba(255,255,255,0.12);
+    linear-gradient(145deg, rgba(244,230,190,0.105), rgba(143,160,146,0.04)),
+    rgba(6, 26, 18, 0.82);
+  box-shadow: 0 34px 90px rgba(0,0,0,0.58), inset 0 1px rgba(244,230,190,0.11);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
 }
@@ -168,7 +174,7 @@
   inset: auto -20% -45% 18%;
   height: 74%;
   border-radius: 999px;
-  background: radial-gradient(circle, rgba(242,201,120,0.22), transparent 66%);
+  background: radial-gradient(circle, rgba(201,166,70,0.22), transparent 66%);
   pointer-events: none;
 }
 
@@ -181,10 +187,10 @@
   place-items: center;
   border-radius: 29px;
   background:
-    linear-gradient(145deg, rgba(242,201,120,0.92), rgba(128,216,255,0.35)),
-    #1d1b17;
-  color: #080806;
-  box-shadow: 0 24px 60px rgba(242,201,120,0.18), inset 0 1px rgba(255,255,255,0.7);
+    linear-gradient(145deg, rgba(201,166,70,0.94), rgba(244,230,190,0.62)),
+    #0D3B2A;
+  color: #020806;
+  box-shadow: 0 24px 60px rgba(201,166,70,0.18), inset 0 1px rgba(244,230,190,0.72);
   transform: rotate(-3deg);
 }
 
@@ -244,10 +250,10 @@
 
 .vl-command-strip span {
   padding: 10px 11px;
-  border: 1px solid rgba(247, 239, 224, 0.11);
+  border: 1px solid rgba(244, 230, 190, 0.12);
   border-radius: 16px;
-  background: rgba(255,255,255,0.045);
-  color: rgba(247,239,224,0.72);
+  background: rgba(6, 26, 18, 0.54);
+  color: rgba(244,230,190,0.78);
   font-size: 12px;
   font-weight: 800;
   text-align: center;
@@ -268,12 +274,12 @@
   border: 1px solid color-mix(in srgb, var(--tint) 34%, transparent);
   border-radius: 30px;
   background:
-    radial-gradient(circle at 94% 0%, color-mix(in srgb, var(--tint) 26%, transparent), transparent 42%),
-    linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.035)),
-    rgba(12, 13, 15, 0.84);
+    radial-gradient(circle at 94% 0%, color-mix(in srgb, var(--tint) 24%, transparent), transparent 42%),
+    linear-gradient(135deg, rgba(244,230,190,0.085), rgba(143,160,146,0.035)),
+    rgba(6, 26, 18, 0.88);
   color: var(--vl-ink);
   text-decoration: none;
-  box-shadow: 0 28px 70px rgba(0,0,0,0.42), inset 0 1px rgba(255,255,255,0.12);
+  box-shadow: 0 28px 70px rgba(0,0,0,0.46), inset 0 1px rgba(244,230,190,0.11);
   transform-style: preserve-3d;
   animation-delay: var(--delay);
   transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
@@ -288,7 +294,7 @@
 .vl-card-shine {
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg, transparent 0 36%, rgba(255,255,255,0.12) 46%, transparent 58% 100%);
+  background: linear-gradient(120deg, transparent 0 36%, rgba(244,230,190,0.11) 46%, transparent 58% 100%);
   transform: translateX(-78%);
   transition: transform 580ms ease;
   pointer-events: none;
@@ -303,8 +309,8 @@
   display: inline-flex;
   padding: 7px 9px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--tint) 12%, rgba(255,255,255,0.04));
-  color: color-mix(in srgb, var(--tint) 82%, white);
+  background: color-mix(in srgb, var(--tint) 12%, rgba(6,26,18,0.52));
+  color: color-mix(in srgb, var(--tint) 82%, var(--vl-champagne));
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 0.14em;
@@ -327,10 +333,10 @@
   flex: none;
   border: 1px solid color-mix(in srgb, var(--tint, var(--vl-gold)) 46%, transparent);
   background:
-    linear-gradient(145deg, color-mix(in srgb, var(--tint, var(--vl-gold)) 32%, transparent), rgba(255,255,255,0.05)),
-    rgba(255,255,255,0.045);
-  box-shadow: inset 0 1px rgba(255,255,255,0.18), 0 18px 34px rgba(0,0,0,0.3);
-  color: color-mix(in srgb, var(--tint, var(--vl-gold)) 86%, white);
+    linear-gradient(145deg, color-mix(in srgb, var(--tint, var(--vl-gold)) 30%, transparent), rgba(244,230,190,0.045)),
+    rgba(6,26,18,0.58);
+  box-shadow: inset 0 1px rgba(244,230,190,0.16), 0 18px 34px rgba(0,0,0,0.34);
+  color: color-mix(in srgb, var(--tint, var(--vl-gold)) 82%, var(--vl-champagne));
   font-weight: 1000;
 }
 
@@ -365,7 +371,7 @@
   justify-content: flex-start;
   gap: 10px;
   margin-top: 20px;
-  color: rgba(247,239,224,0.74);
+  color: rgba(244,230,190,0.76);
   font-size: 12px;
   font-weight: 900;
   letter-spacing: 0.04em;
@@ -377,7 +383,7 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  color: color-mix(in srgb, var(--tint) 78%, white);
+  color: color-mix(in srgb, var(--tint) 76%, var(--vl-champagne));
 }
 
 .vl-open-label svg,
@@ -411,7 +417,7 @@
 }
 
 .vl-section-heading span {
-  color: rgba(247,239,224,0.48);
+  color: rgba(244,230,190,0.52);
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 0.13em;
@@ -427,14 +433,14 @@
   margin-top: 10px;
   padding: 13px;
   min-height: 84px;
-  border: 1px solid rgba(247,239,224,0.12);
+  border: 1px solid rgba(244,230,190,0.12);
   border-radius: 24px;
   background:
-    linear-gradient(110deg, color-mix(in srgb, var(--tint) 10%, transparent), rgba(255,255,255,0.035)),
-    rgba(9, 10, 12, 0.72);
+    linear-gradient(110deg, color-mix(in srgb, var(--tint) 9%, transparent), rgba(143,160,146,0.03)),
+    rgba(6, 26, 18, 0.76);
   color: var(--vl-ink);
   text-decoration: none;
-  box-shadow: 0 18px 48px rgba(0,0,0,0.35), inset 0 1px rgba(255,255,255,0.08);
+  box-shadow: 0 18px 48px rgba(0,0,0,0.38), inset 0 1px rgba(244,230,190,0.08);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   animation-delay: var(--delay);
@@ -443,10 +449,10 @@
 
 .vl-row-card:hover {
   transform: translateX(3px);
-  border-color: color-mix(in srgb, var(--tint) 45%, rgba(247,239,224,0.16));
+  border-color: color-mix(in srgb, var(--tint) 45%, rgba(244,230,190,0.16));
   background:
-    linear-gradient(110deg, color-mix(in srgb, var(--tint) 15%, transparent), rgba(255,255,255,0.055)),
-    rgba(14, 15, 18, 0.88);
+    linear-gradient(110deg, color-mix(in srgb, var(--tint) 14%, transparent), rgba(244,230,190,0.05)),
+    rgba(13, 59, 42, 0.78);
 }
 
 .vl-row-mark {
@@ -469,7 +475,7 @@
 }
 
 .vl-row-copy em {
-  color: color-mix(in srgb, var(--tint) 70%, rgba(247,239,224,0.54));
+  color: color-mix(in srgb, var(--tint) 70%, rgba(244,230,190,0.62));
   font-size: 9px;
   font-style: normal;
   font-weight: 900;
@@ -481,7 +487,7 @@
 .vl-row-copy small {
   display: block;
   margin-top: 5px;
-  color: rgba(247,239,224,0.58);
+  color: rgba(244,230,190,0.68);
   font-size: 12px;
   line-height: 1.42;
 }
@@ -491,25 +497,26 @@
 }
 
 .vl-sky-panel {
-  --tint: #8fc9ff;
+  --tint: #8FA092;
   display: flex;
   align-items: center;
   gap: 14px;
   margin-top: 18px;
   padding: 16px;
-  border: 1px solid rgba(143,201,255,0.24);
+  border: 1px solid rgba(201,166,70,0.22);
   border-radius: 27px;
   background:
-    radial-gradient(circle at 10% 0%, rgba(143,201,255,0.18), transparent 44%),
-    rgba(8, 12, 18, 0.78);
-  box-shadow: 0 18px 60px rgba(0,0,0,0.38), inset 0 1px rgba(255,255,255,0.1);
+    radial-gradient(circle at 10% 0%, rgba(201,166,70,0.15), transparent 44%),
+    radial-gradient(circle at 84% 30%, rgba(13,59,42,0.26), transparent 50%),
+    rgba(6, 26, 18, 0.8);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.42), inset 0 1px rgba(244,230,190,0.1);
 }
 
 .vl-sky-orb {
   width: 54px;
   height: 54px;
   border-radius: 20px;
-  color: #c9e5ff;
+  color: #F4E6BE;
 }
 
 .vl-sky-panel strong {
@@ -523,7 +530,7 @@
 
 .vl-sky-panel p {
   margin: 6px 0 0;
-  color: rgba(247,239,224,0.62);
+  color: rgba(244,230,190,0.68);
   font-size: 12px;
   line-height: 1.45;
 }
@@ -539,10 +546,10 @@
   flex: 1 1 42%;
   min-width: 120px;
   padding: 12px 13px;
-  border: 1px solid rgba(247,239,224,0.12);
+  border: 1px solid rgba(244,230,190,0.12);
   border-radius: 18px;
-  background: rgba(255,255,255,0.055);
-  color: rgba(247,239,224,0.78);
+  background: rgba(6,26,18,0.62);
+  color: rgba(244,230,190,0.82);
   text-align: center;
   text-decoration: none;
   font-size: 12px;
@@ -554,7 +561,7 @@
 .vl-socials a:hover {
   transform: translateY(-2px);
   color: var(--vl-ink);
-  border-color: rgba(242,201,120,0.34);
+  border-color: rgba(201,166,70,0.38);
 }
 
 .vl-footer {
@@ -563,7 +570,7 @@
   gap: 12px;
   margin-top: 18px;
   padding: 0 3px;
-  color: rgba(247,239,224,0.42);
+  color: rgba(244,230,190,0.48);
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.06em;
