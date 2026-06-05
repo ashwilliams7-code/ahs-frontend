@@ -7,6 +7,7 @@ import Privacy from './pages/Privacy'
 import Terms from './pages/Terms'
 import Contact from './pages/Contact'
 import AppSelector from './pages/AppSelector'
+import VentureLinks from './pages/VentureLinks'
 // NDISHub Pages
 import Dashboard from './pages/Dashboard'
 import Invoicing from './pages/Invoicing'
@@ -80,6 +81,9 @@ function App() {
           </PublicRoute>
         }
       />
+      <Route path="/links" element={<VentureLinks />} />
+      <Route path="/linktree" element={<Navigate to="/links" replace />} />
+      <Route path="/ventures" element={<Navigate to="/links" replace />} />
 
       {/* App Selector - First page after login */}
       <Route
