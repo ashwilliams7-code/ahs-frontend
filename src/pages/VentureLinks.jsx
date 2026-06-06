@@ -1,83 +1,102 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useId, useMemo, useRef, useState } from 'react'
 import './VentureLinks.css'
 
-const FEATURED_LINKS = [
+const INITIATIVES = [
   {
     key: 'autoaihub',
     title: 'AutoAI Hub',
-    eyebrow: 'AHS domain',
+    eyebrow: 'AI automation platform',
+    status: 'Live site',
     description: 'Custom AI systems, automations, dashboards, and business-agent deployments for Australian operators.',
     href: 'https://app.autoaihub.io/',
-    label: 'Open AHS',
-    mark: 'AI',
+    label: 'Open AutoAI Hub',
+    logo: 'autoaihub',
     tint: '#C9A646',
-    metric: 'AI ops',
+    scene: 'Systems that turn business friction into automated operating leverage.',
   },
   {
     key: 'aurii',
     title: 'Aurii',
-    eyebrow: 'aesthetic intelligence',
-    description: 'Pre-consult appearance ROI, feature audit, and high-trust aesthetic planning.',
+    eyebrow: 'Aesthetic intelligence',
+    status: 'Live site',
+    description: 'Pre-consult appearance analysis, feature planning, and high-trust aesthetic decision support.',
     href: 'https://aurii.me',
-    label: 'View Aurii',
-    mark: 'Au',
+    label: 'Open Aurii',
+    logo: 'aurii',
     tint: '#F4E6BE',
-    metric: 'beauty tech',
+    scene: 'A premium diagnostic layer for appearance, trust, and visual decision-making.',
   },
   {
     key: 'kingklaw',
     title: 'King Klaw',
-    eyebrow: 'agent deployment',
-    description: 'OpenClaw-style business agents packaged for Australian SMB workflows.',
+    eyebrow: 'Business-agent deployment',
+    status: 'Live domain',
+    description: 'Agent workflows packaged for Australian SMB operations and practical workflow execution.',
     href: 'https://kingklaw.au',
     label: 'Visit King Klaw',
-    mark: 'KK',
+    logo: 'kingklaw',
     tint: '#8FA092',
-    metric: 'AU agents',
+    scene: 'A sharper front door for agent deployment, workflow capture, and SMB execution.',
   },
-]
-
-const VENTURE_LINKS = [
   {
+    key: 'clawhub',
     title: 'ClawHub',
-    description: 'Marketplace layer for curated OpenClaw skills and deployable agent workflows.',
+    eyebrow: 'Agent workflow marketplace',
+    status: 'Live domain',
+    description: 'Curated skills and deployable workflow components for agent-powered operations.',
     href: 'https://clawhub.ai',
-    mark: 'CH',
+    label: 'Visit ClawHub',
+    logo: 'clawhub',
     tint: '#0D3B2A',
-    type: 'marketplace',
+    scene: 'A marketplace spine for reusable agent workflows, skills, and deployment patterns.',
   },
   {
+    key: 'seekmate',
     title: 'SeekMateAI',
+    eyebrow: 'Application-ops agents',
+    status: 'Public build proof',
     description: 'Job-search agents, inbox triage, application operations, and multi-bot workflow tooling.',
     href: 'https://github.com/ashwilliams7-code/SeekMateAI',
-    mark: 'SM',
+    label: 'View GitHub repo',
+    logo: 'seekmate',
     tint: '#8FA092',
-    type: 'github proof',
+    scene: 'Proof that messy personal operations can be converted into agentic systems.',
   },
   {
+    key: 'homerun',
     title: 'Homerun',
-    description: 'Prediction-market alpha OS for Polymarket/Kalshi-style research and trading systems.',
+    eyebrow: 'Market alpha systems',
+    status: 'Public build proof',
+    description: 'Prediction-market research tooling for Polymarket/Kalshi-style workflows.',
     href: 'https://github.com/ashwilliams7-code/homerun',
-    mark: 'HR',
+    label: 'View GitHub repo',
+    logo: 'homerun',
     tint: '#C9A646',
-    type: 'markets',
+    scene: 'A research and signal layer for prediction-market information advantage.',
   },
   {
-    title: 'AHS backend',
-    description: 'Express/Supabase API layer for invoices, activity, workers, ApplyMate, and operations data.',
+    key: 'ahs-backend',
+    title: 'AHS Backend',
+    eyebrow: 'Infrastructure proof',
+    status: 'Public build proof',
+    description: 'Backend services and operational tooling supporting AutoAI Hub systems.',
     href: 'https://github.com/ashwilliams7-code/ahs-backend',
-    mark: 'API',
+    label: 'View GitHub repo',
+    logo: 'ahs-backend',
     tint: '#F4E6BE',
-    type: 'infrastructure',
+    scene: 'The unglamorous systems layer underneath product, dashboards, workers, and ops data.',
   },
 ]
 
-const SOCIAL_LINKS = [
+const PUBLIC_CHANNELS = [
   { label: 'GitHub', href: 'https://github.com/ashwilliams7-code?tab=repositories' },
+  { label: 'AutoAI Hub', href: 'https://app.autoaihub.io/' },
   { label: 'Aurii', href: 'https://aurii.me' },
-  { label: 'AHS', href: 'https://app.autoaihub.io/' },
   { label: 'King Klaw', href: 'https://kingklaw.au' },
+  { label: 'ClawHub', href: 'https://clawhub.ai' },
 ]
+
+const INSTAGRAM_LINKS = []
 
 function ExternalArrow() {
   return (
@@ -87,17 +106,184 @@ function ExternalArrow() {
   )
 }
 
+function VentureLogo({ name, title }) {
+  const rawId = useId().replace(/:/g, '')
+  const metalId = `vl-metal-${rawId}`
+  const glowId = `vl-glow-${rawId}`
+  const darkId = `vl-dark-${rawId}`
+  const nodeId = `vl-node-${rawId}`
+
+  const gradients = (
+    <defs>
+      <linearGradient id={metalId} x1="12" y1="8" x2="52" y2="58" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stopColor="#FFF2C9" />
+        <stop offset="0.48" stopColor="#C9A646" />
+        <stop offset="1" stopColor="#7B5F1E" />
+      </linearGradient>
+      <linearGradient id={darkId} x1="11" y1="9" x2="53" y2="56" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stopColor="#123D2B" />
+        <stop offset="1" stopColor="#020806" />
+      </linearGradient>
+      <radialGradient id={glowId} cx="50%" cy="20%" r="72%">
+        <stop offset="0" stopColor="#F4E6BE" stopOpacity="0.86" />
+        <stop offset="0.5" stopColor="#C9A646" stopOpacity="0.32" />
+        <stop offset="1" stopColor="#C9A646" stopOpacity="0" />
+      </radialGradient>
+      <radialGradient id={nodeId} cx="36%" cy="25%" r="70%">
+        <stop offset="0" stopColor="#F4E6BE" />
+        <stop offset="1" stopColor="#8FA092" />
+      </radialGradient>
+    </defs>
+  )
+
+  const commonStroke = {
+    strokeLinecap: 'round',
+    strokeLinejoin: 'round',
+    vectorEffect: 'non-scaling-stroke',
+  }
+
+  const marks = {
+    williams: (
+      <>
+        <path d="M32 7.5 50.5 15v15.2C50.5 43.8 42.8 53.4 32 58 21.2 53.4 13.5 43.8 13.5 30.2V15L32 7.5Z" fill={`url(#${darkId})`} stroke={`url(#${metalId})`} strokeWidth="2.4" {...commonStroke} />
+        <path d="M20 21.5 25.3 14l6.8 8.4 6.7-8.4 5.2 7.5-3.1 8.4H23.1L20 21.5Z" fill={`url(#${metalId})`} opacity="0.96" {...commonStroke} />
+        <path d="M19.8 34.2 25.8 45l6.3-13.6L38.5 45l5.7-10.8" fill="none" stroke="#F4E6BE" strokeWidth="4.1" {...commonStroke} />
+        <path d="M24.2 48.6h15.6" fill="none" stroke={`url(#${metalId})`} strokeWidth="2.2" {...commonStroke} />
+      </>
+    ),
+    autoaihub: (
+      <>
+        <path d="M22.4 12.8h19.2L52 31.9 41.6 51.2H22.4L12 31.9l10.4-19.1Z" fill={`url(#${darkId})`} stroke={`url(#${metalId})`} strokeWidth="2.4" {...commonStroke} />
+        <path d="M19.7 32h-7.2M44.3 32h7.2M32 19.7v-7.2M32 44.3v7.2" fill="none" stroke="#8FA092" strokeWidth="2.1" {...commonStroke} />
+        <path d="M20.6 23.2c7.4-7.4 15.7-7.4 22.8 0M20.6 40.8c7.4 7.4 15.7 7.4 22.8 0" fill="none" stroke={`url(#${metalId})`} strokeWidth="2.1" opacity="0.82" {...commonStroke} />
+        <circle cx="32" cy="32" r="7.4" fill={`url(#${metalId})`} />
+        <circle cx="32" cy="32" r="3.1" fill="#061A12" />
+        <circle cx="16" cy="32" r="3.1" fill={`url(#${nodeId})`} />
+        <circle cx="48" cy="32" r="3.1" fill={`url(#${nodeId})`} />
+        <circle cx="32" cy="16" r="3.1" fill={`url(#${nodeId})`} />
+        <circle cx="32" cy="48" r="3.1" fill={`url(#${nodeId})`} />
+      </>
+    ),
+    aurii: (
+      <>
+        <path d="M32 8.5C44.7 13.4 52.3 22 52.3 32c0 13.1-9.1 22-20.3 24-11.2-2-20.3-10.9-20.3-24 0-10 7.6-18.6 20.3-23.5Z" fill={`url(#${darkId})`} stroke={`url(#${metalId})`} strokeWidth="2.2" {...commonStroke} />
+        <path d="M22.2 39.8c8.2 2.5 15.1.5 19.3-5.7 3.9-5.8 2.5-12.1-2.9-15.3-8.9 2.7-15.1 10.1-16.4 21Z" fill="none" stroke="#F4E6BE" strokeWidth="2.65" {...commonStroke} />
+        <path d="M32.9 19c-1.1 6.6.7 12.2 5.8 16.1M22.2 39.9c3.8 7.1 11.2 9.6 19.7 7.3" fill="none" stroke={`url(#${metalId})`} strokeWidth="2.35" {...commonStroke} />
+        <circle cx="41.4" cy="28.3" r="2.1" fill={`url(#${metalId})`} />
+        <path d="M18.4 47.2c7.6 4.4 19.6 4.5 27.2 0" fill="none" stroke="#8FA092" strokeWidth="2.1" opacity="0.88" {...commonStroke} />
+        <path d="M24.3 15.4c4.8-3.1 10.6-3.1 15.4 0" fill="none" stroke={`url(#${metalId})`} strokeWidth="2.1" opacity="0.78" {...commonStroke} />
+      </>
+    ),
+    kingklaw: (
+      <>
+        <path d="M15.4 23.1 22.2 13l9.8 10.5L41.8 13l6.8 10.1-4 9.6H19.4l-4-9.6Z" fill={`url(#${metalId})`} stroke="#F4E6BE" strokeWidth="1.3" {...commonStroke} />
+        <path d="M19.1 36.7c5.8-2.4 11.9-2.5 18.4-.2 2.6.9 5.1.5 7.4-1.1" fill="none" stroke="#8FA092" strokeWidth="2.2" {...commonStroke} />
+        <path d="M24.2 51.4c5.8-6.9 6.6-14.7 2.2-23.2" fill="none" stroke={`url(#${metalId})`} strokeWidth="4" {...commonStroke} />
+        <path d="M34 53.4c3.6-8.6 2.8-16.7-2.2-24.3" fill="none" stroke="#F4E6BE" strokeWidth="4" {...commonStroke} />
+        <path d="M45 48.4c-1.6-8.7-5.4-15-11.5-18.9" fill="none" stroke={`url(#${metalId})`} strokeWidth="4" {...commonStroke} />
+        <path d="M22.6 52.6 28 49.7l-2.2 6.1M32.2 54.7l4.7-4 .1 6.5M43.3 49.8l4.4-4.1.8 6.2" fill="#F4E6BE" stroke="none" />
+      </>
+    ),
+    clawhub: (
+      <>
+        <path d="M32 8.8 51.8 20.2v23.6L32 55.2 12.2 43.8V20.2L32 8.8Z" fill={`url(#${darkId})`} stroke={`url(#${metalId})`} strokeWidth="2.3" {...commonStroke} />
+        <path d="M22 42.6c-3.3-7.4-1-15 6.3-20.5M31.3 45.2c-2.8-8-.8-16.7 5.2-23.8M41.3 41.4c-1.6-6.8-5.1-12-10.3-15.8" fill="none" stroke="#F4E6BE" strokeWidth="3.1" {...commonStroke} />
+        <path d="M21.8 43.8h20.6M20.4 25.3l11.6 6.8 11.6-6.8M32 32.1v12.5" fill="none" stroke="#8FA092" strokeWidth="1.8" opacity="0.9" {...commonStroke} />
+        <circle cx="20.4" cy="25.3" r="3" fill={`url(#${nodeId})`} />
+        <circle cx="43.6" cy="25.3" r="3" fill={`url(#${nodeId})`} />
+        <circle cx="32" cy="32.1" r="3.4" fill={`url(#${metalId})`} />
+        <circle cx="21.8" cy="43.8" r="2.7" fill={`url(#${metalId})`} />
+        <circle cx="42.4" cy="43.8" r="2.7" fill={`url(#${metalId})`} />
+      </>
+    ),
+    seekmate: (
+      <>
+        <circle cx="31" cy="31" r="20.7" fill={`url(#${darkId})`} stroke={`url(#${metalId})`} strokeWidth="2.4" />
+        <path d="M45.5 45.5 54 54" fill="none" stroke={`url(#${metalId})`} strokeWidth="4.2" {...commonStroke} />
+        <path d="M24.1 40.2 30.2 24 42 18.7l-5.2 12.4-12.7 9.1Z" fill={`url(#${metalId})`} stroke="#F4E6BE" strokeWidth="1.3" {...commonStroke} />
+        <path d="M30.2 24 36.8 31.1" fill="none" stroke="#061A12" strokeWidth="1.8" {...commonStroke} />
+        <path d="M18.4 35.8c5.1 5.3 12.2 7 21.2 5.1" fill="none" stroke="#8FA092" strokeWidth="2.1" opacity="0.86" strokeDasharray="1 4" {...commonStroke} />
+        <circle cx="18.8" cy="35.7" r="2.5" fill={`url(#${nodeId})`} />
+        <circle cx="39.6" cy="40.9" r="2.5" fill={`url(#${nodeId})`} />
+      </>
+    ),
+    homerun: (
+      <>
+        <path d="M32 8.7 55.3 32 32 55.3 8.7 32 32 8.7Z" fill={`url(#${darkId})`} stroke={`url(#${metalId})`} strokeWidth="2.4" {...commonStroke} />
+        <path d="M20.3 35.7 27.4 29l6.7 4.9 10.1-13.3" fill="none" stroke={`url(#${metalId})`} strokeWidth="3.4" {...commonStroke} />
+        <path d="M44.2 20.6v13.7M39.6 24.7h9.2" fill="none" stroke="#F4E6BE" strokeWidth="2.3" {...commonStroke} />
+        <path d="M18.4 45.6c8.7-1.9 18-1.9 27.2 0" fill="none" stroke="#8FA092" strokeWidth="2" opacity="0.9" {...commonStroke} />
+        <circle cx="32" cy="14.2" r="2.4" fill={`url(#${nodeId})`} />
+        <circle cx="49.8" cy="32" r="2.4" fill={`url(#${nodeId})`} />
+        <circle cx="32" cy="49.8" r="2.4" fill={`url(#${nodeId})`} />
+        <circle cx="14.2" cy="32" r="2.4" fill={`url(#${nodeId})`} />
+      </>
+    ),
+    'ahs-backend': (
+      <>
+        <path d="M17 16.5h30a4.6 4.6 0 0 1 4.6 4.6v7.2A4.6 4.6 0 0 1 47 33H17a4.6 4.6 0 0 1-4.6-4.6v-7.2A4.6 4.6 0 0 1 17 16.5Z" fill={`url(#${darkId})`} stroke={`url(#${metalId})`} strokeWidth="2.2" {...commonStroke} />
+        <path d="M17 35h30a4.6 4.6 0 0 1 4.6 4.6v3.2A4.6 4.6 0 0 1 47 47.4H17a4.6 4.6 0 0 1-4.6-4.6v-3.2A4.6 4.6 0 0 1 17 35Z" fill="#061A12" stroke="#8FA092" strokeWidth="2" {...commonStroke} />
+        <path d="M20.1 24.7h14.2M20.1 41.2h10.6" fill="none" stroke="#F4E6BE" strokeWidth="2.2" {...commonStroke} />
+        <circle cx="43.6" cy="24.7" r="3.3" fill={`url(#${metalId})`} />
+        <circle cx="43.6" cy="41.2" r="3.3" fill={`url(#${nodeId})`} />
+        <path d="M32 10.5v6M32 47.4v6M43.6 28.1l-7.7 7.3" fill="none" stroke={`url(#${metalId})`} strokeWidth="1.9" opacity="0.9" {...commonStroke} />
+        <path d="M32 7.2 34 11l4.2.6-3 3 .7 4.2L32 16.7l-3.9 2.1.7-4.2-3-3 4.2-.6L32 7.2Z" fill={`url(#${metalId})`} />
+      </>
+    ),
+    sky: (
+      <>
+        <circle cx="32" cy="32" r="22" fill={`url(#${darkId})`} stroke={`url(#${metalId})`} strokeWidth="2.3" />
+        <path d="M32 13.5 35.6 25l11.9 3.5-11.9 3.9L32 50.5l-3.6-18.1-11.9-3.9L28.4 25 32 13.5Z" fill={`url(#${metalId})`} stroke="#F4E6BE" strokeWidth="1.1" {...commonStroke} />
+        <path d="M15.6 38.3c9.8-8.6 22.8-12.4 36-10.5M12.8 29c11.9 8.4 24.6 11 38.4 7.8" fill="none" stroke="#8FA092" strokeWidth="1.8" opacity="0.86" {...commonStroke} />
+        <circle cx="18.6" cy="36" r="2.3" fill={`url(#${nodeId})`} />
+        <circle cx="49.4" cy="28.2" r="2.3" fill={`url(#${nodeId})`} />
+      </>
+    ),
+  }
+
+  return (
+    <svg className="vl-logo" viewBox="0 0 64 64" role={title ? 'img' : undefined} aria-hidden={title ? undefined : 'true'} focusable="false">
+      {title ? <title>{title}</title> : null}
+      {gradients}
+      <circle cx="32" cy="32" r="29" fill={`url(#${glowId})`} opacity="0.22" />
+      {marks[name] ?? marks.williams}
+    </svg>
+  )
+}
+
+function cardMotion(index, rawProgress) {
+  const distance = index - rawProgress
+  const abs = Math.abs(distance)
+  const x = distance * 58
+  const y = distance * 88
+  const z = 160 - abs * 150
+  const scale = Math.max(0.72, 1 - abs * 0.075)
+  const opacity = Math.max(0.18, 1 - abs * 0.2)
+  const blur = Math.min(6, abs * 1.45)
+
+  return {
+    transform: `translate3d(${x}px, ${y}px, ${z}px) rotateX(${distance * -8}deg) rotateY(${distance * 11}deg) rotateZ(${distance * -2}deg) scale(${scale})`,
+    opacity,
+    filter: `blur(${blur}px)`,
+    zIndex: 50 - Math.round(abs * 5),
+  }
+}
+
 export default function VentureLinks() {
+  const shellRef = useRef(null)
+  const storyRef = useRef(null)
   const [copied, setCopied] = useState(false)
+  const [motion, setMotion] = useState({ progress: 0, raw: 0, activeIndex: 0 })
   const pageUrl = 'https://app.autoaihub.io/links'
 
   useEffect(() => {
     const originalTitle = document.title
-    document.title = 'Ash Williams — Venture Links'
+    document.title = 'Williams Group — Current Initiatives'
 
-    const description = 'Ash Williams venture link hub: AutoAI Hub, Aurii, King Klaw, ClawHub, SeekMateAI, Homerun, and public project proof.'
+    const description = 'Public links for Williams Group current initiatives: AutoAI Hub, Aurii, King Klaw, ClawHub, and selected build proof.'
     let meta = document.querySelector('meta[name="description"]')
-    const originalDescription = meta?.getAttribute('content')
+    const hadDescriptionMeta = Boolean(meta)
+    const originalDescription = meta?.getAttribute('content') ?? ''
     if (!meta) {
       meta = document.createElement('meta')
       meta.setAttribute('name', 'description')
@@ -107,7 +293,8 @@ export default function VentureLinks() {
 
     const themeColor = '#020806'
     let themeMeta = document.querySelector('meta[name="theme-color"]')
-    const originalThemeColor = themeMeta?.getAttribute('content')
+    const hadThemeMeta = Boolean(themeMeta)
+    const originalThemeColor = themeMeta?.getAttribute('content') ?? ''
     if (!themeMeta) {
       themeMeta = document.createElement('meta')
       themeMeta.setAttribute('name', 'theme-color')
@@ -117,127 +304,250 @@ export default function VentureLinks() {
 
     return () => {
       document.title = originalTitle
-      if (originalDescription) {
+      if (hadDescriptionMeta) {
         meta.setAttribute('content', originalDescription)
+      } else {
+        meta.remove()
       }
-      if (originalThemeColor) {
+      if (hadThemeMeta) {
         themeMeta.setAttribute('content', originalThemeColor)
+      } else {
+        themeMeta.remove()
       }
     }
   }, [])
 
+  useEffect(() => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduceMotion) return undefined
+
+    let frame = 0
+    let lastActive = -1
+    let lastRaw = -1
+
+    const update = () => {
+      const story = storyRef.current
+      const shell = shellRef.current
+      if (!story || !shell) return
+
+      const rect = story.getBoundingClientRect()
+      const range = Math.max(1, rect.height - window.innerHeight)
+      const progress = Math.min(1, Math.max(0, -rect.top / range))
+      const raw = progress * (INITIATIVES.length - 1)
+      const activeIndex = Math.min(INITIATIVES.length - 1, Math.max(0, Math.round(raw)))
+
+      shell.style.setProperty('--vl-scroll', progress.toFixed(4))
+      shell.style.setProperty('--vl-raw', raw.toFixed(4))
+      shell.setAttribute('data-scene', INITIATIVES[activeIndex].key)
+
+      if (activeIndex !== lastActive || Math.abs(raw - lastRaw) > 0.035) {
+        lastActive = activeIndex
+        lastRaw = raw
+        setMotion({ progress, raw, activeIndex })
+      }
+    }
+
+    const requestUpdate = () => {
+      window.cancelAnimationFrame(frame)
+      frame = window.requestAnimationFrame(update)
+    }
+
+    update()
+    window.addEventListener('scroll', requestUpdate, { passive: true })
+    window.addEventListener('resize', requestUpdate)
+
+    return () => {
+      window.cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', requestUpdate)
+      window.removeEventListener('resize', requestUpdate)
+    }
+  }, [])
+
   const currentYear = useMemo(() => new Date().getFullYear(), [])
+  const activeInitiative = INITIATIVES[motion.activeIndex] ?? INITIATIVES[0]
 
   const handleShare = async () => {
     const shareData = {
-      title: 'Ash Williams — Venture Links',
-      text: 'AI systems, aesthetic intelligence, business agents, markets, and Sky.',
+      title: 'Williams Group — Current Initiatives',
+      text: 'Current Williams Group projects across AI systems, aesthetics, agent workflows, markets, and build proof.',
       url: pageUrl,
     }
 
-    try {
-      if (navigator.share) {
-        await navigator.share(shareData)
-      } else if (navigator.clipboard) {
-        await navigator.clipboard.writeText(pageUrl)
-        setCopied(true)
-        window.setTimeout(() => setCopied(false), 1800)
-      }
-    } catch {
+    const copyLink = async () => {
       if (navigator.clipboard) {
         await navigator.clipboard.writeText(pageUrl)
         setCopied(true)
         window.setTimeout(() => setCopied(false), 1800)
       }
     }
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData)
+      } else {
+        await copyLink()
+      }
+    } catch {
+      try {
+        await copyLink()
+      } catch {
+        setCopied(false)
+      }
+    }
   }
 
   return (
-    <main className="venture-links-shell" aria-label="Ash Williams venture links">
+    <main ref={shellRef} className="venture-links-shell" data-scene="autoaihub" aria-label="Williams Group current initiatives">
       <div className="vl-ambient" aria-hidden="true">
         <div className="vl-glow vl-glow-one"></div>
         <div className="vl-glow vl-glow-two"></div>
         <div className="vl-grain"></div>
       </div>
 
-      <section className="vl-phone-frame">
-        <header className="vl-hero">
-          <div className="vl-topline">
-            <span className="vl-live-dot"><span></span>Live on AHS</span>
-            <button type="button" className="vl-share" onClick={handleShare}>
-              {copied ? 'Copied' : 'Share'}
-            </button>
+      <section ref={storyRef} className="vl-scroll-story" aria-label="Cinematic initiative board">
+        <div className="vl-cinema-stage">
+          <div className="vl-stage-background" aria-hidden="true">
+            <div className="vl-portal-ring vl-ring-one"></div>
+            <div className="vl-portal-ring vl-ring-two"></div>
+            <div className="vl-stage-grid"></div>
           </div>
 
-          <div className="vl-identity-card">
-            <div className="vl-monogram" aria-hidden="true">
-              <span>A</span>
-              <small>W</small>
+          <div className="vl-stage-content">
+            <header className="vl-hero">
+              <div className="vl-topline">
+                <span className="vl-live-dot"><span></span>Public initiatives board</span>
+                <button type="button" className="vl-share" onClick={handleShare}>
+                  {copied ? 'Copied' : 'Share'}
+                </button>
+              </div>
+
+              <div className="vl-identity-card">
+                <div className="vl-monogram" aria-hidden="true">
+                  <VentureLogo name="williams" />
+                </div>
+                <div>
+                  <p className="vl-kicker">current initiatives</p>
+                  <h1>Williams Group</h1>
+                  <p className="vl-subhead">
+                    Active projects, public links, and selected build proof across AI systems, aesthetic intelligence, agent workflows, marketplaces, and markets.
+                  </p>
+                </div>
+              </div>
+
+              <div className="vl-command-strip" aria-label="Focus areas">
+                <span>AI systems</span>
+                <span>Aesthetic intelligence</span>
+                <span>Agent workflows</span>
+                <span>Public build proof</span>
+              </div>
+            </header>
+
+            <section className="vl-scene-panel">
+              <div className="vl-scene-logo" style={{ '--tint': activeInitiative.tint }}>
+                <VentureLogo name={activeInitiative.logo} title={`${activeInitiative.title} logo`} />
+              </div>
+              <div className="vl-scene-copy">
+                <p>{activeInitiative.eyebrow}</p>
+                <h2>{activeInitiative.title}</h2>
+                <span>{activeInitiative.scene}</span>
+                <a href={activeInitiative.href} target="_blank" rel="noopener noreferrer">
+                  {activeInitiative.label}<ExternalArrow />
+                </a>
+              </div>
+            </section>
+
+            <div className="vl-initiative-orbit" aria-label="Scrollable initiative cards">
+              {INITIATIVES.map((item, index) => (
+                <a
+                  className={`vl-orbit-card${index === motion.activeIndex ? ' is-active' : ''}`}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  key={item.key}
+                  style={{ '--tint': item.tint, ...cardMotion(index, motion.raw) }}
+                  tabIndex={index === motion.activeIndex ? 0 : -1}
+                  aria-label={`${item.title}: ${item.description}`}
+                >
+                  <span className="vl-card-shine" aria-hidden="true"></span>
+                  <span className="vl-orbit-logo"><VentureLogo name={item.logo} /></span>
+                  <span className="vl-orbit-copy">
+                    <em>{item.status}</em>
+                    <strong>{item.title}</strong>
+                    <small>{item.description}</small>
+                  </span>
+                </a>
+              ))}
             </div>
-            <div>
-              <p className="vl-kicker">venture switchboard</p>
-              <h1>Ash Williams</h1>
-              <p className="vl-subhead">
-                AI systems, aesthetic intelligence, business-agent deployments, market alpha, and Sky — the private operating layer underneath it all.
-              </p>
+
+            <div className="vl-chapter-rail" aria-hidden="true">
+              {INITIATIVES.map((item, index) => (
+                <span
+                  className={index === motion.activeIndex ? 'is-active' : ''}
+                  key={item.key}
+                ></span>
+              ))}
+            </div>
+
+            <div className="vl-scroll-meter" aria-hidden="true">
+              <span style={{ transform: `scaleX(${Math.max(0.04, motion.progress)})` }}></span>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="vl-command-strip" aria-label="Focus areas">
-            <span>AI agents</span>
-            <span>Beauty tech</span>
-            <span>Ops systems</span>
-            <span>Markets</span>
-          </div>
-        </header>
+      <section className="vl-phone-frame vl-directory" aria-label="All current initiative links">
+        <div className="vl-section-heading">
+          <p>Active public initiatives</p>
+          <span>live sites and product homes</span>
+        </div>
 
-        <section className="vl-featured-grid" aria-label="Featured ventures">
-          {FEATURED_LINKS.map((link, index) => (
+        <div className="vl-featured-grid">
+          {INITIATIVES.slice(0, 4).map((link, index) => (
             <a
               className="vl-feature-card"
               href={link.href}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               key={link.key}
               style={{ '--tint': link.tint, '--delay': `${index * 70}ms` }}
             >
               <span className="vl-card-shine" aria-hidden="true"></span>
               <span className="vl-card-meta">{link.eyebrow}</span>
               <span className="vl-feature-main">
-                <span className="vl-feature-mark">{link.mark}</span>
+                <span className="vl-feature-mark"><VentureLogo name={link.logo} /></span>
                 <span>
                   <strong>{link.title}</strong>
                   <small>{link.description}</small>
                 </span>
               </span>
               <span className="vl-feature-bottom">
-                <span>{link.metric}</span>
+                <span>{link.status}</span>
                 <span className="vl-open-label">{link.label}<ExternalArrow /></span>
               </span>
             </a>
           ))}
-        </section>
+        </div>
 
-        <section className="vl-stack" aria-label="All venture links">
+        <section className="vl-stack" aria-label="Public build proof">
           <div className="vl-section-heading">
-            <p>More in the orbit</p>
-            <span>public-safe links only</span>
+            <p>Public build proof</p>
+            <span>repositories and infrastructure</span>
           </div>
 
-          {VENTURE_LINKS.map((link, index) => (
+          {INITIATIVES.slice(4).map((link, index) => (
             <a
               className="vl-row-card"
               href={link.href}
               target="_blank"
-              rel="noreferrer"
-              key={link.title}
+              rel="noopener noreferrer"
+              key={link.key}
               style={{ '--tint': link.tint, '--delay': `${index * 65}ms` }}
             >
-              <span className="vl-row-mark">{link.mark}</span>
+              <span className="vl-row-mark"><VentureLogo name={link.logo} /></span>
               <span className="vl-row-copy">
                 <span>
                   <strong>{link.title}</strong>
-                  <em>{link.type}</em>
+                  <em>{link.status}</em>
                 </span>
                 <small>{link.description}</small>
               </span>
@@ -247,16 +557,24 @@ export default function VentureLinks() {
         </section>
 
         <aside className="vl-sky-panel" aria-label="Sky context">
-          <span className="vl-sky-orb">S</span>
+          <span className="vl-sky-orb"><VentureLogo name="sky" /></span>
           <div>
-            <strong>Sky is the operating layer.</strong>
-            <p>Memory, voice, automations, tools, and operator workflows connecting the ventures behind the scenes.</p>
+            <strong>Sky supports the operating layer.</strong>
+            <p>Internal coordination, automation, and workflow context across Williams Group initiatives. Shared here as context only.</p>
           </div>
         </aside>
 
-        <nav className="vl-socials" aria-label="Social and public links">
-          {SOCIAL_LINKS.map((link) => (
-            <a href={link.href} target="_blank" rel="noreferrer" key={link.label}>{link.label}</a>
+        {INSTAGRAM_LINKS.length > 0 ? (
+          <nav className="vl-socials vl-instagram" aria-label="Instagram pages">
+            {INSTAGRAM_LINKS.map((link) => (
+              <a href={link.href} target="_blank" rel="noopener noreferrer" key={link.label}>{link.label}</a>
+            ))}
+          </nav>
+        ) : null}
+
+        <nav className="vl-socials" aria-label="Public channels">
+          {PUBLIC_CHANNELS.map((link) => (
+            <a href={link.href} target="_blank" rel="noopener noreferrer" key={link.label}>{link.label}</a>
           ))}
         </nav>
 
