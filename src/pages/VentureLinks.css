@@ -16,6 +16,7 @@
   --scene-a: rgba(34, 244, 214, 0.22);
   --scene-b: rgba(248, 216, 78, 0.28);
   --scene-c: rgba(255, 122, 217, 0.12);
+  --vl-page-scroll: 0;
   position: relative;
   min-height: 100svh;
   overflow-x: clip;
@@ -89,6 +90,8 @@
     linear-gradient(180deg, rgba(255,247,199,0.035), transparent 22%, rgba(0,0,0,0.48));
   mix-blend-mode: screen;
   opacity: 0.72;
+  transform: translate3d(0, calc(var(--vl-page-scroll) * -34px), 0);
+  transition: transform 120ms linear;
 }
 
 .venture-links-shell::after {
@@ -445,6 +448,44 @@
   line-height: 1.55;
 }
 
+.vl-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.vl-hero-actions button {
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 247, 199, 0.16);
+  border-radius: 999px;
+  background:
+    linear-gradient(135deg, rgba(255,247,199,0.13), rgba(71,243,210,0.05)),
+    rgba(6, 42, 55, 0.72);
+  color: var(--vl-champagne);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 1000;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: inset 0 1px rgba(255,247,199,0.08), 0 16px 34px rgba(0,0,0,0.32);
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.vl-hero-actions button:first-child {
+  border-color: rgba(248, 216, 78, 0.38);
+  background:
+    radial-gradient(circle at 20% 0%, rgba(248,216,78,0.2), transparent 42%),
+    rgba(6, 42, 55, 0.78);
+}
+
+.vl-hero-actions button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(248, 216, 78, 0.5);
+}
+
 .vl-command-strip {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -742,6 +783,99 @@
 .vl-directory {
   padding-top: clamp(40px, 7vw, 90px);
   padding-bottom: 42px;
+  scroll-margin-top: 18px;
+}
+
+.vl-landing-brief {
+  display: grid;
+  gap: 16px;
+  margin: 0 0 28px;
+  padding: 20px;
+  border: 1px solid rgba(255,247,199,0.15);
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(248,216,78,0.18), transparent 38%),
+    radial-gradient(circle at 100% 15%, rgba(34,244,214,0.16), transparent 44%),
+    linear-gradient(145deg, rgba(255,247,199,0.085), rgba(71,243,210,0.032)),
+    rgba(2, 6, 23, 0.58);
+  box-shadow: 0 28px 74px rgba(0,0,0,0.42), inset 0 1px rgba(255,247,199,0.1);
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.vl-featured-grid + .vl-landing-brief {
+  margin-top: 30px;
+}
+
+.vl-landing-copy p,
+.vl-landing-copy h2,
+.vl-landing-copy span {
+  margin: 0;
+}
+
+.vl-landing-copy p {
+  color: var(--vl-gold);
+  font-size: 10px;
+  font-weight: 1000;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.vl-landing-copy h2 {
+  margin-top: 7px;
+  color: var(--vl-champagne);
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: clamp(34px, 8vw, 54px);
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+}
+
+.vl-landing-copy span {
+  display: block;
+  margin-top: 10px;
+  color: rgba(255,247,199,0.76);
+  font-size: 14px;
+  line-height: 1.58;
+}
+
+.vl-landing-points {
+  display: grid;
+  gap: 10px;
+}
+
+.vl-landing-point {
+  padding: 14px;
+  border: 1px solid rgba(255,247,199,0.11);
+  border-radius: 22px;
+  background: rgba(6,42,55,0.54);
+  box-shadow: inset 0 1px rgba(255,247,199,0.06), 0 16px 34px rgba(0,0,0,0.22);
+}
+
+.vl-landing-point strong {
+  display: block;
+  color: var(--vl-champagne);
+  font-size: 14px;
+  font-weight: 1000;
+}
+
+.vl-landing-point span {
+  display: block;
+  margin-top: 5px;
+  color: rgba(255,247,199,0.68);
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+@media (min-width: 761px) {
+  .vl-landing-brief {
+    grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+    align-items: center;
+  }
+
+  .vl-landing-points {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 .vl-section-heading {
@@ -778,7 +912,7 @@
 
 .vl-feature-card {
   position: relative;
-  display: grid;
+  display: block;
   gap: 18px;
   padding: 20px;
   border: 1px solid color-mix(in srgb, var(--tint) 34%, transparent);
@@ -795,6 +929,142 @@
   animation-delay: var(--delay);
   transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
   overflow: hidden;
+}
+
+.vl-expand-card {
+  scroll-margin-top: 16px;
+}
+
+.vl-expand-card summary {
+  list-style: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.vl-expand-card summary::-webkit-details-marker {
+  display: none;
+}
+
+.vl-feature-summary {
+  position: relative;
+  display: grid;
+  gap: 18px;
+}
+
+.vl-expand-card[open] {
+  border-color: color-mix(in srgb, var(--tint) 62%, rgba(255,247,199,0.24));
+  box-shadow:
+    0 32px 86px rgba(0,0,0,0.5),
+    0 0 54px color-mix(in srgb, var(--tint) 16%, transparent),
+    inset 0 1px rgba(255,247,199,0.14);
+}
+
+.vl-expand-toggle svg {
+  transition: transform 190ms ease;
+}
+
+.vl-expand-card[open] .vl-expand-toggle svg {
+  transform: rotate(135deg);
+}
+
+.vl-expand-open {
+  display: none;
+}
+
+.vl-expand-card[open] .vl-expand-open {
+  display: inline;
+}
+
+.vl-expand-card[open] .vl-expand-closed {
+  display: none;
+}
+
+.vl-expand-body {
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+  padding-top: 17px;
+  border-top: 1px solid rgba(255,247,199,0.12);
+  color: rgba(255,247,199,0.78);
+}
+
+.vl-expand-body p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.58;
+}
+
+.vl-help-list {
+  display: grid;
+  gap: 8px;
+  padding: 13px;
+  border: 1px solid rgba(255,247,199,0.1);
+  border-radius: 20px;
+  background: rgba(2, 6, 23, 0.34);
+}
+
+.vl-help-list strong {
+  color: color-mix(in srgb, var(--tint) 70%, var(--vl-champagne));
+  font-size: 11px;
+  font-weight: 1000;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.vl-help-list ul,
+.vl-founder-copy ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vl-help-list li,
+.vl-founder-copy li {
+  position: relative;
+  padding-left: 17px;
+  color: rgba(255,247,199,0.72);
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.vl-help-list li::before,
+.vl-founder-copy li::before {
+  position: absolute;
+  left: 0;
+  top: 0.63em;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--tint, var(--vl-gold)) 74%, var(--vl-champagne));
+  box-shadow: 0 0 14px color-mix(in srgb, var(--tint, var(--vl-gold)) 50%, transparent);
+  content: '';
+}
+
+.vl-inline-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: fit-content;
+  min-height: 38px;
+  padding: 0 13px;
+  border: 1px solid color-mix(in srgb, var(--tint, var(--vl-gold)) 38%, rgba(255,247,199,0.12));
+  border-radius: 999px;
+  background: rgba(6,42,55,0.68);
+  color: color-mix(in srgb, var(--tint, var(--vl-gold)) 72%, var(--vl-champagne));
+  font-size: 11px;
+  font-weight: 1000;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.vl-inline-cta:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--tint, var(--vl-gold)) 62%, rgba(255,247,199,0.22));
 }
 
 .vl-feature-card:hover {
@@ -865,10 +1135,7 @@
 
 .vl-row-card {
   position: relative;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 14px;
-  align-items: center;
+  display: block;
   min-height: 92px;
   padding: 15px;
   border: 1px solid color-mix(in srgb, var(--tint) 28%, transparent);
@@ -884,6 +1151,13 @@
   transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+}
+
+.vl-row-summary {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 14px;
+  align-items: center;
 }
 
 .vl-row-card:hover {
@@ -931,6 +1205,105 @@
   display: grid;
   place-items: center;
   color: color-mix(in srgb, var(--tint) 76%, var(--vl-champagne));
+}
+
+.vl-founder-section {
+  margin: 30px 0 28px;
+  scroll-margin-top: 18px;
+}
+
+.vl-founder-card {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.78fr) 1.22fr;
+  gap: 18px;
+  align-items: stretch;
+  padding: 18px;
+  border: 1px solid rgba(255,247,199,0.15);
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(248,216,78,0.18), transparent 42%),
+    radial-gradient(circle at 100% 95%, rgba(34,244,214,0.14), transparent 46%),
+    rgba(2, 6, 23, 0.58);
+  box-shadow: 0 30px 82px rgba(0,0,0,0.46), inset 0 1px rgba(255,247,199,0.1);
+  overflow: hidden;
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+.vl-founder-photo-wrap {
+  position: relative;
+  min-height: 320px;
+  border-radius: 26px;
+  overflow: hidden;
+  background: rgba(6,42,55,0.72);
+  box-shadow: inset 0 1px rgba(255,247,199,0.12), 0 24px 58px rgba(0,0,0,0.34);
+}
+
+.vl-founder-photo-wrap::after {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, transparent 42%, rgba(2,6,23,0.8) 100%),
+    radial-gradient(circle at 30% 10%, rgba(248,216,78,0.16), transparent 42%);
+  content: '';
+  pointer-events: none;
+}
+
+.vl-founder-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 24%;
+  transform: scale(1.01);
+}
+
+.vl-founder-photo-wrap > span {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+  z-index: 1;
+  display: inline-flex;
+  width: fit-content;
+  padding: 8px 10px;
+  border: 1px solid rgba(255,247,199,0.14);
+  border-radius: 999px;
+  background: rgba(2,6,23,0.56);
+  color: var(--vl-champagne);
+  font-size: 10px;
+  font-weight: 1000;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.vl-founder-copy {
+  display: grid;
+  align-content: center;
+  gap: 14px;
+  padding: 4px 2px;
+}
+
+.vl-founder-copy h2 {
+  margin: 0;
+  color: var(--vl-champagne);
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: clamp(38px, 7vw, 64px);
+  line-height: 0.92;
+  letter-spacing: -0.055em;
+}
+
+.vl-founder-copy p:not(.vl-kicker) {
+  margin: 0;
+  color: rgba(255,247,199,0.76);
+  font-size: 14px;
+  line-height: 1.62;
+}
+
+.vl-founder-copy .vl-inline-cta {
+  --tint: var(--vl-gold);
 }
 
 .vl-sky-panel {
@@ -1123,6 +1496,45 @@
   }
   to {
     box-shadow: 0 0 0 11px rgba(248,216,78,0);
+  }
+}
+
+@keyframes vl-mobile-card-glow {
+  from {
+    box-shadow: 0 18px 46px rgba(0,0,0,0.34), inset 0 1px rgba(255,247,199,0.09);
+  }
+  to {
+    box-shadow:
+      0 22px 58px rgba(0,0,0,0.42),
+      0 0 34px color-mix(in srgb, var(--tint, var(--vl-gold)) 14%, transparent),
+      inset 0 1px rgba(255,247,199,0.13);
+  }
+}
+
+@keyframes vl-mobile-element-float {
+  from {
+    transform: translate3d(0, 0, 0) rotate(-0.4deg);
+  }
+  to {
+    transform: translate3d(0, -4px, 0) rotate(1.1deg);
+  }
+}
+
+@keyframes vl-founder-photo-drift {
+  from {
+    transform: scale(1.01) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.055) translate3d(0, -7px, 0);
+  }
+}
+
+@keyframes vl-landing-pulse {
+  from {
+    filter: saturate(1);
+  }
+  to {
+    filter: saturate(1.18) brightness(1.04);
   }
 }
 
@@ -1346,7 +1758,6 @@
     font-size: clamp(41px, 13vw, 58px);
   }
 
-  .vl-subhead,
   .vl-scene-copy span,
   .vl-orbit-copy small {
     display: -webkit-box;
@@ -2425,11 +2836,16 @@
     font-size: clamp(33px, 10.5vw, 44px);
   }
 
+  .venture-links-shell[data-stage='phone'] .vl-subhead,
+  .venture-links-shell[data-stage='compact'] .vl-subhead,
   .vl-subhead {
+    display: block;
+    overflow: visible;
     margin-top: 7px;
     font-size: 12px;
-    line-height: 1.35;
-    -webkit-line-clamp: 3;
+    line-height: 1.42;
+    -webkit-box-orient: initial;
+    -webkit-line-clamp: unset !important;
   }
 
   .vl-command-strip {
@@ -2438,6 +2854,60 @@
 
   .vl-directory {
     padding-top: 12px;
+  }
+
+  .vl-hero-actions {
+    gap: 8px;
+    margin-top: 11px;
+  }
+
+  .vl-hero-actions button {
+    min-height: 36px;
+    padding-inline: 11px;
+    font-size: 10px;
+  }
+
+  .vl-landing-brief {
+    margin-bottom: 20px;
+    padding: 16px;
+    border-radius: 26px;
+  }
+
+  .vl-landing-copy h2 {
+    font-size: clamp(31px, 9.5vw, 42px);
+  }
+
+  .vl-landing-points {
+    gap: 8px;
+  }
+
+  .vl-landing-point {
+    padding: 12px;
+    border-radius: 18px;
+  }
+
+  .vl-founder-section {
+    margin: 24px 0;
+  }
+
+  .vl-founder-card {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 14px;
+    border-radius: 27px;
+  }
+
+  .vl-founder-photo-wrap {
+    min-height: clamp(330px, 94vw, 420px);
+    border-radius: 23px;
+  }
+
+  .vl-founder-copy {
+    gap: 12px;
+  }
+
+  .vl-founder-copy h2 {
+    font-size: clamp(36px, 10vw, 46px);
   }
 
   .vl-section-heading {
@@ -2490,10 +2960,13 @@
   }
 
   .vl-row-card {
-    grid-template-columns: auto 1fr;
     min-height: 0;
     padding: 14px;
     border-radius: 24px;
+  }
+
+  .vl-row-summary {
+    grid-template-columns: auto 1fr;
   }
 
   .vl-row-arrow {
@@ -2638,6 +3111,60 @@
   .venture-links-shell[data-stage='phone'] .vl-socials a:nth-child(5),
   .venture-links-shell[data-stage='compact'] .vl-socials a:nth-child(5) {
     animation-delay: 1120ms;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-reveal,
+  .venture-links-shell[data-stage='compact'] .vl-reveal {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0) rotateX(5deg) scale(0.975);
+    filter: blur(8px) saturate(0.88);
+    animation: none;
+    transition:
+      opacity 520ms ease,
+      transform 640ms cubic-bezier(0.18, 0.84, 0.28, 1.08),
+      filter 520ms ease,
+      box-shadow 420ms ease;
+    transition-delay: min(var(--delay, 0ms), 220ms);
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-reveal.is-in-view,
+  .venture-links-shell[data-stage='compact'] .vl-reveal.is-in-view {
+    opacity: 1;
+    filter: none;
+    transform: translate3d(0, 0, 0) rotateX(0) scale(1);
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-expand-card.is-in-view,
+  .venture-links-shell[data-stage='compact'] .vl-expand-card.is-in-view,
+  .venture-links-shell[data-stage='phone'] .vl-landing-brief.is-in-view,
+  .venture-links-shell[data-stage='compact'] .vl-landing-brief.is-in-view,
+  .venture-links-shell[data-stage='phone'] .vl-founder-section.is-in-view .vl-founder-card,
+  .venture-links-shell[data-stage='compact'] .vl-founder-section.is-in-view .vl-founder-card {
+    animation: vl-mobile-card-glow 4.2s ease-in-out 420ms infinite alternate;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-reveal.is-in-view .vl-feature-mark,
+  .venture-links-shell[data-stage='compact'] .vl-reveal.is-in-view .vl-feature-mark,
+  .venture-links-shell[data-stage='phone'] .vl-reveal.is-in-view .vl-row-mark,
+  .venture-links-shell[data-stage='compact'] .vl-reveal.is-in-view .vl-row-mark,
+  .venture-links-shell[data-stage='phone'] .vl-sky-panel.is-in-view .vl-sky-orb,
+  .venture-links-shell[data-stage='compact'] .vl-sky-panel.is-in-view .vl-sky-orb {
+    animation: vl-mobile-element-float 3.6s ease-in-out 540ms infinite alternate;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-founder-section.is-in-view .vl-founder-photo,
+  .venture-links-shell[data-stage='compact'] .vl-founder-section.is-in-view .vl-founder-photo {
+    animation: vl-founder-photo-drift 8s ease-in-out 360ms infinite alternate;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-landing-brief.is-in-view,
+  .venture-links-shell[data-stage='compact'] .vl-landing-brief.is-in-view {
+    animation-name: vl-mobile-card-glow, vl-landing-pulse;
+    animation-duration: 4.2s, 5.8s;
+    animation-timing-function: ease-in-out, ease-in-out;
+    animation-delay: 420ms, 720ms;
+    animation-iteration-count: infinite, infinite;
+    animation-direction: alternate, alternate;
   }
 }
 

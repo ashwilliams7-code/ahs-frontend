@@ -8,6 +8,12 @@ const INITIATIVES = [
     eyebrow: 'AI automation platform',
     status: 'Live site',
     description: 'Custom AI systems, automations, dashboards, and business-agent deployments for Australian operators.',
+    expanded: 'AutoAI Hub is the main product home for practical AI implementation: custom assistants, workflow automations, operational dashboards, internal tools, and agent deployments built around how a real business already works.',
+    helps: [
+      'Removes repetitive admin, follow-up, and handover work from busy teams.',
+      'Turns messy processes into trackable systems with clearer ownership and reporting.',
+      'Gives Australian SMBs useful AI without needing to hire an in-house AI team.',
+    ],
     href: 'https://app.autoaihub.io/',
     label: 'Open AutoAI Hub',
     logo: 'autoaihub',
@@ -20,6 +26,12 @@ const INITIATIVES = [
     eyebrow: 'Aesthetic intelligence',
     status: 'Live site',
     description: 'Pre-consult appearance analysis, feature planning, and high-trust aesthetic decision support.',
+    expanded: 'Aurii brings structure to aesthetic decision-making. It helps people understand facial balance, presentation, profile quality, and possible improvement pathways before they walk into high-stakes consultations.',
+    helps: [
+      'Helps clients make calmer, better-informed appearance decisions.',
+      'Gives clinics and consultants cleaner intake context before a conversation starts.',
+      'Reduces confusion by translating visual goals into practical next steps.',
+    ],
     href: 'https://aurii.me',
     label: 'Open Aurii',
     logo: 'aurii',
@@ -32,6 +44,12 @@ const INITIATIVES = [
     eyebrow: 'Business-agent deployment',
     status: 'Live domain',
     description: 'Agent workflows packaged for Australian SMB operations and practical workflow execution.',
+    expanded: 'King Klaw is the deployment face for focused business agents: capturing workflows, converting them into repeatable systems, and packaging automations that can actually run inside a small business.',
+    helps: [
+      'Finds the highest-leverage workflows instead of automating random busywork.',
+      'Creates practical agents around sales, admin, fulfilment, and operations.',
+      'Makes agent deployment feel like an operating upgrade, not a science project.',
+    ],
     href: 'https://kingklaw.au',
     label: 'Visit King Klaw',
     logo: 'kingklaw',
@@ -44,6 +62,12 @@ const INITIATIVES = [
     eyebrow: 'Agent workflow marketplace',
     status: 'Live domain',
     description: 'Curated skills and deployable workflow components for agent-powered operations.',
+    expanded: 'ClawHub is designed as the reusable layer: a place for agent skills, workflows, templates, and deployment patterns that can be reused instead of rebuilt from scratch every time.',
+    helps: [
+      'Speeds up new AI builds with reusable workflow components.',
+      'Keeps agent systems more consistent, auditable, and easier to improve.',
+      'Turns one-off automation lessons into a compounding operations library.',
+    ],
     href: 'https://clawhub.ai',
     label: 'Visit ClawHub',
     logo: 'clawhub',
@@ -56,6 +80,12 @@ const INITIATIVES = [
     eyebrow: 'Application-ops agents',
     status: 'Public build proof',
     description: 'Job-search agents, inbox triage, application operations, and multi-bot workflow tooling.',
+    expanded: 'SeekMateAI is build proof for messy personal-operations automation: job search workflows, inbox triage, application tracking, bot orchestration, and practical agent handoffs.',
+    helps: [
+      'Shows how repetitive personal admin can become a managed agent workflow.',
+      'Proves the same automation patterns can be applied to business operations.',
+      'Demonstrates real-world orchestration beyond a polished demo screen.',
+    ],
     href: 'https://github.com/ashwilliams7-code/SeekMateAI',
     label: 'View GitHub repo',
     logo: 'seekmate',
@@ -68,6 +98,12 @@ const INITIATIVES = [
     eyebrow: 'Market alpha systems',
     status: 'Public build proof',
     description: 'Prediction-market research tooling for Polymarket/Kalshi-style workflows.',
+    expanded: 'Homerun explores prediction-market intelligence: collecting signals, structuring research, and turning public information into faster market understanding.',
+    helps: [
+      'Organises market research into repeatable signal workflows.',
+      'Makes complex public information easier to monitor and compare.',
+      'Acts as proof of deeper data, research, and automation capability.',
+    ],
     href: 'https://github.com/ashwilliams7-code/homerun',
     label: 'View GitHub repo',
     logo: 'homerun',
@@ -80,6 +116,12 @@ const INITIATIVES = [
     eyebrow: 'Infrastructure proof',
     status: 'Public build proof',
     description: 'Backend services and operational tooling supporting AutoAI Hub systems.',
+    expanded: 'AHS Backend is the systems layer underneath the public product: services, integrations, operational tooling, and the practical wiring needed for AI workflows to run reliably.',
+    helps: [
+      'Connects front-end experiences to real services and operational data.',
+      'Supports automation, intake, reporting, and workflow execution behind the scenes.',
+      'Shows the engineering foundation underneath the venture portfolio.',
+    ],
     href: 'https://github.com/ashwilliams7-code/ahs-backend',
     label: 'View GitHub repo',
     logo: 'ahs-backend',
@@ -87,6 +129,33 @@ const INITIATIVES = [
     scene: 'The unglamorous systems layer underneath product, dashboards, workers, and ops data.',
   },
 ]
+
+const LANDING_POINTS = [
+  {
+    title: 'Founder-led AI systems',
+    text: 'Built close to the real workflow, not from a generic automation template.',
+  },
+  {
+    title: 'Public proof, not just pitch decks',
+    text: 'Live domains and repositories show the portfolio is moving from ideas into shipped systems.',
+  },
+  {
+    title: 'Built for operators',
+    text: 'The focus is practical leverage: fewer bottlenecks, cleaner handoffs, and faster execution.',
+  },
+]
+
+const FOUNDER = {
+  name: 'Ash Williams',
+  role: 'Founder, Williams Group',
+  image: '/assets/ash-founder.jpg',
+  bio: 'Ash is a Brisbane-based AI builder and operator creating practical agent systems for businesses, creators, and high-trust consumer experiences. He combines product instinct, automation, research, and hands-on engineering to turn scattered workflows into systems that actually move.',
+  highlights: [
+    'Builder behind AutoAI Hub and the wider Williams Group venture stack.',
+    'Focused on AI that saves time, clarifies decisions, and compounds operational leverage.',
+    'Hands-on across product, automation, content, research, and agent orchestration.',
+  ],
+}
 
 const PUBLIC_CHANNELS = [
   { label: 'GitHub', href: 'https://github.com/ashwilliams7-code?tab=repositories' },
@@ -286,6 +355,71 @@ function cardMotion(index, rawProgress, stageMode = 'desktop') {
   }
 }
 
+function VentureExpandCard({ link, index, variant = 'feature' }) {
+  const isFeature = variant === 'feature'
+  const summaryClass = isFeature ? 'vl-feature-summary' : 'vl-row-summary'
+  const cardClass = isFeature ? 'vl-feature-card' : 'vl-row-card'
+  const delay = `${index * (isFeature ? 70 : 65)}ms`
+
+  return (
+    <details
+      className={`vl-expand-card ${cardClass} vl-reveal`}
+      style={{ '--tint': link.tint, '--delay': delay }}
+    >
+      <summary className={summaryClass} aria-label={`Expand ${link.title} details`}>
+        {isFeature ? (
+          <>
+            <span className="vl-card-shine" aria-hidden="true"></span>
+            <span className="vl-card-meta">{link.eyebrow}</span>
+            <span className="vl-feature-main">
+              <span className="vl-feature-mark"><VentureLogo name={link.logo} /></span>
+              <span>
+                <strong>{link.title}</strong>
+                <small>{link.description}</small>
+              </span>
+            </span>
+            <span className="vl-feature-bottom">
+              <span>{link.status}</span>
+              <span className="vl-open-label vl-expand-toggle">
+                <span className="vl-expand-closed">Tap for details</span>
+                <span className="vl-expand-open">Hide details</span>
+                <ExternalArrow />
+              </span>
+            </span>
+          </>
+        ) : (
+          <>
+            <span className="vl-row-mark"><VentureLogo name={link.logo} /></span>
+            <span className="vl-row-copy">
+              <span>
+                <strong>{link.title}</strong>
+                <em>{link.status}</em>
+              </span>
+              <small>{link.description}</small>
+            </span>
+            <span className="vl-row-arrow vl-expand-toggle" aria-hidden="true"><ExternalArrow /></span>
+          </>
+        )}
+      </summary>
+
+      <div className="vl-expand-body">
+        <p>{link.expanded}</p>
+        <div className="vl-help-list" aria-label={`How ${link.title} helps people`}>
+          <strong>How it helps</strong>
+          <ul>
+            {link.helps.map((point) => (
+              <li key={point}>{point}</li>
+            ))}
+          </ul>
+        </div>
+        <a className="vl-inline-cta" href={link.href} target="_blank" rel="noopener noreferrer">
+          {link.label}<ExternalArrow />
+        </a>
+      </div>
+    </details>
+  )
+}
+
 export default function VentureLinks() {
   const shellRef = useRef(null)
   const storyRef = useRef(null)
@@ -424,8 +558,63 @@ export default function VentureLinks() {
     }
   }, [])
 
+  useEffect(() => {
+    const shell = shellRef.current
+    if (!shell) return undefined
+
+    let frame = 0
+    const update = () => {
+      const scrollMax = Math.max(1, document.documentElement.scrollHeight - window.innerHeight)
+      const pageScroll = Math.min(1, Math.max(0, window.scrollY / scrollMax))
+      shell.style.setProperty('--vl-page-scroll', pageScroll.toFixed(4))
+    }
+
+    const requestUpdate = () => {
+      window.cancelAnimationFrame(frame)
+      frame = window.requestAnimationFrame(update)
+    }
+
+    update()
+    window.addEventListener('scroll', requestUpdate, { passive: true })
+    window.addEventListener('resize', requestUpdate)
+
+    return () => {
+      window.cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', requestUpdate)
+      window.removeEventListener('resize', requestUpdate)
+    }
+  }, [])
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduceMotion) {
+      document.querySelectorAll('.vl-reveal').forEach((node) => node.classList.add('is-in-view'))
+      return undefined
+    }
+
+    const nodes = Array.from(document.querySelectorAll('.vl-reveal'))
+    if (!nodes.length) return undefined
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in-view')
+        }
+      })
+    }, { threshold: 0.14, rootMargin: '0px 0px -10% 0px' })
+
+    nodes.forEach((node) => observer.observe(node))
+    return () => observer.disconnect()
+  }, [])
+
   const currentYear = useMemo(() => new Date().getFullYear(), [])
   const activeInitiative = INITIATIVES[motion.activeIndex] ?? INITIATIVES[0]
+
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id)
+    if (!section) return
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 
   const handleShare = async () => {
     const shareData = {
@@ -509,9 +698,14 @@ export default function VentureLinks() {
                   <p className="vl-kicker">venture portfolio</p>
                   <h1>Williams Group</h1>
                   <p className="vl-subhead">
-                    A focused portfolio of AI systems, aesthetic intelligence, agent infrastructure, marketplaces, and market research — presented with operator-grade clarity.
+                    Founder-led venture studio building practical AI systems and product homes for Australian operators — from automation and agents to aesthetic intelligence and market-research tooling.
                   </p>
                 </div>
+              </div>
+
+              <div className="vl-hero-actions" aria-label="Page shortcuts">
+                <button type="button" onClick={() => scrollToSection('portfolio-ventures')}>Explore ventures</button>
+                <button type="button" onClick={() => scrollToSection('founder')}>Meet the founder</button>
               </div>
 
               <div className="vl-command-strip" aria-label="Focus areas">
@@ -575,68 +769,74 @@ export default function VentureLinks() {
         </div>
       </section>
 
-      <section className="vl-phone-frame vl-directory" aria-label="Williams Group portfolio links">
-        <div className="vl-section-heading">
+      <section id="portfolio-ventures" className="vl-phone-frame vl-directory" aria-label="Williams Group portfolio links">
+        <div className="vl-section-heading vl-reveal">
           <p>Portfolio ventures</p>
-          <span>live businesses and product homes</span>
+          <span>tap a card to expand</span>
         </div>
 
         <div className="vl-featured-grid">
           {INITIATIVES.slice(0, 4).map((link, index) => (
-            <a
-              className="vl-feature-card"
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              key={link.key}
-              style={{ '--tint': link.tint, '--delay': `${index * 70}ms` }}
-            >
-              <span className="vl-card-shine" aria-hidden="true"></span>
-              <span className="vl-card-meta">{link.eyebrow}</span>
-              <span className="vl-feature-main">
-                <span className="vl-feature-mark"><VentureLogo name={link.logo} /></span>
-                <span>
-                  <strong>{link.title}</strong>
-                  <small>{link.description}</small>
-                </span>
-              </span>
-              <span className="vl-feature-bottom">
-                <span>{link.status}</span>
-                <span className="vl-open-label">{link.label}<ExternalArrow /></span>
-              </span>
-            </a>
+            <VentureExpandCard link={link} index={index} key={link.key} />
           ))}
         </div>
 
-        <section className="vl-stack" aria-label="Public build proof">
+        <section className="vl-landing-brief vl-reveal" aria-label="How Williams Group helps">
+          <div className="vl-landing-copy">
+            <p>What this is</p>
+            <h2>A public front door for founder-led AI products.</h2>
+            <span>
+              Williams Group brings the ventures together in one place: what each product does, who it helps, and where to follow the proof as it ships.
+            </span>
+          </div>
+          <div className="vl-landing-points">
+            {LANDING_POINTS.map((point) => (
+              <article className="vl-landing-point" key={point.title}>
+                <strong>{point.title}</strong>
+                <span>{point.text}</span>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="founder" className="vl-founder-section vl-reveal" aria-label="About the founder">
           <div className="vl-section-heading">
+            <p>Founder</p>
+            <span>builder and operator</span>
+          </div>
+          <article className="vl-founder-card">
+            <div className="vl-founder-photo-wrap">
+              <img className="vl-founder-photo" src={FOUNDER.image} alt="Ash Williams, founder of Williams Group" loading="lazy" />
+              <span>Founder-led systems</span>
+            </div>
+            <div className="vl-founder-copy">
+              <p className="vl-kicker">{FOUNDER.role}</p>
+              <h2>{FOUNDER.name}</h2>
+              <p>{FOUNDER.bio}</p>
+              <ul>
+                {FOUNDER.highlights.map((highlight) => (
+                  <li key={highlight}>{highlight}</li>
+                ))}
+              </ul>
+              <a className="vl-inline-cta" href="https://github.com/ashwilliams7-code?tab=repositories" target="_blank" rel="noopener noreferrer">
+                View public build proof<ExternalArrow />
+              </a>
+            </div>
+          </article>
+        </section>
+
+        <section className="vl-stack" aria-label="Public build proof">
+          <div className="vl-section-heading vl-reveal">
             <p>Public build proof</p>
-            <span>repositories and infrastructure</span>
+            <span>tap a card to expand</span>
           </div>
 
           {INITIATIVES.slice(4).map((link, index) => (
-            <a
-              className="vl-row-card"
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              key={link.key}
-              style={{ '--tint': link.tint, '--delay': `${index * 65}ms` }}
-            >
-              <span className="vl-row-mark"><VentureLogo name={link.logo} /></span>
-              <span className="vl-row-copy">
-                <span>
-                  <strong>{link.title}</strong>
-                  <em>{link.status}</em>
-                </span>
-                <small>{link.description}</small>
-              </span>
-              <span className="vl-row-arrow"><ExternalArrow /></span>
-            </a>
+            <VentureExpandCard link={link} index={index} variant="row" key={link.key} />
           ))}
         </section>
 
-        <aside className="vl-sky-panel" aria-label="Sky context">
+        <aside className="vl-sky-panel vl-reveal" aria-label="Sky context">
           <span className="vl-sky-orb"><VentureLogo name="sky" /></span>
           <div>
             <strong>Sky supports the operating layer.</strong>
