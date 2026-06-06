@@ -839,8 +839,8 @@ export default function VentureLinks() {
         <aside className="vl-sky-panel vl-reveal" aria-label="Sky context">
           <span className="vl-sky-orb"><VentureLogo name="sky" /></span>
           <div>
-            <strong>Sky supports the operating layer.</strong>
-            <p>Internal coordination, automation, and workflow context across Williams Group initiatives. Shared here as context only.</p>
+            <strong>Sky is a military-grade ultra intelligence.</strong>
+            <p>The internal operating intelligence behind Williams Group coordination, automation, and agentic execution.</p>
           </div>
         </aside>
 
