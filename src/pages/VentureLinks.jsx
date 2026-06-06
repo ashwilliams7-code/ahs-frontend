@@ -251,18 +251,21 @@ function VentureLogo({ name, title }) {
   )
 }
 
-function cardMotion(index, rawProgress) {
+function cardMotion(index, rawProgress, compact = false) {
   const distance = index - rawProgress
   const abs = Math.abs(distance)
-  const x = distance * 58
-  const y = distance * 88
-  const z = 160 - abs * 150
-  const scale = Math.max(0.72, 1 - abs * 0.075)
-  const opacity = Math.max(0.18, 1 - abs * 0.2)
-  const blur = Math.min(6, abs * 1.45)
+  const x = distance * (compact ? 34 : 58)
+  const y = distance * (compact ? 52 : 88)
+  const z = (compact ? 92 : 160) - abs * (compact ? 84 : 150)
+  const scale = Math.max(compact ? 0.68 : 0.72, 1 - abs * (compact ? 0.065 : 0.075))
+  const opacity = Math.max(0.18, 1 - abs * (compact ? 0.18 : 0.2))
+  const blur = Math.min(compact ? 4.2 : 6, abs * (compact ? 0.85 : 1.45))
+  const rotateX = distance * (compact ? -9.5 : -8)
+  const rotateY = distance * (compact ? 16 : 11)
+  const rotateZ = distance * (compact ? -1.5 : -2)
 
   return {
-    transform: `translate3d(${x}px, ${y}px, ${z}px) rotateX(${distance * -8}deg) rotateY(${distance * 11}deg) rotateZ(${distance * -2}deg) scale(${scale})`,
+    transform: `translate3d(${x}px, ${y}px, ${z}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg) scale(${scale})`,
     opacity,
     filter: `blur(${blur}px)`,
     zIndex: 50 - Math.round(abs * 5),
@@ -273,6 +276,7 @@ export default function VentureLinks() {
   const shellRef = useRef(null)
   const storyRef = useRef(null)
   const [copied, setCopied] = useState(false)
+  const [isCompactStage, setIsCompactStage] = useState(false)
   const [motion, setMotion] = useState({ progress: 0, raw: 0, activeIndex: 0 })
   const pageUrl = 'https://app.autoaihub.io/links'
 
@@ -315,6 +319,20 @@ export default function VentureLinks() {
         themeMeta.remove()
       }
     }
+  }, [])
+
+  useEffect(() => {
+    const query = window.matchMedia('(max-width: 900px)')
+    const updateCompactStage = () => setIsCompactStage(query.matches)
+
+    updateCompactStage()
+    if (query.addEventListener) {
+      query.addEventListener('change', updateCompactStage)
+      return () => query.removeEventListener('change', updateCompactStage)
+    }
+
+    query.addListener(updateCompactStage)
+    return () => query.removeListener(updateCompactStage)
   }, [])
 
   useEffect(() => {
@@ -464,7 +482,7 @@ export default function VentureLinks() {
                   target="_blank"
                   rel="noopener noreferrer"
                   key={item.key}
-                  style={{ '--tint': item.tint, ...cardMotion(index, motion.raw) }}
+                  style={{ '--tint': item.tint, ...cardMotion(index, motion.raw, isCompactStage) }}
                   tabIndex={index === motion.activeIndex ? 0 : -1}
                   aria-label={`${item.title}: ${item.description}`}
                 >

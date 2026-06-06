@@ -28,6 +28,13 @@
   transition: background 650ms ease;
 }
 
+.venture-links-shell,
+.venture-links-shell *,
+.venture-links-shell *::before,
+.venture-links-shell *::after {
+  box-sizing: border-box;
+}
+
 .venture-links-shell[data-scene='aurii'] {
   --scene-a: rgba(244, 230, 190, 0.23);
   --scene-b: rgba(160, 130, 78, 0.28);
@@ -967,26 +974,37 @@
 
 @media (max-width: 900px) {
   .vl-cinema-stage {
-    min-height: 820px;
+    min-height: 100svh;
+    perspective: 1200px;
   }
 
   .vl-stage-content {
     width: min(100%, 560px);
+    height: 100svh;
+    min-height: 0;
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto 1fr;
+    grid-template-rows: auto auto minmax(0, 1fr);
     align-items: start;
-    padding: 0 16px;
+    gap: clamp(8px, 1.4svh, 14px);
+    padding: 0 16px max(18px, env(safe-area-inset-bottom));
   }
 
   .vl-hero {
     grid-column: 1;
-    padding-top: max(18px, env(safe-area-inset-top));
+    width: min(100%, calc(100vw - 32px));
+    justify-self: center;
+    padding-top: max(12px, env(safe-area-inset-top));
+  }
+
+  .vl-topline {
+    margin-bottom: 10px;
   }
 
   .vl-identity-card {
     grid-template-columns: auto 1fr;
     padding: 18px;
     border-radius: 30px;
+    transform: translateZ(42px) rotateY(calc((var(--vl-scroll, 0) - 0.5) * -4deg));
   }
 
   .vl-monogram {
@@ -999,13 +1017,33 @@
     font-size: clamp(41px, 13vw, 58px);
   }
 
+  .vl-subhead,
+  .vl-scene-copy span,
+  .vl-orbit-copy small {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .vl-command-strip {
+    margin-top: 10px;
+  }
+
+  .vl-command-strip span {
+    padding: 8px 9px;
+    font-size: 10px;
+  }
+
   .vl-scene-panel {
     grid-column: 1;
     align-self: start;
-    margin-top: 12px;
-    padding: 14px;
+    width: min(100%, calc(100vw - 32px));
+    justify-self: center;
+    margin-top: 0;
+    padding: 12px;
     border-radius: 25px;
-    transform: translateZ(72px);
+    transform: translateZ(56px);
   }
 
   .vl-scene-logo {
@@ -1022,17 +1060,19 @@
   .vl-initiative-orbit {
     grid-column: 1;
     grid-row: 3;
-    width: 100%;
-    height: 420px;
-    min-height: 420px;
+    width: min(100%, calc(100vw - 32px));
+    justify-self: center;
+    height: min(36svh, 330px);
+    min-height: 270px;
+    align-self: start;
   }
 
   .vl-orbit-card {
-    width: min(355px, calc(100vw - 38px));
-    min-height: 165px;
-    padding: 17px;
-    gap: 14px;
-    border-radius: 28px;
+    width: min(340px, calc(100vw - 42px));
+    min-height: 146px;
+    padding: 15px;
+    gap: 12px;
+    border-radius: 26px;
   }
 
   .vl-orbit-logo {
@@ -1047,11 +1087,12 @@
   }
 
   .vl-orbit-copy strong {
-    font-size: 29px;
+    font-size: 28px;
   }
 
   .vl-orbit-copy small {
     font-size: 12px;
+    line-height: 1.38;
   }
 
   .vl-chapter-rail {
@@ -1084,11 +1125,26 @@
   }
 
   .vl-cinema-stage {
-    min-height: 800px;
+    height: 100svh;
+    min-height: 100svh;
+    perspective: 1100px;
+  }
+
+  .vl-stage-content {
+    grid-template-rows: auto auto minmax(252px, 1fr);
+    gap: 8px;
+    padding: 0 14px max(16px, env(safe-area-inset-bottom));
+  }
+
+  .vl-hero,
+  .vl-scene-panel,
+  .vl-initiative-orbit {
+    width: min(100%, calc(100vw - 28px));
   }
 
   .vl-topline {
     gap: 8px;
+    margin-bottom: 7px;
   }
 
   .vl-live-dot {
@@ -1103,66 +1159,125 @@
 
   .vl-identity-card {
     gap: 13px;
+    padding: 12px;
+    border-radius: 24px;
+    transform: translateZ(18px) rotateY(calc((var(--vl-scroll, 0) - 0.5) * -3deg));
   }
 
   .vl-monogram {
-    width: 66px;
-    height: 66px;
-    border-radius: 21px;
+    width: 54px;
+    height: 54px;
+    border-radius: 18px;
+  }
+
+  .vl-identity-card h1 {
+    font-size: clamp(34px, 11vw, 46px);
   }
 
   .vl-subhead {
-    font-size: 13px;
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 1.35;
   }
 
   .vl-command-strip {
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    gap: 7px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+  }
+
+  .vl-command-strip::-webkit-scrollbar {
+    display: none;
   }
 
   .vl-command-strip span {
-    padding: 9px 8px;
-    font-size: 10px;
+    flex: 0 0 auto;
+    padding: 8px 10px;
+    font-size: 9px;
+    white-space: nowrap;
   }
 
   .vl-scene-panel {
     grid-template-columns: auto 1fr;
-    gap: 12px;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 22px;
+    transform: translateZ(22px);
   }
 
   .vl-scene-logo {
-    width: 56px;
-    height: 56px;
-    border-radius: 19px;
+    width: 46px;
+    height: 46px;
+    border-radius: 16px;
   }
 
   .vl-scene-logo .vl-logo {
-    width: 49px;
-    height: 49px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .vl-scene-copy p {
+    font-size: 9px;
   }
 
   .vl-scene-copy h2 {
-    font-size: 26px;
+    font-size: 23px;
   }
 
   .vl-scene-copy span {
-    font-size: 12px;
+    margin-top: 5px;
+    font-size: 11px;
+    line-height: 1.35;
+  }
+
+  .vl-scene-copy a {
+    margin-top: 7px;
+    font-size: 10px;
+  }
+
+  .vl-initiative-orbit {
+    height: min(34svh, 296px);
+    min-height: 252px;
   }
 
   .vl-orbit-card {
-    width: min(332px, calc(100vw - 28px));
-    grid-template-columns: 1fr;
-    min-height: 190px;
+    width: min(322px, calc(100vw - 44px));
+    grid-template-columns: auto 1fr;
+    min-height: 132px;
+    padding: 12px;
+    gap: 11px;
+    border-radius: 23px;
     text-align: left;
   }
 
   .vl-orbit-logo {
-    width: 62px;
-    height: 62px;
+    width: 52px;
+    height: 52px;
+    border-radius: 18px;
   }
 
   .vl-orbit-logo .vl-logo {
-    width: 55px;
-    height: 55px;
+    width: 46px;
+    height: 46px;
+  }
+
+  .vl-orbit-copy {
+    gap: 5px;
+  }
+
+  .vl-orbit-copy em {
+    padding: 5px 7px;
+    font-size: 8.5px;
+  }
+
+  .vl-orbit-copy strong {
+    font-size: 24px;
+  }
+
+  .vl-orbit-copy small {
+    font-size: 11px;
   }
 
   .vl-section-heading {
