@@ -458,7 +458,7 @@ export default function VentureLinks() {
           <div className="vl-stage-content">
             <header className="vl-hero">
               <div className="vl-topline">
-                <span className="vl-live-dot"><span></span>Private venture portfolio</span>
+                <span className="vl-live-dot"><span></span>Public venture portfolio</span>
                 <button type="button" className="vl-share" onClick={handleShare}>
                   {copied ? 'Copied' : 'Share'}
                 </button>

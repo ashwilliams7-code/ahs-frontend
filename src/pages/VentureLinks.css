@@ -1730,6 +1730,189 @@
   }
 }
 
+@media (max-width: 760px) {
+  .venture-links-shell {
+    overflow-x: hidden;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-scroll-story,
+  .venture-links-shell[data-stage='compact'] .vl-scroll-story,
+  .vl-scroll-story {
+    min-height: auto;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-cinema-stage,
+  .venture-links-shell[data-stage='compact'] .vl-cinema-stage,
+  .vl-cinema-stage {
+    position: relative;
+    height: auto;
+    min-height: auto;
+    overflow: visible;
+    perspective: none;
+    transform-style: flat;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-stage-background,
+  .venture-links-shell[data-stage='compact'] .vl-stage-background,
+  .venture-links-shell[data-stage='phone'] .vl-scene-panel,
+  .venture-links-shell[data-stage='compact'] .vl-scene-panel,
+  .venture-links-shell[data-stage='phone'] .vl-initiative-orbit,
+  .venture-links-shell[data-stage='compact'] .vl-initiative-orbit,
+  .venture-links-shell[data-stage='phone'] .vl-chapter-rail,
+  .venture-links-shell[data-stage='compact'] .vl-chapter-rail,
+  .venture-links-shell[data-stage='phone'] .vl-scroll-meter,
+  .venture-links-shell[data-stage='compact'] .vl-scroll-meter,
+  .vl-stage-background,
+  .vl-scene-panel,
+  .vl-initiative-orbit,
+  .vl-chapter-rail,
+  .vl-scroll-meter {
+    display: none;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-stage-content,
+  .venture-links-shell[data-stage='compact'] .vl-stage-content,
+  .vl-stage-content {
+    display: block;
+    width: min(100%, 640px);
+    height: auto;
+    min-height: auto;
+    margin: 0 auto;
+    padding: max(14px, env(safe-area-inset-top)) 16px 12px;
+    transform-style: flat;
+  }
+
+  .vl-hero {
+    width: 100%;
+    padding-top: 0;
+  }
+
+  .vl-topline {
+    margin-bottom: 10px;
+  }
+
+  .vl-identity-card {
+    grid-template-columns: auto 1fr;
+    gap: 13px;
+    padding: 14px;
+    border-radius: 26px;
+    transform: none !important;
+  }
+
+  .vl-monogram {
+    width: 58px;
+    height: 58px;
+    border-radius: 19px;
+    transform: rotate(-3deg);
+  }
+
+  .vl-kicker {
+    margin-top: 0;
+    font-size: 9px;
+  }
+
+  .vl-identity-card h1 {
+    font-size: clamp(33px, 10.5vw, 44px);
+  }
+
+  .vl-subhead {
+    margin-top: 7px;
+    font-size: 12px;
+    line-height: 1.35;
+    -webkit-line-clamp: 3;
+  }
+
+  .vl-command-strip {
+    display: none;
+  }
+
+  .vl-directory {
+    padding-top: 12px;
+  }
+
+  .vl-section-heading {
+    align-items: start;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 12px;
+  }
+
+  .vl-section-heading p {
+    font-size: 28px;
+  }
+
+  .vl-section-heading span {
+    text-align: left;
+  }
+
+  .vl-feature-card {
+    gap: 14px;
+    padding: 16px;
+    border-radius: 26px;
+  }
+
+  .vl-feature-main {
+    gap: 13px;
+  }
+
+  .vl-feature-mark {
+    width: 56px;
+    height: 56px;
+    border-radius: 19px;
+  }
+
+  .vl-feature-main strong {
+    font-size: 27px;
+  }
+
+  .vl-feature-main small,
+  .vl-row-copy small,
+  .vl-sky-panel p {
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+
+  .vl-feature-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 11px;
+  }
+
+  .vl-row-card {
+    grid-template-columns: auto 1fr;
+    min-height: 0;
+    padding: 14px;
+    border-radius: 24px;
+  }
+
+  .vl-row-arrow {
+    display: none;
+  }
+
+  .vl-row-copy span {
+    align-items: start;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .vl-sky-panel {
+    align-items: start;
+    padding: 15px;
+    border-radius: 24px;
+  }
+
+  .vl-socials {
+    justify-content: flex-start;
+  }
+
+  .vl-footer {
+    align-items: start;
+    flex-direction: column;
+    gap: 6px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .venture-links-shell,
   .venture-links-shell *,
