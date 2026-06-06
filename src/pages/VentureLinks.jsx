@@ -400,7 +400,7 @@ function VentureExpandCard({ link, index, variant = 'feature' }) {
             <span className="vl-feature-bottom">
               <span>{link.status}</span>
               <span className="vl-open-label vl-expand-toggle">
-                <span className="vl-expand-closed">Tap for details</span>
+                <span className="vl-expand-closed">Details</span>
                 <span className="vl-expand-open">Hide details</span>
                 <ExternalArrow />
               </span>
@@ -436,6 +436,28 @@ function VentureExpandCard({ link, index, variant = 'feature' }) {
         </a>
       </div>
     </details>
+  )
+}
+
+function PrimaryLinkCard({ link }) {
+  return (
+    <a
+      className="vl-primary-link"
+      href={link.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{ '--tint': link.tint }}
+      aria-label={`${link.label} — ${link.description}`}
+    >
+      <span className="vl-primary-mark"><VentureLogo name={link.logo} /></span>
+      <span className="vl-primary-copy">
+        <strong>{link.title}</strong>
+        <small>{link.description}</small>
+      </span>
+      <span className="vl-primary-action">
+        {link.label.replace(/^(Open|Visit)\s+/i, '')}<ExternalArrow />
+      </span>
+    </a>
   )
 }
 
@@ -534,7 +556,7 @@ export default function VentureLinks() {
 
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const directLinksLayout = window.matchMedia(LAPTOP_LINKS_QUERY).matches
+    const directLinksLayout = true
     const shell = shellRef.current
 
     if (shell && (reduceMotion || directLinksLayout)) {
@@ -591,7 +613,7 @@ export default function VentureLinks() {
     const shell = shellRef.current
     if (!shell) return undefined
 
-    const directLinksLayout = window.matchMedia(LAPTOP_LINKS_QUERY).matches
+    const directLinksLayout = true
     if (directLinksLayout) {
       shell.style.setProperty('--vl-page-scroll', '0')
       return undefined
@@ -687,7 +709,7 @@ export default function VentureLinks() {
       className="venture-links-shell"
       data-scene="autoaihub"
       data-stage={stageMode}
-      data-links-layout={stageMode === 'desktop' ? 'cinematic' : 'direct'}
+      data-links-layout="direct"
       data-intro={introPhase === 'done' ? undefined : introPhase}
       aria-label="Williams Group venture portfolio"
     >
@@ -806,6 +828,12 @@ export default function VentureLinks() {
       </section>
 
       <section id="portfolio-ventures" className="vl-phone-frame vl-directory" data-link-directory aria-label="Williams Group portfolio links">
+        <nav className="vl-primary-links vl-reveal" aria-label="Primary venture links">
+          {INITIATIVES.slice(0, 4).map((link) => (
+            <PrimaryLinkCard link={link} key={link.key} />
+          ))}
+        </nav>
+
         <div className="vl-section-heading vl-reveal">
           <p>Portfolio ventures</p>
           <span>tap a card to expand</span>
@@ -875,8 +903,8 @@ export default function VentureLinks() {
         <aside className="vl-sky-panel vl-reveal" aria-label="Sky context">
           <span className="vl-sky-orb"><VentureLogo name="sky" /></span>
           <div>
-            <strong>Sky is an omnipresent, military-grade hyperintelligence.</strong>
-            <p>The AGI-style operating layer running Williams Group: coordinating ventures, automation, agents, decisions, and execution from one always-on command system.</p>
+            <strong>Sky is the operating layer behind the stack.</strong>
+            <p>The agent system coordinating ventures, automation, research, decisions, and execution across Williams Group from one always-on command layer.</p>
           </div>
         </aside>
 
