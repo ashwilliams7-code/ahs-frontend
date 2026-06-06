@@ -972,6 +972,98 @@
   }
 }
 
+@keyframes vl-mobile-glow-wake {
+  from {
+    opacity: 0;
+    filter: blur(52px) saturate(1.28);
+  }
+  to {
+    opacity: 0.2;
+    filter: blur(34px) saturate(1);
+  }
+}
+
+@keyframes vl-mobile-hero-in {
+  from {
+    opacity: 0;
+    filter: blur(10px) saturate(0.8);
+    transform: translate3d(0, 18px, 0) scale(0.975);
+  }
+  64% {
+    opacity: 1;
+    filter: blur(0) saturate(1.08);
+    transform: translate3d(0, -2px, 0) scale(1.006);
+  }
+  to {
+    opacity: 1;
+    filter: none;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes vl-mobile-logo-pulse {
+  from {
+    opacity: 0;
+    filter: drop-shadow(0 0 0 rgba(201,166,70,0));
+    transform: rotate(-10deg) scale(0.82);
+  }
+  58% {
+    opacity: 1;
+    filter: drop-shadow(0 0 26px rgba(201,166,70,0.36));
+    transform: rotate(-2deg) scale(1.08);
+  }
+  to {
+    opacity: 1;
+    filter: drop-shadow(0 10px 18px rgba(0,0,0,0.26));
+    transform: rotate(-4deg) scale(1);
+  }
+}
+
+@keyframes vl-mobile-card-in {
+  from {
+    opacity: 0;
+    filter: blur(9px) saturate(0.85);
+    transform: translate3d(0, 24px, 0) rotateX(7deg) scale(0.965);
+  }
+  70% {
+    opacity: 1;
+    filter: blur(0) saturate(1.06);
+    transform: translate3d(0, -2px, 0) rotateX(-1deg) scale(1.004);
+  }
+  to {
+    opacity: 1;
+    filter: none;
+    transform: translate3d(0, 0, 0) rotateX(0) scale(1);
+  }
+}
+
+@keyframes vl-mobile-shine-sweep {
+  from {
+    opacity: 0;
+    transform: translateX(-125%) skewX(-18deg);
+  }
+  24% {
+    opacity: 0.78;
+  }
+  78% {
+    opacity: 0;
+    transform: translateX(116%) skewX(-18deg);
+  }
+  to {
+    opacity: 0;
+    transform: none;
+  }
+}
+
+@keyframes vl-mobile-live-pulse {
+  from {
+    box-shadow: 0 0 0 0 rgba(201,166,70,0.52);
+  }
+  to {
+    box-shadow: 0 0 0 11px rgba(201,166,70,0);
+  }
+}
+
 @media (max-width: 900px) {
   .vl-cinema-stage {
     min-height: 100svh;
@@ -1796,7 +1888,7 @@
     gap: 13px;
     padding: 14px;
     border-radius: 26px;
-    transform: none !important;
+    transform: none;
   }
 
   .vl-monogram {
@@ -1910,6 +2002,124 @@
     align-items: start;
     flex-direction: column;
     gap: 6px;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-glow-one,
+  .venture-links-shell[data-stage='compact'] .vl-glow-one {
+    animation: vl-mobile-glow-wake 900ms ease-out both, vl-drift 15s ease-in-out 900ms infinite alternate;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-glow-two,
+  .venture-links-shell[data-stage='compact'] .vl-glow-two {
+    animation: vl-mobile-glow-wake 980ms ease-out 120ms both, vl-drift 17s ease-in-out 1.1s infinite alternate;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-topline,
+  .venture-links-shell[data-stage='compact'] .vl-topline {
+    animation: vl-mobile-hero-in 520ms cubic-bezier(0.2, 0.86, 0.22, 1) 40ms both;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-identity-card,
+  .venture-links-shell[data-stage='compact'] .vl-identity-card {
+    transform: translate3d(0, 0, 0);
+    transform-origin: 50% 24%;
+    animation: vl-mobile-hero-in 640ms cubic-bezier(0.2, 0.86, 0.22, 1) 110ms both;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-monogram,
+  .venture-links-shell[data-stage='compact'] .vl-monogram {
+    animation: vl-mobile-logo-pulse 840ms cubic-bezier(0.19, 0.92, 0.24, 1.18) 180ms both;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-live-dot span,
+  .venture-links-shell[data-stage='compact'] .vl-live-dot span {
+    animation: vl-mobile-live-pulse 1.25s ease-out 520ms 2;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-section-heading,
+  .venture-links-shell[data-stage='compact'] .vl-section-heading {
+    animation: vl-mobile-hero-in 540ms cubic-bezier(0.2, 0.86, 0.22, 1) 160ms both;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-feature-card,
+  .venture-links-shell[data-stage='compact'] .vl-feature-card {
+    transform-origin: 50% 24%;
+    animation: vl-mobile-card-in 640ms cubic-bezier(0.18, 0.84, 0.28, 1.08) both;
+    animation-delay: calc(230ms + var(--delay, 0ms));
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-feature-card .vl-card-shine,
+  .venture-links-shell[data-stage='compact'] .vl-feature-card .vl-card-shine {
+    animation: vl-mobile-shine-sweep 1.05s cubic-bezier(0.22, 0.78, 0.28, 1) both;
+    animation-delay: calc(420ms + var(--delay, 0ms));
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-row-card,
+  .venture-links-shell[data-stage='compact'] .vl-row-card,
+  .venture-links-shell[data-stage='phone'] .vl-sky-panel,
+  .venture-links-shell[data-stage='compact'] .vl-sky-panel {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    transform-origin: 50% 20%;
+    animation: vl-mobile-card-in 600ms cubic-bezier(0.18, 0.84, 0.28, 1.08) both;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-row-card,
+  .venture-links-shell[data-stage='compact'] .vl-row-card {
+    animation-delay: calc(560ms + var(--delay, 0ms));
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-sky-panel,
+  .venture-links-shell[data-stage='compact'] .vl-sky-panel {
+    animation-delay: 790ms;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-row-card::before,
+  .venture-links-shell[data-stage='compact'] .vl-row-card::before,
+  .venture-links-shell[data-stage='phone'] .vl-sky-panel::before,
+  .venture-links-shell[data-stage='compact'] .vl-sky-panel::before {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    content: '';
+    background: linear-gradient(120deg, transparent 0 36%, rgba(244,230,190,0.1) 46%, transparent 58% 100%);
+    transform: translateX(-125%) skewX(-18deg);
+    animation: vl-mobile-shine-sweep 1.05s cubic-bezier(0.22, 0.78, 0.28, 1) 760ms both;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-row-card > *,
+  .venture-links-shell[data-stage='compact'] .vl-row-card > *,
+  .venture-links-shell[data-stage='phone'] .vl-sky-panel > *,
+  .venture-links-shell[data-stage='compact'] .vl-sky-panel > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-socials a,
+  .venture-links-shell[data-stage='compact'] .vl-socials a {
+    animation: vl-mobile-card-in 520ms cubic-bezier(0.18, 0.84, 0.28, 1.08) 920ms both;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-socials a:nth-child(2),
+  .venture-links-shell[data-stage='compact'] .vl-socials a:nth-child(2) {
+    animation-delay: 970ms;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-socials a:nth-child(3),
+  .venture-links-shell[data-stage='compact'] .vl-socials a:nth-child(3) {
+    animation-delay: 1020ms;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-socials a:nth-child(4),
+  .venture-links-shell[data-stage='compact'] .vl-socials a:nth-child(4) {
+    animation-delay: 1070ms;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-socials a:nth-child(5),
+  .venture-links-shell[data-stage='compact'] .vl-socials a:nth-child(5) {
+    animation-delay: 1120ms;
   }
 }
 
