@@ -251,24 +251,38 @@ function VentureLogo({ name, title }) {
   )
 }
 
-function cardMotion(index, rawProgress, compact = false) {
+function cardMotion(index, rawProgress, stageMode = 'desktop') {
   const distance = index - rawProgress
+  const clamped = Math.max(-3.2, Math.min(3.2, distance))
   const abs = Math.abs(distance)
-  const x = distance * (compact ? 34 : 58)
-  const y = distance * (compact ? 52 : 88)
-  const z = (compact ? 92 : 160) - abs * (compact ? 84 : 150)
-  const scale = Math.max(compact ? 0.68 : 0.72, 1 - abs * (compact ? 0.065 : 0.075))
-  const opacity = Math.max(0.18, 1 - abs * (compact ? 0.18 : 0.2))
-  const blur = Math.min(compact ? 4.2 : 6, abs * (compact ? 0.85 : 1.45))
-  const rotateX = distance * (compact ? -9.5 : -8)
-  const rotateY = distance * (compact ? 16 : 11)
-  const rotateZ = distance * (compact ? -1.5 : -2)
+  const phone = stageMode === 'phone'
+  const compact = stageMode === 'compact'
+
+  const x = phone ? clamped * 24 : distance * (compact ? 34 : 58)
+  const y = phone ? clamped * 66 + Math.sign(clamped) * Math.max(0, abs - 1) * 9 : distance * (compact ? 52 : 88)
+  const z = phone ? 184 - abs * 124 : (compact ? 92 : 160) - abs * (compact ? 84 : 150)
+  const scale = phone
+    ? Math.max(0.58, 1 - abs * 0.088)
+    : Math.max(compact ? 0.68 : 0.72, 1 - abs * (compact ? 0.065 : 0.075))
+  const opacity = phone
+    ? Math.max(0.08, 1 - abs * 0.25)
+    : Math.max(0.18, 1 - abs * (compact ? 0.18 : 0.2))
+  const blur = phone
+    ? Math.min(5.4, abs * 0.78)
+    : Math.min(compact ? 4.2 : 6, abs * (compact ? 0.85 : 1.45))
+  const rotateX = phone ? 2.4 + clamped * -11 : distance * (compact ? -9.5 : -8)
+  const rotateY = phone ? clamped * 24 : distance * (compact ? 16 : 11)
+  const rotateZ = phone ? clamped * -3.2 : distance * (compact ? -1.5 : -2)
+  const cardDepth = Math.max(0, 1 - Math.min(abs, 1))
 
   return {
     transform: `translate3d(${x}px, ${y}px, ${z}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg) scale(${scale})`,
     opacity,
     filter: `blur(${blur}px)`,
-    zIndex: 50 - Math.round(abs * 5),
+    zIndex: 80 - Math.round(abs * 8),
+    pointerEvents: abs < 0.65 ? 'auto' : 'none',
+    '--vl-card-depth': cardDepth.toFixed(3),
+    '--vl-card-shine-opacity': (0.16 + cardDepth * 0.34).toFixed(3),
   }
 }
 
@@ -276,15 +290,15 @@ export default function VentureLinks() {
   const shellRef = useRef(null)
   const storyRef = useRef(null)
   const [copied, setCopied] = useState(false)
-  const [isCompactStage, setIsCompactStage] = useState(false)
+  const [stageMode, setStageMode] = useState('desktop')
   const [motion, setMotion] = useState({ progress: 0, raw: 0, activeIndex: 0 })
   const pageUrl = 'https://app.autoaihub.io/links'
 
   useEffect(() => {
     const originalTitle = document.title
-    document.title = 'Williams Group — Current Initiatives'
+    document.title = 'Williams Group — Venture Portfolio'
 
-    const description = 'Public links for Williams Group current initiatives: AutoAI Hub, Aurii, King Klaw, ClawHub, and selected build proof.'
+    const description = 'A premium public portfolio for Williams Group ventures: AutoAI Hub, Aurii, King Klaw, ClawHub, and selected build proof.'
     let meta = document.querySelector('meta[name="description"]')
     const hadDescriptionMeta = Boolean(meta)
     const originalDescription = meta?.getAttribute('content') ?? ''
@@ -322,17 +336,28 @@ export default function VentureLinks() {
   }, [])
 
   useEffect(() => {
-    const query = window.matchMedia('(max-width: 900px)')
-    const updateCompactStage = () => setIsCompactStage(query.matches)
-
-    updateCompactStage()
-    if (query.addEventListener) {
-      query.addEventListener('change', updateCompactStage)
-      return () => query.removeEventListener('change', updateCompactStage)
+    const tabletQuery = window.matchMedia('(max-width: 900px)')
+    const phoneQuery = window.matchMedia('(max-width: 430px)')
+    const updateStageMode = () => {
+      setStageMode(phoneQuery.matches ? 'phone' : tabletQuery.matches ? 'compact' : 'desktop')
     }
 
-    query.addListener(updateCompactStage)
-    return () => query.removeListener(updateCompactStage)
+    updateStageMode()
+    const addListener = (query) => {
+      if (query.addEventListener) {
+        query.addEventListener('change', updateStageMode)
+        return () => query.removeEventListener('change', updateStageMode)
+      }
+      query.addListener(updateStageMode)
+      return () => query.removeListener(updateStageMode)
+    }
+
+    const removeTablet = addListener(tabletQuery)
+    const removePhone = addListener(phoneQuery)
+    return () => {
+      removeTablet()
+      removePhone()
+    }
   }, [])
 
   useEffect(() => {
@@ -386,8 +411,8 @@ export default function VentureLinks() {
 
   const handleShare = async () => {
     const shareData = {
-      title: 'Williams Group — Current Initiatives',
-      text: 'Current Williams Group projects across AI systems, aesthetics, agent workflows, markets, and build proof.',
+      title: 'Williams Group — Venture Portfolio',
+      text: 'A focused portfolio of Williams Group ventures across AI systems, aesthetic intelligence, agent infrastructure, and market research.',
       url: pageUrl,
     }
 
@@ -415,14 +440,14 @@ export default function VentureLinks() {
   }
 
   return (
-    <main ref={shellRef} className="venture-links-shell" data-scene="autoaihub" aria-label="Williams Group current initiatives">
+    <main ref={shellRef} className="venture-links-shell" data-scene="autoaihub" data-stage={stageMode} aria-label="Williams Group venture portfolio">
       <div className="vl-ambient" aria-hidden="true">
         <div className="vl-glow vl-glow-one"></div>
         <div className="vl-glow vl-glow-two"></div>
         <div className="vl-grain"></div>
       </div>
 
-      <section ref={storyRef} className="vl-scroll-story" aria-label="Cinematic initiative board">
+      <section ref={storyRef} className="vl-scroll-story" aria-label="Cinematic venture portfolio">
         <div className="vl-cinema-stage">
           <div className="vl-stage-background" aria-hidden="true">
             <div className="vl-portal-ring vl-ring-one"></div>
@@ -433,7 +458,7 @@ export default function VentureLinks() {
           <div className="vl-stage-content">
             <header className="vl-hero">
               <div className="vl-topline">
-                <span className="vl-live-dot"><span></span>Public initiatives board</span>
+                <span className="vl-live-dot"><span></span>Private venture portfolio</span>
                 <button type="button" className="vl-share" onClick={handleShare}>
                   {copied ? 'Copied' : 'Share'}
                 </button>
@@ -444,19 +469,19 @@ export default function VentureLinks() {
                   <VentureLogo name="williams" />
                 </div>
                 <div>
-                  <p className="vl-kicker">current initiatives</p>
+                  <p className="vl-kicker">venture portfolio</p>
                   <h1>Williams Group</h1>
                   <p className="vl-subhead">
-                    Active projects, public links, and selected build proof across AI systems, aesthetic intelligence, agent workflows, marketplaces, and markets.
+                    A focused portfolio of AI systems, aesthetic intelligence, agent infrastructure, marketplaces, and market research — presented with operator-grade clarity.
                   </p>
                 </div>
               </div>
 
               <div className="vl-command-strip" aria-label="Focus areas">
-                <span>AI systems</span>
-                <span>Aesthetic intelligence</span>
-                <span>Agent workflows</span>
-                <span>Public build proof</span>
+                <span>Venture studio</span>
+                <span>Operator systems</span>
+                <span>Agent infrastructure</span>
+                <span>Public proof</span>
               </div>
             </header>
 
@@ -482,7 +507,7 @@ export default function VentureLinks() {
                   target="_blank"
                   rel="noopener noreferrer"
                   key={item.key}
-                  style={{ '--tint': item.tint, ...cardMotion(index, motion.raw, isCompactStage) }}
+                  style={{ '--tint': item.tint, ...cardMotion(index, motion.raw, stageMode) }}
                   tabIndex={index === motion.activeIndex ? 0 : -1}
                   aria-label={`${item.title}: ${item.description}`}
                 >
@@ -513,10 +538,10 @@ export default function VentureLinks() {
         </div>
       </section>
 
-      <section className="vl-phone-frame vl-directory" aria-label="All current initiative links">
+      <section className="vl-phone-frame vl-directory" aria-label="Williams Group portfolio links">
         <div className="vl-section-heading">
-          <p>Active public initiatives</p>
-          <span>live sites and product homes</span>
+          <p>Portfolio ventures</p>
+          <span>live businesses and product homes</span>
         </div>
 
         <div className="vl-featured-grid">
