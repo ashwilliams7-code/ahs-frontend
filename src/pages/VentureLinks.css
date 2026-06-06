@@ -2477,8 +2477,8 @@
 
   .venture-links-shell[data-intro='active'] .vl-scroll-story,
   .venture-links-shell[data-intro='active'] .vl-directory {
-    opacity: 0.72;
-    filter: blur(1.5px) saturate(1.12) brightness(0.9);
+    opacity: 1;
+    filter: none;
     transform: none;
     transform-origin: 50% 0;
   }
@@ -2489,9 +2489,9 @@
     filter: none;
     transform: scale(1);
     transition:
-      opacity 460ms ease,
-      filter 460ms ease,
-      transform 460ms cubic-bezier(0.2, 0.86, 0.22, 1);
+      opacity 260ms ease,
+      filter 260ms ease,
+      transform 320ms cubic-bezier(0.2, 0.86, 0.22, 1);
   }
 
   .vl-premium-loader {
@@ -2513,7 +2513,7 @@
   }
 
   .vl-premium-loader.is-exiting {
-    animation: vl-loader-exit 480ms cubic-bezier(0.2, 0.86, 0.22, 1) both;
+    animation: vl-loader-exit 320ms cubic-bezier(0.2, 0.86, 0.22, 1) both;
   }
 
   .vl-premium-loader::before,
@@ -2753,7 +2753,7 @@
     background: linear-gradient(90deg, rgba(71, 243, 210, 0.72), var(--vl-gold), var(--vl-champagne));
     box-shadow: 0 0 20px rgba(248, 216, 78, 0.62);
     transform-origin: left center;
-    animation: vl-loader-progress 3s cubic-bezier(0.2, 0.82, 0.24, 1) both;
+    animation: vl-loader-progress 1s cubic-bezier(0.2, 0.82, 0.24, 1) both;
   }
 
   .venture-links-shell[data-stage='phone'] .vl-scroll-story,

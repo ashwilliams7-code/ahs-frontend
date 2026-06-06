@@ -166,6 +166,23 @@ const PUBLIC_CHANNELS = [
 ]
 
 const INSTAGRAM_LINKS = []
+const MOBILE_LINKS_QUERY = '(max-width: 760px)'
+const PHONE_LINKS_QUERY = '(max-width: 430px)'
+const TABLET_LINKS_QUERY = '(max-width: 900px)'
+const INTRO_EXIT_MS = 920
+const INTRO_DONE_MS = 1280
+
+function getInitialStageMode() {
+  if (typeof window === 'undefined') return 'desktop'
+  if (window.matchMedia(PHONE_LINKS_QUERY).matches) return 'phone'
+  if (window.matchMedia(TABLET_LINKS_QUERY).matches) return 'compact'
+  return 'desktop'
+}
+
+function shouldRunMobileIntro() {
+  if (typeof window === 'undefined') return false
+  return window.matchMedia(MOBILE_LINKS_QUERY).matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+}
 
 function ExternalArrow() {
   return (
@@ -424,21 +441,19 @@ export default function VentureLinks() {
   const shellRef = useRef(null)
   const storyRef = useRef(null)
   const [copied, setCopied] = useState(false)
-  const [stageMode, setStageMode] = useState('desktop')
+  const [stageMode, setStageMode] = useState(getInitialStageMode)
   const [motion, setMotion] = useState({ progress: 0, raw: 0, activeIndex: 0 })
-  const [introPhase, setIntroPhase] = useState('active')
+  const [introPhase, setIntroPhase] = useState(() => shouldRunMobileIntro() ? 'active' : 'done')
   const pageUrl = 'https://app.autoaihub.io/links'
 
   useEffect(() => {
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const mobileIntro = window.matchMedia('(max-width: 760px)').matches
-    if (reduceMotion || !mobileIntro) {
+    if (!shouldRunMobileIntro()) {
       setIntroPhase('done')
       return undefined
     }
 
-    const exitTimer = window.setTimeout(() => setIntroPhase('exiting'), 3000)
-    const doneTimer = window.setTimeout(() => setIntroPhase('done'), 3540)
+    const exitTimer = window.setTimeout(() => setIntroPhase('exiting'), INTRO_EXIT_MS)
+    const doneTimer = window.setTimeout(() => setIntroPhase('done'), INTRO_DONE_MS)
 
     return () => {
       window.clearTimeout(exitTimer)
@@ -488,8 +503,8 @@ export default function VentureLinks() {
   }, [])
 
   useEffect(() => {
-    const tabletQuery = window.matchMedia('(max-width: 900px)')
-    const phoneQuery = window.matchMedia('(max-width: 430px)')
+    const tabletQuery = window.matchMedia(TABLET_LINKS_QUERY)
+    const phoneQuery = window.matchMedia(PHONE_LINKS_QUERY)
     const updateStageMode = () => {
       setStageMode(phoneQuery.matches ? 'phone' : tabletQuery.matches ? 'compact' : 'desktop')
     }
@@ -514,7 +529,16 @@ export default function VentureLinks() {
 
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduceMotion) return undefined
+    const mobileStatic = window.matchMedia(MOBILE_LINKS_QUERY).matches
+    const shell = shellRef.current
+
+    if (shell && (reduceMotion || mobileStatic)) {
+      shell.style.setProperty('--vl-scroll', '0')
+      shell.style.setProperty('--vl-raw', '0')
+      shell.setAttribute('data-scene', INITIATIVES[0].key)
+    }
+
+    if (reduceMotion || mobileStatic) return undefined
 
     let frame = 0
     let lastActive = -1
@@ -561,6 +585,12 @@ export default function VentureLinks() {
   useEffect(() => {
     const shell = shellRef.current
     if (!shell) return undefined
+
+    const mobileStatic = window.matchMedia(MOBILE_LINKS_QUERY).matches
+    if (mobileStatic) {
+      shell.style.setProperty('--vl-page-scroll', '0')
+      return undefined
+    }
 
     let frame = 0
     const update = () => {
@@ -769,7 +799,7 @@ export default function VentureLinks() {
         </div>
       </section>
 
-      <section id="portfolio-ventures" className="vl-phone-frame vl-directory" aria-label="Williams Group portfolio links">
+      <section id="portfolio-ventures" className="vl-phone-frame vl-directory" data-link-directory aria-label="Williams Group portfolio links">
         <div className="vl-section-heading vl-reveal">
           <p>Portfolio ventures</p>
           <span>tap a card to expand</span>
