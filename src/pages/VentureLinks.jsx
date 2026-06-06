@@ -303,8 +303,8 @@ export default function VentureLinks() {
       return undefined
     }
 
-    const exitTimer = window.setTimeout(() => setIntroPhase('exiting'), 980)
-    const doneTimer = window.setTimeout(() => setIntroPhase('done'), 1460)
+    const exitTimer = window.setTimeout(() => setIntroPhase('exiting'), 3000)
+    const doneTimer = window.setTimeout(() => setIntroPhase('done'), 3540)
 
     return () => {
       window.clearTimeout(exitTimer)
@@ -490,6 +490,10 @@ export default function VentureLinks() {
               <em>AI systems</em>
               <em>agent infrastructure</em>
               <em>public proof</em>
+            </span>
+            <span className="vl-loader-status">
+              Loading venture stack
+              <span aria-hidden="true"><i></i><i></i><i></i></span>
             </span>
             <span className="vl-loader-progress"><span></span></span>
           </div>
