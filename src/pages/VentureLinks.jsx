@@ -292,7 +292,25 @@ export default function VentureLinks() {
   const [copied, setCopied] = useState(false)
   const [stageMode, setStageMode] = useState('desktop')
   const [motion, setMotion] = useState({ progress: 0, raw: 0, activeIndex: 0 })
+  const [introPhase, setIntroPhase] = useState('active')
   const pageUrl = 'https://app.autoaihub.io/links'
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const mobileIntro = window.matchMedia('(max-width: 760px)').matches
+    if (reduceMotion || !mobileIntro) {
+      setIntroPhase('done')
+      return undefined
+    }
+
+    const exitTimer = window.setTimeout(() => setIntroPhase('exiting'), 980)
+    const doneTimer = window.setTimeout(() => setIntroPhase('done'), 1460)
+
+    return () => {
+      window.clearTimeout(exitTimer)
+      window.clearTimeout(doneTimer)
+    }
+  }, [])
 
   useEffect(() => {
     const originalTitle = document.title
@@ -440,12 +458,43 @@ export default function VentureLinks() {
   }
 
   return (
-    <main ref={shellRef} className="venture-links-shell" data-scene="autoaihub" data-stage={stageMode} aria-label="Williams Group venture portfolio">
+    <main
+      ref={shellRef}
+      className="venture-links-shell"
+      data-scene="autoaihub"
+      data-stage={stageMode}
+      data-intro={introPhase === 'done' ? undefined : introPhase}
+      aria-label="Williams Group venture portfolio"
+    >
       <div className="vl-ambient" aria-hidden="true">
         <div className="vl-glow vl-glow-one"></div>
         <div className="vl-glow vl-glow-two"></div>
         <div className="vl-grain"></div>
       </div>
+
+      {introPhase !== 'done' ? (
+        <div className={`vl-premium-loader${introPhase === 'exiting' ? ' is-exiting' : ''}`} aria-hidden="true">
+          <div className="vl-loader-aura">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div className="vl-loader-card">
+            <span className="vl-loader-eyebrow">Williams Group</span>
+            <span className="vl-loader-mark"><VentureLogo name="williams" /></span>
+            <span className="vl-loader-copy">
+              <strong>Venture Portfolio</strong>
+              <small>bringing the operating layer online</small>
+            </span>
+            <span className="vl-loader-chips">
+              <em>AI systems</em>
+              <em>agent infrastructure</em>
+              <em>public proof</em>
+            </span>
+            <span className="vl-loader-progress"><span></span></span>
+          </div>
+        </div>
+      ) : null}
 
       <section ref={storyRef} className="vl-scroll-story" aria-label="Cinematic venture portfolio">
         <div className="vl-cinema-stage">

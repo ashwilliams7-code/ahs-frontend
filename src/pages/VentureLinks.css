@@ -135,6 +135,63 @@
   transform: rotate(8deg);
 }
 
+.vl-premium-loader {
+  display: none;
+}
+
+.vl-loader-aura,
+.vl-loader-card,
+.vl-loader-eyebrow,
+.vl-loader-mark,
+.vl-loader-copy,
+.vl-loader-chips,
+.vl-loader-progress {
+  position: relative;
+}
+
+.vl-loader-aura,
+.vl-loader-card {
+  z-index: 1;
+}
+
+.vl-loader-card {
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.vl-loader-eyebrow,
+.vl-loader-copy,
+.vl-loader-chips,
+.vl-loader-progress {
+  z-index: 2;
+}
+
+.vl-loader-mark {
+  z-index: 2;
+  display: grid;
+  place-items: center;
+}
+
+.vl-loader-mark .vl-logo {
+  width: 100%;
+  height: 100%;
+}
+
+.vl-loader-chips em {
+  font-style: normal;
+}
+
+.vl-loader-progress {
+  overflow: hidden;
+}
+
+.vl-loader-progress > span {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .vl-scroll-story {
   position: relative;
   z-index: 2;
@@ -1064,6 +1121,103 @@
   }
 }
 
+@keyframes vl-loader-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes vl-loader-exit {
+  from {
+    opacity: 1;
+    filter: blur(0);
+  }
+  to {
+    opacity: 0;
+    filter: blur(10px);
+  }
+}
+
+@keyframes vl-loader-card-in {
+  from {
+    opacity: 0;
+    filter: blur(18px) saturate(0.78);
+    transform: translate3d(0, 20px, 0) scale(0.94) rotateX(7deg);
+  }
+  66% {
+    opacity: 1;
+    filter: blur(0) saturate(1.08);
+    transform: translate3d(0, -2px, 0) scale(1.015) rotateX(-1deg);
+  }
+  to {
+    opacity: 1;
+    filter: none;
+    transform: translate3d(0, 0, 0) scale(1) rotateX(0);
+  }
+}
+
+@keyframes vl-loader-mark-pop {
+  from {
+    opacity: 0;
+    filter: drop-shadow(0 0 0 rgba(201,166,70,0));
+    transform: scale(0.7) rotate(-10deg);
+  }
+  58% {
+    opacity: 1;
+    filter: drop-shadow(0 0 34px rgba(201,166,70,0.5));
+    transform: scale(1.1) rotate(-2deg);
+  }
+  to {
+    opacity: 1;
+    filter: drop-shadow(0 16px 26px rgba(0,0,0,0.42));
+    transform: scale(1) rotate(-4deg);
+  }
+}
+
+@keyframes vl-loader-aura-spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg) scale(0.92);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(92deg) scale(1.02);
+  }
+}
+
+@keyframes vl-loader-sheen {
+  from {
+    transform: translateX(-135%) skewX(-18deg);
+  }
+  64% {
+    transform: translateX(112%) skewX(-18deg);
+  }
+  to {
+    transform: translateX(112%) skewX(-18deg);
+  }
+}
+
+@keyframes vl-loader-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes vl-loader-chip-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 900px) {
   .vl-cinema-stage {
     min-height: 100svh;
@@ -1827,6 +1981,237 @@
     overflow-x: hidden;
   }
 
+  .venture-links-shell[data-intro='active'] .vl-scroll-story,
+  .venture-links-shell[data-intro='active'] .vl-directory {
+    opacity: 0.34;
+    filter: blur(5px) saturate(0.82);
+    transform: scale(0.985);
+    transform-origin: 50% 0;
+  }
+
+  .venture-links-shell[data-intro='exiting'] .vl-scroll-story,
+  .venture-links-shell[data-intro='exiting'] .vl-directory {
+    opacity: 1;
+    filter: none;
+    transform: scale(1);
+    transition:
+      opacity 460ms ease,
+      filter 460ms ease,
+      transform 460ms cubic-bezier(0.2, 0.86, 0.22, 1);
+  }
+
+  .vl-premium-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    display: grid;
+    place-items: center;
+    padding: max(20px, env(safe-area-inset-top)) 22px max(22px, env(safe-area-inset-bottom));
+    background:
+      radial-gradient(circle at 50% 26%, rgba(201, 166, 70, 0.24), transparent 24rem),
+      radial-gradient(circle at 12% 82%, rgba(13, 59, 42, 0.7), transparent 20rem),
+      linear-gradient(150deg, rgba(2, 8, 6, 0.96), rgba(4, 20, 14, 0.98) 48%, rgba(0, 0, 0, 0.96));
+    pointer-events: none;
+    overflow: hidden;
+    animation: vl-loader-fade-in 240ms ease both;
+  }
+
+  .vl-premium-loader.is-exiting {
+    animation: vl-loader-exit 480ms cubic-bezier(0.2, 0.86, 0.22, 1) both;
+  }
+
+  .vl-premium-loader::before,
+  .vl-premium-loader::after {
+    position: absolute;
+    inset: 0;
+    content: '';
+    pointer-events: none;
+  }
+
+  .vl-premium-loader::before {
+    z-index: 0;
+    background-image:
+      linear-gradient(rgba(244,230,190,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(244,230,190,0.055) 1px, transparent 1px),
+      linear-gradient(112deg, transparent 0 38%, rgba(244,230,190,0.08) 38.15% 38.42%, transparent 38.7% 100%);
+    background-size: 44px 44px, 44px 44px, 100% 100%;
+    mask-image: radial-gradient(circle at 50% 42%, rgba(0,0,0,0.8), transparent 72%);
+    opacity: 0.34;
+  }
+
+  .vl-premium-loader::after {
+    z-index: 0;
+    background:
+      radial-gradient(ellipse at 50% 18%, transparent 0 38%, rgba(0,0,0,0.18) 72%, rgba(0,0,0,0.58) 100%),
+      linear-gradient(180deg, rgba(244,230,190,0.04), transparent 30%, rgba(0,0,0,0.46));
+  }
+
+  .vl-loader-aura {
+    position: absolute;
+    left: 50%;
+    top: 44%;
+    width: min(84vw, 340px);
+    height: min(84vw, 340px);
+    transform: translate(-50%, -50%);
+  }
+
+  .vl-loader-aura span {
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(244, 230, 190, 0.14);
+    border-radius: 999px;
+    box-shadow:
+      inset 0 0 48px rgba(201, 166, 70, 0.07),
+      0 0 90px rgba(201, 166, 70, 0.08);
+    animation: vl-loader-aura-spin 1.35s cubic-bezier(0.2, 0.76, 0.24, 1) both;
+  }
+
+  .vl-loader-aura span:nth-child(2) {
+    inset: 13%;
+    border-color: rgba(201, 166, 70, 0.2);
+    animation-delay: 80ms;
+    animation-direction: reverse;
+  }
+
+  .vl-loader-aura span:nth-child(3) {
+    inset: 27%;
+    border-color: rgba(143, 160, 146, 0.2);
+    animation-delay: 140ms;
+  }
+
+  .vl-loader-card {
+    width: min(320px, calc(100vw - 44px));
+    padding: 24px 20px 20px;
+    border: 1px solid rgba(244, 230, 190, 0.2);
+    border-radius: 34px;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(244, 230, 190, 0.16), transparent 42%),
+      linear-gradient(145deg, rgba(244, 230, 190, 0.115), rgba(143, 160, 146, 0.035) 42%, rgba(2, 8, 6, 0.34)),
+      rgba(3, 12, 9, 0.88);
+    box-shadow:
+      0 34px 92px rgba(0, 0, 0, 0.72),
+      0 0 92px rgba(201, 166, 70, 0.12),
+      inset 0 1px rgba(244, 230, 190, 0.18),
+      inset 0 -24px 38px rgba(0, 0, 0, 0.34);
+    overflow: hidden;
+    transform-style: preserve-3d;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    animation: vl-loader-card-in 760ms cubic-bezier(0.19, 0.92, 0.24, 1.05) both;
+  }
+
+  .vl-loader-card::before {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(120deg, transparent 0 36%, rgba(244, 230, 190, 0.18) 46%, transparent 58% 100%);
+    content: '';
+    mix-blend-mode: screen;
+    animation: vl-loader-sheen 1.25s cubic-bezier(0.22, 0.78, 0.28, 1) 160ms both;
+  }
+
+  .vl-loader-card::after {
+    position: absolute;
+    inset: 1px;
+    z-index: 1;
+    border: 1px solid rgba(255, 255, 255, 0.035);
+    border-radius: 33px;
+    content: '';
+    pointer-events: none;
+  }
+
+  .vl-loader-eyebrow {
+    color: var(--vl-gold);
+    font-size: 10px;
+    font-weight: 1000;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .vl-loader-mark {
+    width: 86px;
+    height: 86px;
+    margin: 14px auto 12px;
+    border: 1px solid rgba(244, 230, 190, 0.2);
+    border-radius: 28px;
+    background:
+      radial-gradient(circle at 24% 12%, rgba(244,230,190,0.18), transparent 34%),
+      linear-gradient(145deg, rgba(13,59,42,0.94), rgba(2,8,6,0.88));
+    box-shadow: 0 24px 58px rgba(201,166,70,0.2), inset 0 1px rgba(244,230,190,0.18);
+    animation: vl-loader-mark-pop 860ms cubic-bezier(0.19, 0.92, 0.24, 1.18) 120ms both;
+  }
+
+  .vl-loader-copy {
+    display: grid;
+    gap: 7px;
+  }
+
+  .vl-loader-copy strong {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(38px, 11vw, 48px);
+    line-height: 0.9;
+    letter-spacing: -0.055em;
+  }
+
+  .vl-loader-copy small {
+    color: rgba(244, 230, 190, 0.72);
+    font-size: 12px;
+    font-weight: 850;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .vl-loader-chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 17px;
+  }
+
+  .vl-loader-chips em {
+    padding: 7px 9px;
+    border: 1px solid rgba(244, 230, 190, 0.12);
+    border-radius: 999px;
+    background: rgba(6, 26, 18, 0.62);
+    color: rgba(244, 230, 190, 0.76);
+    font-size: 9px;
+    font-weight: 1000;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: vl-loader-chip-in 380ms ease both;
+  }
+
+  .vl-loader-chips em:nth-child(1) {
+    animation-delay: 360ms;
+  }
+
+  .vl-loader-chips em:nth-child(2) {
+    animation-delay: 430ms;
+  }
+
+  .vl-loader-chips em:nth-child(3) {
+    animation-delay: 500ms;
+  }
+
+  .vl-loader-progress {
+    width: 100%;
+    height: 3px;
+    margin-top: 18px;
+    border-radius: 999px;
+    background: rgba(244, 230, 190, 0.11);
+    box-shadow: inset 0 0 0 1px rgba(244, 230, 190, 0.06);
+  }
+
+  .vl-loader-progress > span {
+    border-radius: inherit;
+    background: linear-gradient(90deg, rgba(143, 160, 146, 0.72), var(--vl-gold), var(--vl-champagne));
+    box-shadow: 0 0 20px rgba(201, 166, 70, 0.62);
+    transform-origin: left center;
+    animation: vl-loader-progress 980ms cubic-bezier(0.2, 0.82, 0.24, 1) both;
+  }
+
   .venture-links-shell[data-stage='phone'] .vl-scroll-story,
   .venture-links-shell[data-stage='compact'] .vl-scroll-story,
   .vl-scroll-story {
@@ -2132,6 +2517,17 @@
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .vl-premium-loader {
+    display: none !important;
+  }
+
+  .venture-links-shell[data-intro] .vl-scroll-story,
+  .venture-links-shell[data-intro] .vl-directory {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
   }
 
   .vl-scroll-story {
