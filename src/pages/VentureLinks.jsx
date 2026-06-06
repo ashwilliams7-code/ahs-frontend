@@ -169,6 +169,7 @@ const INSTAGRAM_LINKS = []
 const MOBILE_LINKS_QUERY = '(max-width: 760px)'
 const PHONE_LINKS_QUERY = '(max-width: 430px)'
 const TABLET_LINKS_QUERY = '(max-width: 900px)'
+const LAPTOP_LINKS_QUERY = '(max-width: 1920px)'
 const INTRO_EXIT_MS = 920
 const INTRO_DONE_MS = 1280
 
@@ -176,6 +177,7 @@ function getInitialStageMode() {
   if (typeof window === 'undefined') return 'desktop'
   if (window.matchMedia(PHONE_LINKS_QUERY).matches) return 'phone'
   if (window.matchMedia(TABLET_LINKS_QUERY).matches) return 'compact'
+  if (window.matchMedia(LAPTOP_LINKS_QUERY).matches) return 'laptop'
   return 'desktop'
 }
 
@@ -505,8 +507,9 @@ export default function VentureLinks() {
   useEffect(() => {
     const tabletQuery = window.matchMedia(TABLET_LINKS_QUERY)
     const phoneQuery = window.matchMedia(PHONE_LINKS_QUERY)
+    const laptopQuery = window.matchMedia(LAPTOP_LINKS_QUERY)
     const updateStageMode = () => {
-      setStageMode(phoneQuery.matches ? 'phone' : tabletQuery.matches ? 'compact' : 'desktop')
+      setStageMode(phoneQuery.matches ? 'phone' : tabletQuery.matches ? 'compact' : laptopQuery.matches ? 'laptop' : 'desktop')
     }
 
     updateStageMode()
@@ -521,24 +524,26 @@ export default function VentureLinks() {
 
     const removeTablet = addListener(tabletQuery)
     const removePhone = addListener(phoneQuery)
+    const removeLaptop = addListener(laptopQuery)
     return () => {
       removeTablet()
       removePhone()
+      removeLaptop()
     }
   }, [])
 
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const mobileStatic = window.matchMedia(MOBILE_LINKS_QUERY).matches
+    const directLinksLayout = window.matchMedia(LAPTOP_LINKS_QUERY).matches
     const shell = shellRef.current
 
-    if (shell && (reduceMotion || mobileStatic)) {
+    if (shell && (reduceMotion || directLinksLayout)) {
       shell.style.setProperty('--vl-scroll', '0')
       shell.style.setProperty('--vl-raw', '0')
       shell.setAttribute('data-scene', INITIATIVES[0].key)
     }
 
-    if (reduceMotion || mobileStatic) return undefined
+    if (reduceMotion || directLinksLayout) return undefined
 
     let frame = 0
     let lastActive = -1
@@ -586,8 +591,8 @@ export default function VentureLinks() {
     const shell = shellRef.current
     if (!shell) return undefined
 
-    const mobileStatic = window.matchMedia(MOBILE_LINKS_QUERY).matches
-    if (mobileStatic) {
+    const directLinksLayout = window.matchMedia(LAPTOP_LINKS_QUERY).matches
+    if (directLinksLayout) {
       shell.style.setProperty('--vl-page-scroll', '0')
       return undefined
     }
@@ -682,6 +687,7 @@ export default function VentureLinks() {
       className="venture-links-shell"
       data-scene="autoaihub"
       data-stage={stageMode}
+      data-links-layout={stageMode === 'desktop' ? 'cinematic' : 'direct'}
       data-intro={introPhase === 'done' ? undefined : introPhase}
       aria-label="Williams Group venture portfolio"
     >

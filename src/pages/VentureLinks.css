@@ -1859,6 +1859,161 @@
   }
 }
 
+@media (min-width: 761px) and (max-width: 1920px) {
+  .venture-links-shell[data-links-layout='direct'] {
+    overflow-x: hidden;
+  }
+
+  .venture-links-shell[data-links-layout='direct'] .vl-scroll-story {
+    min-height: auto;
+  }
+
+  .venture-links-shell[data-links-layout='direct'] .vl-cinema-stage {
+    position: relative;
+    height: auto;
+    min-height: auto;
+    overflow: visible;
+    perspective: none;
+    transform-style: flat;
+  }
+
+  .venture-links-shell[data-links-layout='direct'] .vl-stage-background,
+  .venture-links-shell[data-links-layout='direct'] .vl-scene-panel,
+  .venture-links-shell[data-links-layout='direct'] .vl-initiative-orbit,
+  .venture-links-shell[data-links-layout='direct'] .vl-chapter-rail,
+  .venture-links-shell[data-links-layout='direct'] .vl-scroll-meter {
+    display: none;
+  }
+
+  .venture-links-shell[data-links-layout='direct'] .vl-stage-content {
+    display: block;
+    width: min(100%, 1120px);
+    height: auto;
+    min-height: 0;
+    margin: 0 auto;
+    padding: clamp(24px, 3.4vw, 50px) 24px 14px;
+    transform-style: flat;
+  }
+
+  .venture-links-shell[data-links-layout='direct'] .vl-hero {
+    width: 100%;
+    padding-top: 0;
+  }
+
+  .venture-links-shell[data-links-layout='direct'] .vl-topline {
+    margin-bottom: 13px;
+  }
+
+  .venture-links-shell[data-links-layout='direct'] .vl-identity-card {
+    grid-template-columns: auto 1fr;
+    gap: clamp(16px, 2vw, 22px);
+    padding: clamp(20px, 2.25vw, 28px);
+    border-radius: 34px;
+    transform: none;
+  }
+
+  .venture-links-shell[data-links-layout='direct'] .vl-monogram {
+    width: clamp(76px, 7vw, 96px);
+    height: clamp(76px, 7vw, 96px);
+    transform: rotate(-3deg);
+  }
+
+  .venture-links-shell[data-links-layout='direct'] .vl-identity-card h1 {
+    font-size: clamp(52px, 5.4vw, 76px);
+  }
+
+  .venture-links-shell[data-links-layout='direct'] .vl-subhead {
+    max-width: 62rem;
+    font-size: clamp(14px, 1.3vw, 17px);
+  }
+
+  .venture-links-shell[data-links-layout='direct'] .vl-command-strip {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .venture-links-shell[data-links-layout='direct'] .vl-directory {
+    width: min(100%, 1120px);
+    padding: clamp(10px, 1.4vw, 20px) 24px 64px;
+  }
+
+  .venture-links-shell[data-links-layout='direct'] .vl-featured-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .venture-links-shell[data-links-layout='direct'] .vl-feature-card:first-child {
+    grid-column: auto;
+  }
+
+  .venture-links-shell[data-links-layout='direct'] .vl-feature-card {
+    min-height: 222px;
+    padding: 18px;
+    border-radius: 28px;
+  }
+
+  .venture-links-shell[data-links-layout='direct'] .vl-feature-summary {
+    height: 100%;
+  }
+
+  .venture-links-shell[data-links-layout='direct'] .vl-feature-main {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 12px;
+  }
+
+  .venture-links-shell[data-links-layout='direct'] .vl-feature-mark {
+    width: 58px;
+    height: 58px;
+    border-radius: 20px;
+  }
+
+  .venture-links-shell[data-links-layout='direct'] .vl-feature-main strong {
+    font-size: clamp(25px, 2.2vw, 31px);
+  }
+
+  .venture-links-shell[data-links-layout='direct'] .vl-feature-main small,
+  .venture-links-shell[data-links-layout='direct'] .vl-row-copy small {
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+
+  .venture-links-shell[data-links-layout='direct'] .vl-feature-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 7px;
+    margin-top: 10px;
+  }
+
+  .venture-links-shell[data-links-layout='direct'] .vl-landing-brief {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    align-items: stretch;
+  }
+
+  .venture-links-shell[data-links-layout='direct'] .vl-landing-points {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .venture-links-shell[data-links-layout='direct'] .vl-founder-card {
+    grid-template-columns: minmax(220px, 0.65fr) minmax(0, 1.35fr);
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1180px) {
+  .venture-links-shell[data-links-layout='direct'] .vl-featured-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .venture-links-shell[data-links-layout='direct'] .vl-feature-card {
+    min-height: 196px;
+  }
+
+  .venture-links-shell[data-links-layout='direct'] .vl-landing-brief,
+  .venture-links-shell[data-links-layout='direct'] .vl-founder-card {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 430px) {
   .vl-scroll-story {
     min-height: 650vh;
