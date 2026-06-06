@@ -461,7 +461,7 @@ export default function VentureLinks() {
     }
     meta.setAttribute('content', description)
 
-    const themeColor = '#020617'
+    const themeColor = '#020806'
     let themeMeta = document.querySelector('meta[name="theme-color"]')
     const hadThemeMeta = Boolean(themeMeta)
     const originalThemeColor = themeMeta?.getAttribute('content') ?? ''

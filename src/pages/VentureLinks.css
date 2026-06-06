@@ -3168,6 +3168,103 @@
   }
 }
 
+@media (max-width: 760px) {
+  .venture-links-shell[data-stage='phone'] .vl-scroll-story {
+    min-height: 360svh;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-cinema-stage {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    min-height: 100svh;
+    overflow: hidden;
+    perspective: 1650px;
+    perspective-origin: 50% 38%;
+    transform-style: preserve-3d;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-stage-content {
+    display: grid;
+    width: min(100%, 560px);
+    height: 100svh;
+    min-height: 0;
+    margin: 0 auto;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto minmax(292px, 1fr);
+    align-items: start;
+    gap: 6px;
+    padding: 0 16px max(14px, env(safe-area-inset-bottom));
+    transform-style: preserve-3d;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-stage-background {
+    display: block;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-scene-panel {
+    display: grid;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-initiative-orbit {
+    display: block;
+    grid-column: 1;
+    grid-row: 3;
+    width: min(100%, calc(100vw - 32px));
+    justify-self: center;
+    height: min(42svh, 350px);
+    min-height: 292px;
+    margin-top: -18px;
+    align-self: start;
+    overflow: visible;
+    perspective: inherit;
+    transform-style: preserve-3d;
+    contain: layout paint;
+    transform: translateY(-42px) translateZ(0) rotateX(1.2deg);
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-chapter-rail {
+    display: grid;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-scroll-meter {
+    display: block;
+  }
+}
+
+@media (max-width: 360px) {
+  .venture-links-shell[data-stage='phone'] .vl-stage-content {
+    grid-template-rows: auto auto minmax(228px, 1fr);
+    gap: 4px;
+    padding-inline: 12px;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-hero-actions {
+    display: none;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-subhead {
+    font-size: 10.5px;
+    line-height: 1.25;
+    -webkit-line-clamp: 1;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-scene-panel {
+    padding: 8px;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-initiative-orbit {
+    min-height: 228px;
+    margin-top: -30px;
+  }
+
+  .venture-links-shell[data-stage='phone'] .vl-orbit-card {
+    width: min(276px, calc(100vw - 48px));
+    min-height: 132px;
+    padding: 12px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .venture-links-shell,
   .venture-links-shell *,
