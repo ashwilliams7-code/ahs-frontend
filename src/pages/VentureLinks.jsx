@@ -170,8 +170,8 @@ const MOBILE_LINKS_QUERY = '(max-width: 760px)'
 const PHONE_LINKS_QUERY = '(max-width: 430px)'
 const TABLET_LINKS_QUERY = '(max-width: 900px)'
 const LAPTOP_LINKS_QUERY = '(max-width: 1920px)'
-const INTRO_EXIT_MS = 920
-const INTRO_DONE_MS = 1280
+const INTRO_EXIT_MS = 2600
+const INTRO_DONE_MS = 3200
 
 function getInitialStageMode() {
   if (typeof window === 'undefined') return 'desktop'
@@ -471,6 +471,10 @@ export default function VentureLinks() {
   const pageUrl = 'https://app.autoaihub.io/links'
 
   useEffect(() => {
+    document.documentElement.classList.remove('links-booting')
+  }, [])
+
+  useEffect(() => {
     if (!shouldRunMobileIntro()) {
       setIntroPhase('done')
       return undefined
@@ -643,6 +647,8 @@ export default function VentureLinks() {
   }, [])
 
   useEffect(() => {
+    if (introPhase !== 'done') return undefined
+
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduceMotion) {
       document.querySelectorAll('.vl-reveal').forEach((node) => node.classList.add('is-in-view'))
@@ -662,7 +668,7 @@ export default function VentureLinks() {
 
     nodes.forEach((node) => observer.observe(node))
     return () => observer.disconnect()
-  }, [])
+  }, [introPhase])
 
   const currentYear = useMemo(() => new Date().getFullYear(), [])
   const activeInitiative = INITIATIVES[motion.activeIndex] ?? INITIATIVES[0]
@@ -725,8 +731,23 @@ export default function VentureLinks() {
             <span></span>
             <span></span>
           </div>
-          <div className="vl-loader-card vl-loader-logo-only">
+          <div className="vl-loader-card">
+            <span className="vl-loader-eyebrow">Williams Group</span>
             <span className="vl-loader-mark"><VentureLogo name="williams" /></span>
+            <span className="vl-loader-copy">
+              <strong>Systems waking</strong>
+              <small>venture stack coming online</small>
+            </span>
+            <span className="vl-loader-chips" aria-hidden="true">
+              <em>AI systems</em>
+              <em>agents</em>
+              <em>ventures</em>
+            </span>
+            <span className="vl-loader-status">
+              loading
+              <span aria-hidden="true"><i></i><i></i><i></i></span>
+            </span>
+            <span className="vl-loader-progress" aria-hidden="true"><span></span></span>
           </div>
         </div>
       ) : null}

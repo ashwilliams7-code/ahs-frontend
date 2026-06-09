@@ -39,6 +39,91 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style id="links-mobile-boot-style">
+      @media (max-width: 760px) and (prefers-reduced-motion: no-preference) {
+        html.links-booting,
+        html.links-booting body {
+          min-height: 100%;
+          background: #020617;
+        }
+
+        html.links-booting::before,
+        html.links-booting::after {
+          position: fixed;
+          z-index: 2147483000;
+          pointer-events: none;
+          content: '';
+        }
+
+        html.links-booting::before {
+          inset: 0;
+          background:
+            radial-gradient(circle at 50% 42%, rgba(34, 244, 214, 0.22), transparent 9.5rem),
+            radial-gradient(circle at 50% 47%, rgba(248, 216, 78, 0.18), transparent 7rem),
+            conic-gradient(from 90deg at 50% 50%, transparent 0 28%, rgba(248, 216, 78, 0.2) 36%, transparent 48% 100%),
+            linear-gradient(180deg, #020617, #06172a 52%, #020617);
+          animation: linksBootField 1.25s ease-in-out infinite alternate;
+        }
+
+        html.links-booting::after {
+          left: 50%;
+          top: 50%;
+          width: min(78vw, 280px);
+          min-height: 92px;
+          display: grid;
+          place-items: center;
+          border: 1px solid rgba(255, 247, 199, 0.24);
+          border-radius: 28px;
+          background:
+            radial-gradient(circle at 18% 12%, rgba(255, 247, 199, 0.2), transparent 34%),
+            radial-gradient(circle at 88% 82%, rgba(34, 244, 214, 0.22), transparent 44%),
+            rgba(2, 6, 23, 0.86);
+          box-shadow:
+            0 26px 74px rgba(0, 0, 0, 0.62),
+            0 0 44px rgba(34, 244, 214, 0.18),
+            0 0 36px rgba(248, 216, 78, 0.16),
+            inset 0 1px rgba(255, 247, 199, 0.22);
+          color: #fff7c7;
+          content: 'Williams Group';
+          font: 900 12px/1.1 Inter, system-ui, sans-serif;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          transform: translate(-50%, -50%) scale(0.96);
+          animation: linksBootCard 620ms cubic-bezier(0.19, 0.92, 0.24, 1.12) both;
+        }
+      }
+
+      @keyframes linksBootField {
+        from { filter: saturate(0.92) brightness(0.92); }
+        to { filter: saturate(1.12) brightness(1.08); }
+      }
+
+      @keyframes linksBootCard {
+        from {
+          opacity: 0;
+          filter: blur(14px);
+          transform: translate(-50%, -45%) scale(0.9);
+        }
+        to {
+          opacity: 1;
+          filter: blur(0);
+          transform: translate(-50%, -50%) scale(1);
+        }
+      }
+    </style>
+    <script>
+      (() => {
+        try {
+          const path = window.location.pathname.replace(/\/+$/, '') || '/'
+          const isLinksRoute = path === '/links'
+          const motionOk = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          const isMobile = window.matchMedia('(max-width: 760px)').matches
+          if (isLinksRoute && motionOk && isMobile) {
+            document.documentElement.classList.add('links-booting')
+          }
+        } catch (_) {}
+      })()
+    </script>
   </head>
   <body class="bg-gray-50 font-sans antialiased">
     <div id="root"></div>
