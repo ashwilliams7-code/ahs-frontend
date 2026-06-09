@@ -440,6 +440,40 @@
   letter-spacing: -0.055em;
 }
 
+.vl-ai-highlight {
+  position: relative;
+  display: inline-block;
+  padding: 0 0.045em 0.03em;
+  color: #020617;
+  text-shadow: none;
+  isolation: isolate;
+}
+
+.vl-ai-highlight::before {
+  position: absolute;
+  inset: 0.04em -0.045em 0.01em;
+  z-index: -1;
+  border-radius: 0.16em;
+  background:
+    linear-gradient(135deg, rgba(232, 255, 225, 0.94), rgba(57, 255, 20, 0.96) 48%, rgba(0, 255, 157, 0.92)),
+    var(--vl-gold);
+  box-shadow:
+    0 0 26px rgba(57, 255, 20, 0.52),
+    0 0 72px rgba(0, 255, 157, 0.2);
+  content: '';
+  transform: rotate(-1.4deg) skewX(-5deg);
+}
+
+.vl-ai-highlight::after {
+  position: absolute;
+  inset: auto 0.08em 0.02em;
+  height: 0.08em;
+  z-index: -1;
+  border-radius: 999px;
+  background: rgba(2, 6, 23, 0.35);
+  content: '';
+}
+
 .vl-subhead {
   max-width: 42rem;
   margin: 13px 0 0;
