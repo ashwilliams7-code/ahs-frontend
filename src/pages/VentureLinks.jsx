@@ -775,7 +775,7 @@ export default function VentureLinks() {
                 </div>
                 <div>
                   <p className="vl-kicker">venture portfolio</p>
-                  <h1>Williams Group</h1>
+                  <h1>Pay humans for judgment. Let AI handle the grind.</h1>
                   <p className="vl-subhead">
                     Founder-led venture studio building practical AI systems and product homes for Australian operators — from automation and agents to aesthetic intelligence and market-research tooling.
                   </p>
