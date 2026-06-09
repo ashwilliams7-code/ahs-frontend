@@ -17,7 +17,7 @@ const INITIATIVES = [
     href: 'https://app.autoaihub.io/',
     label: 'Open AutoAI Hub',
     logo: 'autoaihub',
-    tint: '#22F4D6',
+    tint: '#00FF9D',
     scene: 'Systems that turn business friction into automated operating leverage.',
   },
   {
@@ -35,7 +35,7 @@ const INITIATIVES = [
     href: 'https://aurii.me',
     label: 'Open Aurii',
     logo: 'aurii',
-    tint: '#FF7AD9',
+    tint: '#78FF62',
     scene: 'A premium diagnostic layer for appearance, trust, and visual decision-making.',
   },
   {
@@ -53,7 +53,7 @@ const INITIATIVES = [
     href: 'https://kingklaw.au',
     label: 'Visit King Klaw',
     logo: 'kingklaw',
-    tint: '#F8D84E',
+    tint: '#39FF14',
     scene: 'A sharper front door for agent deployment, workflow capture, and SMB execution.',
   },
   {
@@ -71,7 +71,7 @@ const INITIATIVES = [
     href: 'https://clawhub.ai',
     label: 'Visit ClawHub',
     logo: 'clawhub',
-    tint: '#90FF5A',
+    tint: '#B6FF2E',
     scene: 'A marketplace spine for reusable agent workflows, skills, and deployment patterns.',
   },
   {
@@ -89,7 +89,7 @@ const INITIATIVES = [
     href: 'https://github.com/ashwilliams7-code/SeekMateAI',
     label: 'View GitHub repo',
     logo: 'seekmate',
-    tint: '#38BDF8',
+    tint: '#00FFD0',
     scene: 'Proof that messy personal operations can be converted into agentic systems.',
   },
   {
@@ -107,7 +107,7 @@ const INITIATIVES = [
     href: 'https://github.com/ashwilliams7-code/homerun',
     label: 'View GitHub repo',
     logo: 'homerun',
-    tint: '#FF7A3D',
+    tint: '#B6FF2E',
     scene: 'A research and signal layer for prediction-market information advantage.',
   },
   {
@@ -125,7 +125,7 @@ const INITIATIVES = [
     href: 'https://github.com/ashwilliams7-code/ahs-backend',
     label: 'View GitHub repo',
     logo: 'ahs-backend',
-    tint: '#A78BFA',
+    tint: '#6DFF72',
     scene: 'The unglamorous systems layer underneath product, dashboards, workers, and ops data.',
   },
 ]
@@ -205,21 +205,21 @@ function VentureLogo({ name, title }) {
     <defs>
       <linearGradient id={metalId} x1="12" y1="8" x2="52" y2="58" gradientUnits="userSpaceOnUse">
         <stop offset="0" stopColor="#FFF2C9" />
-        <stop offset="0.48" stopColor="#F8D84E" />
-        <stop offset="1" stopColor="#FF7A3D" />
+        <stop offset="0.48" stopColor="#39FF14" />
+        <stop offset="1" stopColor="#B6FF2E" />
       </linearGradient>
       <linearGradient id={darkId} x1="11" y1="9" x2="53" y2="56" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stopColor="#083B5F" />
-        <stop offset="1" stopColor="#020617" />
+        <stop offset="0" stopColor="#003B1E" />
+        <stop offset="1" stopColor="#000302" />
       </linearGradient>
       <radialGradient id={glowId} cx="50%" cy="20%" r="72%">
-        <stop offset="0" stopColor="#FFF7C7" stopOpacity="0.86" />
-        <stop offset="0.5" stopColor="#F8D84E" stopOpacity="0.32" />
-        <stop offset="1" stopColor="#F8D84E" stopOpacity="0" />
+        <stop offset="0" stopColor="#E8FFE1" stopOpacity="0.86" />
+        <stop offset="0.5" stopColor="#39FF14" stopOpacity="0.32" />
+        <stop offset="1" stopColor="#39FF14" stopOpacity="0" />
       </radialGradient>
       <radialGradient id={nodeId} cx="36%" cy="25%" r="70%">
-        <stop offset="0" stopColor="#FFF7C7" />
-        <stop offset="1" stopColor="#47F3D2" />
+        <stop offset="0" stopColor="#E8FFE1" />
+        <stop offset="1" stopColor="#00FF85" />
       </radialGradient>
     </defs>
   )
@@ -235,17 +235,17 @@ function VentureLogo({ name, title }) {
       <>
         <path d="M32 7.5 50.5 15v15.2C50.5 43.8 42.8 53.4 32 58 21.2 53.4 13.5 43.8 13.5 30.2V15L32 7.5Z" fill={`url(#${darkId})`} stroke={`url(#${metalId})`} strokeWidth="2.4" {...commonStroke} />
         <path d="M20 21.5 25.3 14l6.8 8.4 6.7-8.4 5.2 7.5-3.1 8.4H23.1L20 21.5Z" fill={`url(#${metalId})`} opacity="0.96" {...commonStroke} />
-        <path d="M19.8 34.2 25.8 45l6.3-13.6L38.5 45l5.7-10.8" fill="none" stroke="#FFF7C7" strokeWidth="4.1" {...commonStroke} />
+        <path d="M19.8 34.2 25.8 45l6.3-13.6L38.5 45l5.7-10.8" fill="none" stroke="#E8FFE1" strokeWidth="4.1" {...commonStroke} />
         <path d="M24.2 48.6h15.6" fill="none" stroke={`url(#${metalId})`} strokeWidth="2.2" {...commonStroke} />
       </>
     ),
     autoaihub: (
       <>
         <path d="M22.4 12.8h19.2L52 31.9 41.6 51.2H22.4L12 31.9l10.4-19.1Z" fill={`url(#${darkId})`} stroke={`url(#${metalId})`} strokeWidth="2.4" {...commonStroke} />
-        <path d="M19.7 32h-7.2M44.3 32h7.2M32 19.7v-7.2M32 44.3v7.2" fill="none" stroke="#47F3D2" strokeWidth="2.1" {...commonStroke} />
+        <path d="M19.7 32h-7.2M44.3 32h7.2M32 19.7v-7.2M32 44.3v7.2" fill="none" stroke="#00FF85" strokeWidth="2.1" {...commonStroke} />
         <path d="M20.6 23.2c7.4-7.4 15.7-7.4 22.8 0M20.6 40.8c7.4 7.4 15.7 7.4 22.8 0" fill="none" stroke={`url(#${metalId})`} strokeWidth="2.1" opacity="0.82" {...commonStroke} />
         <circle cx="32" cy="32" r="7.4" fill={`url(#${metalId})`} />
-        <circle cx="32" cy="32" r="3.1" fill="#062A37" />
+        <circle cx="32" cy="32" r="3.1" fill="#00190D" />
         <circle cx="16" cy="32" r="3.1" fill={`url(#${nodeId})`} />
         <circle cx="48" cy="32" r="3.1" fill={`url(#${nodeId})`} />
         <circle cx="32" cy="16" r="3.1" fill={`url(#${nodeId})`} />
@@ -255,28 +255,28 @@ function VentureLogo({ name, title }) {
     aurii: (
       <>
         <path d="M32 8.5C44.7 13.4 52.3 22 52.3 32c0 13.1-9.1 22-20.3 24-11.2-2-20.3-10.9-20.3-24 0-10 7.6-18.6 20.3-23.5Z" fill={`url(#${darkId})`} stroke={`url(#${metalId})`} strokeWidth="2.2" {...commonStroke} />
-        <path d="M22.2 39.8c8.2 2.5 15.1.5 19.3-5.7 3.9-5.8 2.5-12.1-2.9-15.3-8.9 2.7-15.1 10.1-16.4 21Z" fill="none" stroke="#FFF7C7" strokeWidth="2.65" {...commonStroke} />
+        <path d="M22.2 39.8c8.2 2.5 15.1.5 19.3-5.7 3.9-5.8 2.5-12.1-2.9-15.3-8.9 2.7-15.1 10.1-16.4 21Z" fill="none" stroke="#E8FFE1" strokeWidth="2.65" {...commonStroke} />
         <path d="M32.9 19c-1.1 6.6.7 12.2 5.8 16.1M22.2 39.9c3.8 7.1 11.2 9.6 19.7 7.3" fill="none" stroke={`url(#${metalId})`} strokeWidth="2.35" {...commonStroke} />
         <circle cx="41.4" cy="28.3" r="2.1" fill={`url(#${metalId})`} />
-        <path d="M18.4 47.2c7.6 4.4 19.6 4.5 27.2 0" fill="none" stroke="#47F3D2" strokeWidth="2.1" opacity="0.88" {...commonStroke} />
+        <path d="M18.4 47.2c7.6 4.4 19.6 4.5 27.2 0" fill="none" stroke="#00FF85" strokeWidth="2.1" opacity="0.88" {...commonStroke} />
         <path d="M24.3 15.4c4.8-3.1 10.6-3.1 15.4 0" fill="none" stroke={`url(#${metalId})`} strokeWidth="2.1" opacity="0.78" {...commonStroke} />
       </>
     ),
     kingklaw: (
       <>
-        <path d="M15.4 23.1 22.2 13l9.8 10.5L41.8 13l6.8 10.1-4 9.6H19.4l-4-9.6Z" fill={`url(#${metalId})`} stroke="#FFF7C7" strokeWidth="1.3" {...commonStroke} />
-        <path d="M19.1 36.7c5.8-2.4 11.9-2.5 18.4-.2 2.6.9 5.1.5 7.4-1.1" fill="none" stroke="#47F3D2" strokeWidth="2.2" {...commonStroke} />
+        <path d="M15.4 23.1 22.2 13l9.8 10.5L41.8 13l6.8 10.1-4 9.6H19.4l-4-9.6Z" fill={`url(#${metalId})`} stroke="#E8FFE1" strokeWidth="1.3" {...commonStroke} />
+        <path d="M19.1 36.7c5.8-2.4 11.9-2.5 18.4-.2 2.6.9 5.1.5 7.4-1.1" fill="none" stroke="#00FF85" strokeWidth="2.2" {...commonStroke} />
         <path d="M24.2 51.4c5.8-6.9 6.6-14.7 2.2-23.2" fill="none" stroke={`url(#${metalId})`} strokeWidth="4" {...commonStroke} />
-        <path d="M34 53.4c3.6-8.6 2.8-16.7-2.2-24.3" fill="none" stroke="#FFF7C7" strokeWidth="4" {...commonStroke} />
+        <path d="M34 53.4c3.6-8.6 2.8-16.7-2.2-24.3" fill="none" stroke="#E8FFE1" strokeWidth="4" {...commonStroke} />
         <path d="M45 48.4c-1.6-8.7-5.4-15-11.5-18.9" fill="none" stroke={`url(#${metalId})`} strokeWidth="4" {...commonStroke} />
-        <path d="M22.6 52.6 28 49.7l-2.2 6.1M32.2 54.7l4.7-4 .1 6.5M43.3 49.8l4.4-4.1.8 6.2" fill="#FFF7C7" stroke="none" />
+        <path d="M22.6 52.6 28 49.7l-2.2 6.1M32.2 54.7l4.7-4 .1 6.5M43.3 49.8l4.4-4.1.8 6.2" fill="#E8FFE1" stroke="none" />
       </>
     ),
     clawhub: (
       <>
         <path d="M32 8.8 51.8 20.2v23.6L32 55.2 12.2 43.8V20.2L32 8.8Z" fill={`url(#${darkId})`} stroke={`url(#${metalId})`} strokeWidth="2.3" {...commonStroke} />
-        <path d="M22 42.6c-3.3-7.4-1-15 6.3-20.5M31.3 45.2c-2.8-8-.8-16.7 5.2-23.8M41.3 41.4c-1.6-6.8-5.1-12-10.3-15.8" fill="none" stroke="#FFF7C7" strokeWidth="3.1" {...commonStroke} />
-        <path d="M21.8 43.8h20.6M20.4 25.3l11.6 6.8 11.6-6.8M32 32.1v12.5" fill="none" stroke="#47F3D2" strokeWidth="1.8" opacity="0.9" {...commonStroke} />
+        <path d="M22 42.6c-3.3-7.4-1-15 6.3-20.5M31.3 45.2c-2.8-8-.8-16.7 5.2-23.8M41.3 41.4c-1.6-6.8-5.1-12-10.3-15.8" fill="none" stroke="#E8FFE1" strokeWidth="3.1" {...commonStroke} />
+        <path d="M21.8 43.8h20.6M20.4 25.3l11.6 6.8 11.6-6.8M32 32.1v12.5" fill="none" stroke="#00FF85" strokeWidth="1.8" opacity="0.9" {...commonStroke} />
         <circle cx="20.4" cy="25.3" r="3" fill={`url(#${nodeId})`} />
         <circle cx="43.6" cy="25.3" r="3" fill={`url(#${nodeId})`} />
         <circle cx="32" cy="32.1" r="3.4" fill={`url(#${metalId})`} />
@@ -288,9 +288,9 @@ function VentureLogo({ name, title }) {
       <>
         <circle cx="31" cy="31" r="20.7" fill={`url(#${darkId})`} stroke={`url(#${metalId})`} strokeWidth="2.4" />
         <path d="M45.5 45.5 54 54" fill="none" stroke={`url(#${metalId})`} strokeWidth="4.2" {...commonStroke} />
-        <path d="M24.1 40.2 30.2 24 42 18.7l-5.2 12.4-12.7 9.1Z" fill={`url(#${metalId})`} stroke="#FFF7C7" strokeWidth="1.3" {...commonStroke} />
-        <path d="M30.2 24 36.8 31.1" fill="none" stroke="#062A37" strokeWidth="1.8" {...commonStroke} />
-        <path d="M18.4 35.8c5.1 5.3 12.2 7 21.2 5.1" fill="none" stroke="#47F3D2" strokeWidth="2.1" opacity="0.86" strokeDasharray="1 4" {...commonStroke} />
+        <path d="M24.1 40.2 30.2 24 42 18.7l-5.2 12.4-12.7 9.1Z" fill={`url(#${metalId})`} stroke="#E8FFE1" strokeWidth="1.3" {...commonStroke} />
+        <path d="M30.2 24 36.8 31.1" fill="none" stroke="#00190D" strokeWidth="1.8" {...commonStroke} />
+        <path d="M18.4 35.8c5.1 5.3 12.2 7 21.2 5.1" fill="none" stroke="#00FF85" strokeWidth="2.1" opacity="0.86" strokeDasharray="1 4" {...commonStroke} />
         <circle cx="18.8" cy="35.7" r="2.5" fill={`url(#${nodeId})`} />
         <circle cx="39.6" cy="40.9" r="2.5" fill={`url(#${nodeId})`} />
       </>
@@ -299,8 +299,8 @@ function VentureLogo({ name, title }) {
       <>
         <path d="M32 8.7 55.3 32 32 55.3 8.7 32 32 8.7Z" fill={`url(#${darkId})`} stroke={`url(#${metalId})`} strokeWidth="2.4" {...commonStroke} />
         <path d="M20.3 35.7 27.4 29l6.7 4.9 10.1-13.3" fill="none" stroke={`url(#${metalId})`} strokeWidth="3.4" {...commonStroke} />
-        <path d="M44.2 20.6v13.7M39.6 24.7h9.2" fill="none" stroke="#FFF7C7" strokeWidth="2.3" {...commonStroke} />
-        <path d="M18.4 45.6c8.7-1.9 18-1.9 27.2 0" fill="none" stroke="#47F3D2" strokeWidth="2" opacity="0.9" {...commonStroke} />
+        <path d="M44.2 20.6v13.7M39.6 24.7h9.2" fill="none" stroke="#E8FFE1" strokeWidth="2.3" {...commonStroke} />
+        <path d="M18.4 45.6c8.7-1.9 18-1.9 27.2 0" fill="none" stroke="#00FF85" strokeWidth="2" opacity="0.9" {...commonStroke} />
         <circle cx="32" cy="14.2" r="2.4" fill={`url(#${nodeId})`} />
         <circle cx="49.8" cy="32" r="2.4" fill={`url(#${nodeId})`} />
         <circle cx="32" cy="49.8" r="2.4" fill={`url(#${nodeId})`} />
@@ -310,8 +310,8 @@ function VentureLogo({ name, title }) {
     'ahs-backend': (
       <>
         <path d="M17 16.5h30a4.6 4.6 0 0 1 4.6 4.6v7.2A4.6 4.6 0 0 1 47 33H17a4.6 4.6 0 0 1-4.6-4.6v-7.2A4.6 4.6 0 0 1 17 16.5Z" fill={`url(#${darkId})`} stroke={`url(#${metalId})`} strokeWidth="2.2" {...commonStroke} />
-        <path d="M17 35h30a4.6 4.6 0 0 1 4.6 4.6v3.2A4.6 4.6 0 0 1 47 47.4H17a4.6 4.6 0 0 1-4.6-4.6v-3.2A4.6 4.6 0 0 1 17 35Z" fill="#062A37" stroke="#47F3D2" strokeWidth="2" {...commonStroke} />
-        <path d="M20.1 24.7h14.2M20.1 41.2h10.6" fill="none" stroke="#FFF7C7" strokeWidth="2.2" {...commonStroke} />
+        <path d="M17 35h30a4.6 4.6 0 0 1 4.6 4.6v3.2A4.6 4.6 0 0 1 47 47.4H17a4.6 4.6 0 0 1-4.6-4.6v-3.2A4.6 4.6 0 0 1 17 35Z" fill="#00190D" stroke="#00FF85" strokeWidth="2" {...commonStroke} />
+        <path d="M20.1 24.7h14.2M20.1 41.2h10.6" fill="none" stroke="#E8FFE1" strokeWidth="2.2" {...commonStroke} />
         <circle cx="43.6" cy="24.7" r="3.3" fill={`url(#${metalId})`} />
         <circle cx="43.6" cy="41.2" r="3.3" fill={`url(#${nodeId})`} />
         <path d="M32 10.5v6M32 47.4v6M43.6 28.1l-7.7 7.3" fill="none" stroke={`url(#${metalId})`} strokeWidth="1.9" opacity="0.9" {...commonStroke} />
@@ -321,8 +321,8 @@ function VentureLogo({ name, title }) {
     sky: (
       <>
         <circle cx="32" cy="32" r="22" fill={`url(#${darkId})`} stroke={`url(#${metalId})`} strokeWidth="2.3" />
-        <path d="M32 13.5 35.6 25l11.9 3.5-11.9 3.9L32 50.5l-3.6-18.1-11.9-3.9L28.4 25 32 13.5Z" fill={`url(#${metalId})`} stroke="#FFF7C7" strokeWidth="1.1" {...commonStroke} />
-        <path d="M15.6 38.3c9.8-8.6 22.8-12.4 36-10.5M12.8 29c11.9 8.4 24.6 11 38.4 7.8" fill="none" stroke="#47F3D2" strokeWidth="1.8" opacity="0.86" {...commonStroke} />
+        <path d="M32 13.5 35.6 25l11.9 3.5-11.9 3.9L32 50.5l-3.6-18.1-11.9-3.9L28.4 25 32 13.5Z" fill={`url(#${metalId})`} stroke="#E8FFE1" strokeWidth="1.1" {...commonStroke} />
+        <path d="M15.6 38.3c9.8-8.6 22.8-12.4 36-10.5M12.8 29c11.9 8.4 24.6 11 38.4 7.8" fill="none" stroke="#00FF85" strokeWidth="1.8" opacity="0.86" {...commonStroke} />
         <circle cx="18.6" cy="36" r="2.3" fill={`url(#${nodeId})`} />
         <circle cx="49.4" cy="28.2" r="2.3" fill={`url(#${nodeId})`} />
       </>
@@ -504,7 +504,7 @@ export default function VentureLinks() {
     }
     meta.setAttribute('content', description)
 
-    const themeColor = '#020806'
+    const themeColor = '#000302'
     let themeMeta = document.querySelector('meta[name="theme-color"]')
     const hadThemeMeta = Boolean(themeMeta)
     const originalThemeColor = themeMeta?.getAttribute('content') ?? ''
